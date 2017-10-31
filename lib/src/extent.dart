@@ -16,6 +16,21 @@ class Extent<E> {
   /// Returns limit as [List]
   List<E> toList() => <E>[lower, upper];
 
+  /// Compares if [this] and [other] are equal
+  bool operator ==(other) {
+    if (other is Extent<E>) {
+      if (other.lower != lower) return false;
+      if (other.upper != upper) return false;
+      return true;
+    } else if (other is Iterable<E>) {
+      if (other.length != 2) return false;
+      if (other.elementAt(0) != lower) return false;
+      if (other.elementAt(1) != upper) return false;
+      return true;
+    }
+    return false;
+  }
+
   /// Creates an [Extent] from given [Iterable] [data] by finding the minimum and
   /// maximum
   /// TODO add better docs and an example
