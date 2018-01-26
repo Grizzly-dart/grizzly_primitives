@@ -6,6 +6,10 @@
 /// Holds a lower-upper extent
 /// 3. [Index1D]
 /// 4. [Index2D]
+/// 5. [Series]
+/// 6. [DataFrame]
 library grizzly_primitives;
 
-export 'src/src.dart';
+export 'package:grizzly_primitives/src/core/core.dart';
+export 'src/dataframe/dataframe.dart';
+export 'src/series/series.dart';

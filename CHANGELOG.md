@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.3
+
++ `Series`
++ `DataFrameBase`
+
 ## 0.0.2
 
 - `Extent` gets custom `==` operator
