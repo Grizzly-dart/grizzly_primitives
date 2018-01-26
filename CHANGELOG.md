@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.4
+
++ `Array`
++ `Numeric1D`
++ `Array2D`
++ `Numeric2D`
+
 ## 0.0.3
 
 + `Series`
