@@ -78,9 +78,11 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   ArrayView<E> get view;
 
+  /* TODO
   Series<E, int> valueCounts(
       {bool sortByValue: false,
       bool ascending: false,
       bool dropNull: false,
       dynamic name});
+      */
 }

@@ -118,11 +118,13 @@ abstract class Array2DView<E> implements Iterable<ArrayView<E>> {
 
   Array2DView<E> get view;
 
+  /* TODO
   Series<E, int> valueCounts(
       {bool sortByValue: false,
       bool ascending: false,
       bool dropNull: false,
       dynamic name});
+      */
 }
 
 abstract class Axis2D<E> implements Axis2DFix<E> {

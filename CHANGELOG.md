@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5
+
++ Removed `valueCounts` from `Array` and `Array2D`
+
 ## 0.0.4
 
 + `Array`
