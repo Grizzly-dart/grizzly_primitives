@@ -6,7 +6,7 @@ import 'package:grizzly_primitives/src/array/array.dart';
 
 part 'numeric.dart';
 
-abstract class Array2D<E> implements Iterable<Array<E>>, Array2DFix<E> {
+abstract class Array2D<E> implements Array2DFix<E> {
   ArrayFix<E> operator [](int i);
 
   Axis2D<E> get row;
@@ -20,21 +20,12 @@ abstract class Array2D<E> implements Iterable<Array<E>>, Array2DFix<E> {
   void insert(int index, Iterable<E> row);
 
   void insertScalar(int index, E v);
-
-  Array<E> firstWhere(covariant bool test(Array<E> element),
-      {covariant Array<E> orElse()});
-
-  Array<E> lastWhere(covariant bool test(Array<E> element),
-      {covariant Array<E> orElse()});
-
-  Array<E> reduce(
-      covariant Array<E> combine(ArrayView<E> value, ArrayView<E> element));
 }
 
-abstract class Array2DFix<E> implements Iterable<ArrayFix<E>>, Array2DView<E> {
+abstract class Array2DFix<E> implements Array2DView<E> {
   ArrayFix<E> operator [](int i);
 
-  operator []=(int i, ArrayView<E> val);
+  operator []=(int i, /* Iterable<E> | ArrayView<E> */ val);
 
   Axis2DFix<E> get row;
 
@@ -47,23 +38,18 @@ abstract class Array2DFix<E> implements Iterable<ArrayFix<E>>, Array2DView<E> {
   Array2DView<E> get view;
 
   Array2DFix<E> get fixed;
-
-  ArrayFix<E> firstWhere(covariant bool test(ArrayFix<E> element),
-      {covariant ArrayFix<E> orElse()});
-
-  ArrayFix<E> lastWhere(covariant bool test(ArrayFix<E> element),
-      {covariant ArrayFix<E> orElse()});
-
-  ArrayFix<E> reduce(
-      covariant ArrayFix<E> combine(ArrayView<E> value, ArrayView<E> element));
 }
 
-abstract class Array2DView<E> implements Iterable<ArrayView<E>> {
+abstract class Array2DView<E> {
   Array2DView<E> makeView(Iterable<Iterable<E>> newData);
 
   Array2DFix<E> makeFix(Iterable<Iterable<E>> newData);
 
   Array2D<E> make(Iterable<Iterable<E>> newData);
+
+  Iterable<Iterable<E>> get iterable;
+
+  Iterator<ArrayView<E>> get iterator;
 
   /// Number of rows in the array
   int get numCols;

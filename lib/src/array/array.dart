@@ -27,7 +27,7 @@ abstract class ArrayFix<E> implements ArrayView<E> {
 }
 
 /// A read-only 1 dimensional array of element [E]
-abstract class ArrayView<E> implements Iterable<E> {
+abstract class ArrayView<E> {
   ArrayView<E> makeView(Iterable<E> newData);
 
   ArrayFix<E> makeFix(Iterable<E> newData);
@@ -35,6 +35,8 @@ abstract class ArrayView<E> implements Iterable<E> {
   Array<E> makeArray(Iterable<E> newData);
 
   Index1D get shape;
+
+  int get length;
 
   E operator [](int i);
 
@@ -78,6 +80,8 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   ArrayView<E> get view;
 
+  Iterable<E> get iterable;
+
   /* TODO
   Series<E, int> valueCounts(
       {bool sortByValue: false,
@@ -85,4 +89,48 @@ abstract class ArrayView<E> implements Iterable<E> {
       bool dropNull: false,
       dynamic name});
       */
+}
+
+abstract class StringArray implements Array<String> {
+  Array<bool> get isAlphaNum;
+
+  Array<bool> get isAlphabet;
+
+  Array<bool> get isDecimal;
+
+  Array<bool> get isNumber;
+
+  Array<bool> get isLower;
+
+  Array<bool> get isSpace;
+
+  Array<bool> get isUpper;
+
+  Array<bool> startsWith();
+
+  String join(String delimiter);
+
+  void lshift(int width, [String fillchar = ' ']);
+
+  void rshift(int width, [String fillchar = ' ']);
+
+  void lower();
+
+  void upper();
+
+  void lstrip();
+
+  void rstrip();
+
+  // TODO split
+}
+
+abstract class BoolArray {
+  bool get allTrue;
+
+  bool get allFalse;
+
+  bool get anyTrue;
+
+  bool get anyFalse;
 }

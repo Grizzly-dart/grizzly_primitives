@@ -12,6 +12,4 @@ class FrameByLabel<LT, CT> {
   Series<CT, dynamic> get(LT index) => frame.getByLabel(index);
 
   void set(LT index, List value) => frame.setByLabel(index, value);
-
-  List<Series<CT, dynamic>> getMulti(LT index) => frame.getByLabelMulti(index);
 }

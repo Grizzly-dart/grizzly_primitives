@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7
+
++ `Array` and `Array2D` do not inherit from `Iterable`
+
 ## 0.0.5
 
 + Removed `valueCounts` from `Array` and `Array2D`

@@ -8,10 +8,6 @@ part 'indexed.dart';
 part 'positioned.dart';
 
 abstract class DataFrameBase<LT, CT> {
-  FrameByPosition get byPos;
-
-  FrameByLabel get byLabel;
-
   UnmodifiableListView<CT> get columns;
 
   UnmodifiableListView<LT> get labels;
@@ -24,17 +20,19 @@ abstract class DataFrameBase<LT, CT> {
 
   void setByPos(int position, List value);
 
-  Series<CT, dynamic> getByLabel(LT label);
+  Pair<LT, Series<CT, dynamic>> pairByPos(int position);
 
-  List<Series<CT, dynamic>> getByLabelMulti(LT label);
+  FrameByPosition get byPos;
+
+  Series<CT, dynamic> getByLabel(LT label);
 
   void setByLabel(LT index, List value);
 
   Pair<LT, Series<CT, dynamic>> pairByLabel(LT label);
 
-  Pair<LT, Series<CT, dynamic>> pairByPos(int position);
+  FrameByLabel get byLabel;
 
-  Iterable<Pair<LT, Series<CT, dynamic>>> enumerate();
+  Iterable<Pair<LT, Series<CT, dynamic>>> get enumerate;
 
   Iterable<Pair<LT, Series<CT, dynamic>>> enumerateSliced(int start, [int end]);
 

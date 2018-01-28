@@ -63,19 +63,16 @@ abstract class Series<IT, VT> {
   void append(IT label, VT value);
 
   /// Remove element at position [position]
-  ///
-  /// If [inplace] is true, the modifications are done inplace.
-  Series<IT, VT> remove(int position);
+  void remove(int position);
 
   /// Remove multiple element at positions [positions]
-  ///
-  /// If [inplace] is true, the modifications are done inplace.
-  Series<IT, VT> removeMany(List<int> positions);
+  void removeMany(List<int> positions);
 
   /// Drop elements by label [label]
-  ///
-  /// If [inplace] is true, the modifications are done inplace.
-  Series<IT, VT> drop(IT label);
+  void drop(IT label);
+
+  /// Drop elements by label [label]
+  void dropMany(List<IT> label);
 
   void apply(VT func(VT value));
 
@@ -97,7 +94,7 @@ abstract class Series<IT, VT> {
   Series<IIT, VT> makeNew<IIT>(Iterable<VT> data,
       {dynamic name, List<IIT> labels});
 
-  SeriesView<IT, VT> toView();
+  SeriesView<IT, VT> get toView;
 
   DataFrameBase<IT, dynamic> toDataFrame<CT>({CT column});
 
