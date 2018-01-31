@@ -104,6 +104,11 @@ abstract class Array2DView<E> {
 
   Array2DView<E> get view;
 
+  /// Returns the unique items in the array by column
+  Array2D<E> unique({bool sort: false});
+
+  Array<E> uniqueSqueeze({bool sort: false});
+
   /* TODO
   Series<E, int> valueCounts(
       {bool sortByValue: false,

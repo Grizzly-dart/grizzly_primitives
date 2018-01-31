@@ -80,6 +80,9 @@ abstract class ArrayView<E> {
 
   ArrayView<E> get view;
 
+  /// Returns the unique items in the array
+  Array<E> unique({bool sort: false});
+
   Iterable<E> get iterable;
 
   /* TODO
