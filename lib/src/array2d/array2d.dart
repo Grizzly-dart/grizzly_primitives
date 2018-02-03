@@ -4,7 +4,9 @@ import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/series/series.dart';
 import 'package:grizzly_primitives/src/array/array.dart';
 
+part 'axis.dart';
 part 'numeric.dart';
+part 'numeric_axis.dart';
 
 abstract class Array2D<E> implements Array2DFix<E> {
   ArrayFix<E> operator [](int i);
@@ -27,6 +29,10 @@ abstract class Array2DFix<E> implements Array2DView<E> {
 
   operator []=(int i, /* Iterable<E> | ArrayView<E> */ val);
 
+  Iterable<ArrayFix<E>> get rows;
+
+  Iterable<ArrayFix<E>> get cols;
+
   Axis2DFix<E> get row;
 
   Axis2DFix<E> get col;
@@ -47,6 +53,8 @@ abstract class Array2DView<E> {
 
   Array2D<E> make(Iterable<Iterable<E>> newData);
 
+  Array<E> makeArray(Iterable<E> newData);
+
   Iterable<Iterable<E>> get iterable;
 
   Iterator<ArrayView<E>> get iterator;
@@ -63,6 +71,10 @@ abstract class Array2DView<E> {
   bool get isSquare;
 
   ArrayView<E> operator [](int i);
+
+  Iterable<ArrayView<E>> get rows;
+
+  Iterable<ArrayView<E>> get cols;
 
   Axis2DView<E> get row;
 
@@ -105,9 +117,7 @@ abstract class Array2DView<E> {
   Array2DView<E> get view;
 
   /// Returns the unique items in the array by column
-  Array2D<E> unique({bool sort: false});
-
-  Array<E> uniqueSqueeze({bool sort: false});
+  Array<E> unique();
 
   /* TODO
   Series<E, int> valueCounts(
@@ -116,42 +126,4 @@ abstract class Array2DView<E> {
       bool dropNull: false,
       dynamic name});
       */
-}
-
-abstract class Axis2D<E> implements Axis2DFix<E> {
-  void add(Iterable<E> col);
-
-  void addScalar(E v);
-
-  void insert(int index, Iterable<E> col);
-
-  void insertScalar(int index, E v);
-}
-
-abstract class Axis2DFix<E> implements Axis2DView<E> {
-  ArrayFix<E> operator [](int r);
-
-  operator []=(int index, Iterable<E> v);
-
-// TODO set?
-
-//TODO
-}
-
-abstract class Axis2DView<E> {
-  ArrayView<E> operator [](int r);
-
-  int get length;
-
-  int get otherDLength;
-
-  // TODO pairAt
-
-  // TODO enumerate
-
-  Array<E> get min;
-
-  Array<E> get max;
-
-// TODO slice?
 }

@@ -3,20 +3,21 @@ library grizzly.primitives.series;
 import 'dart:collection';
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/dataframe/dataframe.dart';
+import 'package:grizzly_primitives/src/array/array.dart';
 
 part 'positioned.dart';
 part 'view.dart';
 
-typedef Series<IT, VT> SeriesMaker<IT, VT>(Iterable<VT> data,
-    {dynamic name, Iterable<IT> labels});
+typedef Series<LT, VT> SeriesMaker<LT, VT>(Iterable<VT> data,
+    {dynamic name, Iterable<LT> labels});
 
-/// A series with index of type [IT] and value of type [VT]
-abstract class Series<IT, VT> {
+/// A series with index of type [LT] and value of type [VT]
+abstract class Series<LT, VT> {
   /// Name of the series
   dynamic name;
 
   /// Labels of the series
-  UnmodifiableListView<IT> get labels;
+  UnmodifiableListView<LT> get labels;
 
   /// Data of the series
   UnmodifiableListView<VT> get data;
@@ -25,19 +26,19 @@ abstract class Series<IT, VT> {
   int get length;
 
   /// Checks if Series contains the label
-  bool containsIndex(IT label);
+  bool containsIndex(LT label);
 
   /// Lookup value by [label]
-  VT operator [](IT label);
+  VT operator [](LT label);
 
   /// Sets [value] by [label]
-  operator []=(IT label, VT value);
+  operator []=(LT label, VT value);
 
   /// Lookup value by [label]
-  VT get(IT label);
+  VT get(LT label);
 
   /// Sets [value] by [label]
-  void set(IT label, VT value);
+  void set(LT label, VT value);
 
   /// Lookup by [position]
   VT getByPos(int position);
@@ -45,22 +46,22 @@ abstract class Series<IT, VT> {
   /// Sets [value] by [position]
   void setByPos(int position, VT value);
 
-  SeriesByPosition<IT, VT> get byPos;
+  SeriesByPosition<LT, VT> get byPos;
 
   /// Returns label at [position]
-  IT labelAt(int position);
+  LT labelAt(int position);
 
   /// Returns pair by [label]
-  Pair<IT, VT> pairByLabel(IT label);
+  Pair<LT, VT> pairByLabel(LT label);
 
   /// Returns pair by [position]
-  Pair<IT, VT> pairByPos(int position);
+  Pair<LT, VT> pairByPos(int position);
 
-  Iterable<Pair<IT, VT>> get enumerate;
+  Iterable<Pair<LT, VT>> get enumerate;
 
-  Iterable<Pair<IT, VT>> enumerateSliced(int start, [int end]);
+  Iterable<Pair<LT, VT>> enumerateSliced(int start, [int end]);
 
-  void append(IT label, VT value);
+  void append(LT label, VT value);
 
   /// Remove element at position [position]
   void remove(int position);
@@ -69,14 +70,14 @@ abstract class Series<IT, VT> {
   void removeMany(List<int> positions);
 
   /// Drop elements by label [label]
-  void drop(IT label);
+  void drop(LT label);
 
   /// Drop elements by label [label]
-  void dropMany(List<IT> label);
+  void dropMany(List<LT> label);
 
   void apply(VT func(VT value));
 
-  void assign(Series<IT, VT> other);
+  void assign(Series<LT, VT> other);
 
   VT get max;
 
@@ -87,16 +88,26 @@ abstract class Series<IT, VT> {
   Series<VT, int> valueCounts(
       {bool sortByValue: false, bool ascending: false, bool dropNull: false});
 
-  Series<IT, VT> sortByValue({bool ascending: true});
+  Array<VT> unique();
 
-  Series<IT, VT> sortByIndex({bool ascending: true});
+  Series<LT, VT> uniqueSeries();
+
+  Array<IntPair<VT>> uniqueIndexPair();
+
+  Array<int> uniqueIndices();
+
+  void mask(Array<bool> mask);
+
+  Series<LT, VT> sortByValue({bool ascending: true});
+
+  Series<LT, VT> sortByIndex({bool ascending: true});
 
   Series<IIT, VT> makeNew<IIT>(Iterable<VT> data,
       {dynamic name, List<IIT> labels});
 
-  SeriesView<IT, VT> get toView;
+  SeriesView<LT, VT> get toView;
 
-  DataFrameBase<IT, dynamic> toDataFrame<CT>({CT column});
+  DataFrameBase<LT, dynamic> toDataFrame<CT>({CT column});
 
-  Series<IT, String> toStringSeries();
+  Series<LT, String> toStringSeries();
 }

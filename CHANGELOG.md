@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.9
+
++ Removed `uniqueSqueeze`
++ Added `sort` to Array and Array2D
+
 ## 0.0.8
 
 + Added `unique` and `uniqueSqueeze` to Array and Array2D

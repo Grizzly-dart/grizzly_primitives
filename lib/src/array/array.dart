@@ -5,12 +5,15 @@ import 'package:grizzly_primitives/src/series/series.dart';
 import 'package:grizzly_primitives/src/array2d/array2d.dart';
 
 part 'numeric.dart';
+part 'string.dart';
 
 /// A mutable 1 dimensional array of element [E]
 abstract class Array<E> implements ArrayFix<E> {
   void add(E a);
 
   void insert(int index, E a);
+
+  void mask(Array<bool> mask);
 }
 
 /// A mutable 1 dimensional fixed sized array of element [E]
@@ -24,6 +27,8 @@ abstract class ArrayFix<E> implements ArrayView<E> {
   void assign(Iterable<E> other);
 
   ArrayFix<E> get fixed;
+
+  void sort({bool descending: false});
 }
 
 /// A read-only 1 dimensional array of element [E]
@@ -41,6 +46,14 @@ abstract class ArrayView<E> {
   E operator [](int i);
 
   Array<E> slice(int start, [int end]);
+
+  Array<E> clone();
+
+  E get first;
+
+  E get last;
+
+  int count(E v);
 
   E get min;
 
@@ -81,7 +94,11 @@ abstract class ArrayView<E> {
   ArrayView<E> get view;
 
   /// Returns the unique items in the array
-  Array<E> unique({bool sort: false});
+  Array<E> unique();
+
+  // TODO Array<IntPair<E>> uniqueIndexPair();
+
+  Array<int> uniqueIndices();
 
   Iterable<E> get iterable;
 
@@ -94,41 +111,7 @@ abstract class ArrayView<E> {
       */
 }
 
-abstract class StringArray implements Array<String> {
-  Array<bool> get isAlphaNum;
-
-  Array<bool> get isAlphabet;
-
-  Array<bool> get isDecimal;
-
-  Array<bool> get isNumber;
-
-  Array<bool> get isLower;
-
-  Array<bool> get isSpace;
-
-  Array<bool> get isUpper;
-
-  Array<bool> startsWith();
-
-  String join(String delimiter);
-
-  void lshift(int width, [String fillchar = ' ']);
-
-  void rshift(int width, [String fillchar = ' ']);
-
-  void lower();
-
-  void upper();
-
-  void lstrip();
-
-  void rstrip();
-
-  // TODO split
-}
-
-abstract class BoolArray {
+abstract class BoolArrayView {
   bool get allTrue;
 
   bool get allFalse;
