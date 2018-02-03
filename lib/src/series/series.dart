@@ -12,54 +12,17 @@ typedef Series<LT, VT> SeriesMaker<LT, VT>(Iterable<VT> data,
     {dynamic name, Iterable<LT> labels});
 
 /// A series with index of type [LT] and value of type [VT]
-abstract class Series<LT, VT> {
-  /// Name of the series
-  dynamic name;
-
-  /// Labels of the series
-  UnmodifiableListView<LT> get labels;
-
-  /// Data of the series
-  UnmodifiableListView<VT> get data;
-
-  /// Length of the series
-  int get length;
-
-  /// Checks if Series contains the label
-  bool containsIndex(LT label);
-
-  /// Lookup value by [label]
-  VT operator [](LT label);
-
+abstract class Series<LT, VT> implements SeriesView<LT, VT> {
   /// Sets [value] by [label]
   operator []=(LT label, VT value);
 
-  /// Lookup value by [label]
-  VT get(LT label);
-
   /// Sets [value] by [label]
   void set(LT label, VT value);
-
-  /// Lookup by [position]
-  VT getByPos(int position);
 
   /// Sets [value] by [position]
   void setByPos(int position, VT value);
 
   SeriesByPosition<LT, VT> get byPos;
-
-  /// Returns label at [position]
-  LT labelAt(int position);
-
-  /// Returns pair by [label]
-  Pair<LT, VT> pairByLabel(LT label);
-
-  /// Returns pair by [position]
-  Pair<LT, VT> pairByPos(int position);
-
-  Iterable<Pair<LT, VT>> get enumerate;
-
-  Iterable<Pair<LT, VT>> enumerateSliced(int start, [int end]);
 
   void append(LT label, VT value);
 
@@ -79,16 +42,9 @@ abstract class Series<LT, VT> {
 
   void assign(Series<LT, VT> other);
 
-  VT get max;
+  Series<LT, VT> sortByValue({bool ascending: true});
 
-  VT get min;
-
-  Series<int, VT> mode();
-
-  Series<VT, int> valueCounts(
-      {bool sortByValue: false, bool ascending: false, bool dropNull: false});
-
-  Array<VT> unique();
+  Series<LT, VT> sortByIndex({bool ascending: true});
 
   Series<LT, VT> uniqueSeries();
 
@@ -97,17 +53,4 @@ abstract class Series<LT, VT> {
   Array<int> uniqueIndices();
 
   void mask(Array<bool> mask);
-
-  Series<LT, VT> sortByValue({bool ascending: true});
-
-  Series<LT, VT> sortByIndex({bool ascending: true});
-
-  Series<IIT, VT> makeNew<IIT>(Iterable<VT> data,
-      {dynamic name, List<IIT> labels});
-
-  SeriesView<LT, VT> get toView;
-
-  DataFrameBase<LT, dynamic> toDataFrame<CT>({CT column});
-
-  Series<LT, String> toStringSeries();
 }

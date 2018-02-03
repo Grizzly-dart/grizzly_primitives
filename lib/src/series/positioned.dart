@@ -1,7 +1,7 @@
 part of grizzly.primitives.series;
 
-class SeriesByPosition<IT, VT> {
-  final Series<IT, VT> series;
+class SeriesByPosition<LT, VT> implements SeriesViewByPosition<LT, VT> {
+  final Series<LT, VT> series;
 
   SeriesByPosition(this.series);
 
@@ -14,7 +14,22 @@ class SeriesByPosition<IT, VT> {
   void set(int position, VT value) => series.setByPos(position, value);
 
   /// Returns label at position
-  IT labelAt(int position) => series.labelAt(position);
+  LT labelAt(int position) => series.labelAt(position);
 
-  Pair<IT, VT> pairByPos(int pos) => series.pairByPos(pos);
+  Pair<LT, VT> pairByPos(int pos) => series.pairByPos(pos);
+}
+
+class SeriesViewByPosition<LT, VT> {
+  final SeriesView<LT, VT> series;
+
+  SeriesViewByPosition(this.series);
+
+  VT operator [](int position) => series.getByPos(position);
+
+  VT get(int position) => series.getByPos(position);
+
+  /// Returns label at position
+  LT labelAt(int position) => series.labelAt(position);
+
+  Pair<LT, VT> pairByPos(int pos) => series.pairByPos(pos);
 }
