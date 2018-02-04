@@ -88,4 +88,6 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
       /* int | Iterable<int> | Numeric2DArray */ other);
 
   Numeric2D<int> truncDiv(/* int | Iterable<int> | Numeric2DArray */ other);
+
+  Numeric2DView<E> get view;
 }

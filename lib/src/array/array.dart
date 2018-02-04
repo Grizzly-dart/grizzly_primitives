@@ -102,6 +102,8 @@ abstract class ArrayView<E> {
 
   Iterable<E> get iterable;
 
+  Iterator<E> get iterator;
+
   /* TODO
   Series<E, int> valueCounts(
       {bool sortByValue: false,

@@ -15,19 +15,17 @@ abstract class Array2D<E> implements Array2DFix<E> {
 
   Axis2D<E> get col;
 
-  void add(Iterable<E> row);
+  void add(ArrayView<E> row);
 
   void addScalar(E v);
 
-  void insert(int index, Iterable<E> row);
-
-  void insertScalar(int index, E v);
+  void insert(int index, ArrayView<E> row);
 }
 
 abstract class Array2DFix<E> implements Array2DView<E> {
   ArrayFix<E> operator [](int i);
 
-  operator []=(int i, /* Iterable<E> | ArrayView<E> */ val);
+  operator []=(int i, ArrayView<E> val);
 
   Iterable<ArrayFix<E>> get rows;
 
@@ -55,6 +53,7 @@ abstract class Array2DView<E> {
 
   Array<E> makeArray(Iterable<E> newData);
 
+  // TODO convert to Iterable<ArrayView<E>>?
   Iterable<Iterable<E>> get iterable;
 
   Iterator<ArrayView<E>> get iterator;
