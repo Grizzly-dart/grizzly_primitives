@@ -24,7 +24,7 @@ abstract class ArrayFix<E> implements ArrayView<E> {
 
   void set(E v);
 
-  void assign(Iterable<E> other);
+  void assign(ArrayView<E> other);
 
   ArrayFix<E> get fixed;
 

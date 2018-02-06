@@ -1,6 +1,18 @@
 part of grizzly.primitives.array;
 
-abstract class StringArray implements Array<String> {
+abstract class StringFixArray implements ArrayFix<String>, StringArrayView {
+  void toLowerCase();
+
+  void toUpperCase();
+
+  void trim();
+
+  void trimLeft();
+
+  void trimRight();
+}
+
+abstract class StringArrayView implements ArrayView<String> {
   Array<bool> get isAlphaNum;
 
   Array<bool> get isAlphabet;
@@ -11,25 +23,29 @@ abstract class StringArray implements Array<String> {
 
   Array<bool> get isLower;
 
-  Array<bool> get isSpace;
-
   Array<bool> get isUpper;
 
-  Array<bool> startsWith();
+  Array<bool> get isSpace;
 
-  String join(String delimiter);
+  Array<bool> startsWith(Pattern pattern, [int index = 0]);
 
-  void lshift(int width, [String fillchar = ' ']);
+  Array<bool> endsWith(String pattern);
 
-  void rshift(int width, [String fillchar = ' ']);
+  String join([String separator = ""]);
 
-  void lower();
+  Array<int> get lengths;
 
-  void upper();
+  Array<bool> get areEmpty;
 
-  void lstrip();
+  Array<bool> get areNotEmpty;
 
-  void rstrip();
+  bool get areAllEmpty;
 
-// TODO split
+  bool get areAllNotEmpty;
+
+  // TODO split
+
+  Numeric1D<int> toInt({int radix, int defaultValue, int onError(String source)});
+
+  Numeric1D<double> toDouble({double onError(String source), double defaultValue});
 }
