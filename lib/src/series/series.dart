@@ -1,11 +1,11 @@
 library grizzly.primitives.series;
 
-import 'dart:collection';
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/dataframe/dataframe.dart';
 import 'package:grizzly_primitives/src/array/array.dart';
 
 part 'positioned.dart';
+part 'numeric.dart';
 part 'view.dart';
 
 typedef Series<LT, VT> SeriesMaker<LT, VT>(Iterable<VT> data,
