@@ -41,6 +41,10 @@ abstract class Axis2DView<E> {
 
   Array<E> get max;
 
+  ArrayView<int> get argMin;
+
+  ArrayView<int> get argMax;
+
   // TODO slice?
 
   Iterable<Array<E>> unique();

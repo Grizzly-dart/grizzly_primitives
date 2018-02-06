@@ -5,10 +5,10 @@ abstract class SeriesView<LT, VT> {
   dynamic get name;
 
   /// Labels of the series
-  UnmodifiableListView<LT> get labels;
+  ArrayView<LT> get labels;
 
   /// Data of the series
-  UnmodifiableListView<VT> get data;
+  ArrayView<LT> get data;
 
   /// Length of the series
   int get length;
@@ -60,4 +60,6 @@ abstract class SeriesView<LT, VT> {
 
   Series<IIT, VT> make<IIT>(Iterable<VT> data,
       {dynamic name, List<IIT> labels});
+
+  bool labelsMatch(ArrayView<LT> labels);
 }

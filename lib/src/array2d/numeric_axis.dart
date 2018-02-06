@@ -22,4 +22,14 @@ abstract class Numeric2DAxisView<E extends num> implements Axis2DView<E> {
   Array<double> get variance;
 
   Array<double> get std;
+
+  Numeric2D<E> operator +(ArrayView<num> other);
+
+  Numeric2D<E> operator -(ArrayView<num> other);
+
+  Numeric2D<E> operator *(ArrayView<num> other);
+
+  Numeric2D<double> operator /(ArrayView<num> other);
+
+  Numeric2D<int> operator ~/(ArrayView<num> other);
 }

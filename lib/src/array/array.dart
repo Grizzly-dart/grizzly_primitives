@@ -100,9 +100,13 @@ abstract class ArrayView<E> {
 
   Array<int> uniqueIndices();
 
+  Array<E> pickByIndices(ArrayView<int> indices);
+
   Iterable<E> get iterable;
 
   Iterator<E> get iterator;
+
+  Iterable<int> get i;
 
   /* TODO
   Series<E, int> valueCounts(
@@ -113,7 +117,7 @@ abstract class ArrayView<E> {
       */
 }
 
-abstract class BoolArrayView {
+abstract class BoolArrayView implements ArrayView<bool> {
   bool get allTrue;
 
   bool get allFalse;
@@ -121,4 +125,21 @@ abstract class BoolArrayView {
   bool get anyTrue;
 
   bool get anyFalse;
+
+  Numeric1D<int> toIntArray({int trueVal: 1, int falseVal: 0});
+
+  ArrayView<bool> toStringArray(
+      {String trueVal: 'True', String falseVal: 'False'});
+
+  ArrayView<dynamic> toDynamic({trueVal: 1, falseVal: 0});
+}
+
+abstract class DynamicArrayView implements ArrayView<dynamic> {
+  Numeric1D<int> toIntArray({int defaultValue, int onInvalid(value)});
+
+  Numeric1D<double> toDoubleArray({int defaultValue, int onInvalid(value)});
+
+  BoolArrayView toBoolArray({int defaultValue, int onInvalid(value)});
+
+  StringArray toStringArray({int defaultValue, int onInvalid(value)});
 }
