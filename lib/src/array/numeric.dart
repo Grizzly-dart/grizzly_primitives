@@ -83,6 +83,14 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
 
   Numeric1DFix<E> operator -();
 
+  BoolArray operator <(/* Numeric1D | num */ other);
+
+  BoolArray operator <=(/* Numeric1D | num */ other);
+
+  BoolArray operator >(/* Numeric1D | num */ other);
+
+  BoolArray operator >=(/* Numeric1D | num */ other);
+
   E dot(Iterable<num> other);
 
   Array<double> get log;

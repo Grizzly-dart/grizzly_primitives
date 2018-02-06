@@ -13,7 +13,17 @@ abstract class Array<E> implements ArrayFix<E> {
 
   void insert(int index, E a);
 
-  void mask(Array<bool> mask);
+  void mask(ArrayView<bool> mask);
+
+  void removeAt(int pos);
+
+  void removeAtMany(ArrayView<int> pos);
+
+  void removeRange(int start, [int end]);
+
+  void remove(E value);
+
+  void removeMany(ArrayView<E> value);
 }
 
 /// A mutable 1 dimensional fixed sized array of element [E]
@@ -102,6 +112,8 @@ abstract class ArrayView<E> {
 
   Array<E> pickByIndices(ArrayView<int> indices);
 
+  bool contains(E value);
+
   Iterable<E> get iterable;
 
   Iterator<E> get iterator;
@@ -117,21 +129,25 @@ abstract class ArrayView<E> {
       */
 }
 
+abstract class BoolArray implements Array<bool>, BoolArrayView {}
+
 abstract class BoolArrayView implements ArrayView<bool> {
-  bool get allTrue;
+  bool get isTrue;
 
-  bool get allFalse;
+  bool get isFalse;
 
-  bool get anyTrue;
+  BoolArrayView operator &(Array<bool> other);
 
-  bool get anyFalse;
+  BoolArrayView operator |(Array<bool> other);
+
+  BoolArrayView operator ~();
 
   Numeric1D<int> toIntArray({int trueVal: 1, int falseVal: 0});
 
-  ArrayView<bool> toStringArray(
+  ArrayView<String> toStringArray(
       {String trueVal: 'True', String falseVal: 'False'});
 
-  ArrayView<dynamic> toDynamic({trueVal: 1, falseVal: 0});
+  // TODO ArrayView<dynamic> toDynamic({trueVal: 1, falseVal: 0});
 }
 
 abstract class DynamicArrayView implements ArrayView<dynamic> {
@@ -141,5 +157,5 @@ abstract class DynamicArrayView implements ArrayView<dynamic> {
 
   BoolArrayView toBoolArray({int defaultValue, int onInvalid(value)});
 
-  StringArray toStringArray({int defaultValue, int onInvalid(value)});
+  Array<String> toStringArray({int defaultValue, int onInvalid(value)});
 }
