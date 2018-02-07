@@ -136,6 +136,10 @@ abstract class BoolArrayView implements ArrayView<bool> {
 
   bool get isFalse;
 
+  double get mean;
+
+  int get sum;
+
   BoolArrayView operator &(Array<bool> other);
 
   BoolArrayView operator |(Array<bool> other);
