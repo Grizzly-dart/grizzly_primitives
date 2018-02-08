@@ -83,6 +83,8 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
 
   Numeric1DFix<E> operator -();
 
+  Numeric1DFix<E> abs();
+
   BoolArray operator <(/* Numeric1D | num */ other);
 
   BoolArray operator <=(/* Numeric1D | num */ other);
