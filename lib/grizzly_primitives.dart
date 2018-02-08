@@ -15,8 +15,53 @@
 library grizzly_primitives;
 
 export 'package:grizzly_primitives/src/core/core.dart';
-export 'src/dataframe/dataframe.dart';
-export 'src/series/series.dart';
+
+export 'src/iter/iter.dart';
 
 export 'src/array/array.dart';
+
 export 'src/array2d/array2d.dart';
+
+export 'src/series/series.dart';
+
+export 'src/dataframe/dataframe.dart';
+
+class LengthMismatch implements Exception {
+  final int expected;
+
+  final int found;
+
+  final String subject;
+
+  const LengthMismatch({this.expected, this.found, this.subject});
+
+  String toString() {
+    final sb = new StringBuffer();
+
+    sb.write('Length mismatch');
+
+    if (subject != null) sb.write(' for $subject');
+
+    if (expected != null) {
+      sb.write('! Expected $expected');
+
+      if (found != null) {
+        sb.write(' found $found');
+      }
+    }
+
+    sb.write('!');
+    return sb.toString();
+  }
+}
+
+LengthMismatch lengthMismatch({int expected, int found, String subject}) =>
+    new LengthMismatch(expected: expected, found: found, subject: subject);
+
+class LabelNotFound<LT> {
+  final LT label;
+
+  const LabelNotFound(this.label);
+
+  String toString() => 'Label $label not found!';
+}

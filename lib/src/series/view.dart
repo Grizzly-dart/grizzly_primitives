@@ -5,16 +5,16 @@ abstract class SeriesView<LT, VT> {
   dynamic get name;
 
   /// Labels of the series
-  ArrayView<LT> get labels;
+  Iterable<LT> get labels;
 
   /// Data of the series
-  ArrayView<LT> get data;
+  ArrayView<VT> get data;
 
   /// Length of the series
   int get length;
 
   /// Checks if Series contains the label
-  bool containsIndex(LT label);
+  bool containsLabel(LT label);
 
   /// Lookup value by [label]
   VT operator [](LT label);
@@ -45,11 +45,11 @@ abstract class SeriesView<LT, VT> {
   Series<int, VT> mode();
 
   Series<VT, int> valueCounts(
-      {bool sortByValue: false, bool ascending: false, bool dropNull: false});
+      {bool sortByValue: false, bool descending: false, bool dropNull: false});
 
-  SeriesView<LT, VT> get toView;
+  SeriesView<LT, VT> toView();
 
-  Series<LT, VT> get toSeries;
+  Series<LT, VT> toSeries();
 
   Series<LT, String> toStringSeries();
 
@@ -58,8 +58,14 @@ abstract class SeriesView<LT, VT> {
   SeriesView<IIT, VT> makeView<IIT>(Iterable<VT> data,
       {dynamic name, List<IIT> labels});
 
-  Series<IIT, VT> make<IIT>(Iterable<VT> data,
+  Series<IIT, VT> make<IIT>(/* Iterable<String> | ArrayView<String> */ data,
       {dynamic name, List<IIT> labels});
 
-  bool labelsMatch(ArrayView<LT> labels);
+  Array<VT> makeVTArray(Iterable<VT> data);
+
+  Array<VT> makeVTArraySized(int size);
+
+  bool labelsMatch(/* IterView<LT> | Series<LT, dynamic> | Iterable<LT> */ labels);
+
+  int compareVT(VT a, VT b);
 }

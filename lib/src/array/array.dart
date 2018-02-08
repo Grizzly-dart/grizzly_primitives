@@ -1,14 +1,15 @@
 library grizzly.primitives.array;
 
 import 'package:grizzly_primitives/src/core/core.dart';
-import 'package:grizzly_primitives/src/series/series.dart';
+import 'package:grizzly_primitives/src/iter/iter.dart';
 import 'package:grizzly_primitives/src/array2d/array2d.dart';
+import 'package:grizzly_primitives/src/series/series.dart';
 
 part 'numeric.dart';
 part 'string.dart';
 
 /// A mutable 1 dimensional array of element [E]
-abstract class Array<E> implements ArrayFix<E> {
+abstract class Array<E> implements ArrayFix<E>, Iter<E> {
   void add(E a);
 
   void insert(int index, E a);
@@ -27,7 +28,7 @@ abstract class Array<E> implements ArrayFix<E> {
 }
 
 /// A mutable 1 dimensional fixed sized array of element [E]
-abstract class ArrayFix<E> implements ArrayView<E> {
+abstract class ArrayFix<E> implements ArrayView<E>, IterFix<E> {
   operator []=(int i, E val);
 
   // TODO [Index] based indexing
@@ -42,7 +43,7 @@ abstract class ArrayFix<E> implements ArrayView<E> {
 }
 
 /// A read-only 1 dimensional array of element [E]
-abstract class ArrayView<E> {
+abstract class ArrayView<E> implements IterView<E> {
   ArrayView<E> makeView(Iterable<E> newData);
 
   ArrayFix<E> makeFix(Iterable<E> newData);
@@ -114,11 +115,11 @@ abstract class ArrayView<E> {
 
   bool contains(E value);
 
-  Iterable<E> get iterable;
-
   Iterator<E> get iterator;
 
   Iterable<int> get i;
+
+  StringArray toStringArray();
 
   /* TODO
   Series<E, int> valueCounts(
@@ -148,7 +149,7 @@ abstract class BoolArrayView implements ArrayView<bool> {
 
   Numeric1D<int> toIntArray({int trueVal: 1, int falseVal: 0});
 
-  ArrayView<String> toStringArray(
+  StringArray toStringArray(
       {String trueVal: 'True', String falseVal: 'False'});
 
   // TODO ArrayView<dynamic> toDynamic({trueVal: 1, falseVal: 0});
@@ -161,5 +162,5 @@ abstract class DynamicArrayView implements ArrayView<dynamic> {
 
   BoolArrayView toBoolArray({int defaultValue, int onInvalid(value)});
 
-  Array<String> toStringArray({int defaultValue, int onInvalid(value)});
+  StringArray toStringArray({int defaultValue, int onInvalid(value)});
 }

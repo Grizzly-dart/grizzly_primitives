@@ -1,8 +1,9 @@
 library grizzly.primitives.series;
 
 import 'package:grizzly_primitives/src/core/core.dart';
-import 'package:grizzly_primitives/src/dataframe/dataframe.dart';
+import 'package:grizzly_primitives/src/iter/iter.dart';
 import 'package:grizzly_primitives/src/array/array.dart';
+import 'package:grizzly_primitives/src/dataframe/dataframe.dart';
 
 part 'positioned.dart';
 part 'numeric.dart';
@@ -40,17 +41,13 @@ abstract class Series<LT, VT> implements SeriesView<LT, VT> {
 
   void apply(VT func(VT value));
 
-  void assign(Series<LT, VT> other);
+  void assign(Series<LT, VT> other, {bool addNew: true});
 
-  Series<LT, VT> sortByValue({bool ascending: true});
+  void assignMap(Map<LT, VT> other, {bool addNew: true});
 
-  Series<LT, VT> sortByIndex({bool ascending: true});
+  void sortByValue({bool descending: false});
 
-  Series<LT, VT> uniqueSeries();
+  void sortByLabel({bool descending: false});
 
-  Array<IntPair<VT>> uniqueIndexPair();
-
-  Array<int> uniqueIndices();
-
-  void mask(Array<bool> mask);
+  void mask(IterView<bool> mask);
 }
