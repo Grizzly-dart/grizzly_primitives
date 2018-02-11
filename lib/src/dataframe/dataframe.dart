@@ -1,6 +1,5 @@
 library grizzly.primitives.dataframe;
 
-import 'dart:collection';
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/series/series.dart';
 
@@ -8,34 +7,43 @@ part 'indexed.dart';
 part 'positioned.dart';
 
 abstract class DataFrameBase<LT, CT> {
-  UnmodifiableListView<CT> get columns;
+  int get numCols;
 
-  UnmodifiableListView<LT> get labels;
+  int get numRows;
 
-  SeriesView<LT, dynamic> operator [](CT column);
+  Index2D get shape;
 
-  operator []=(CT column, Series<LT, dynamic> value);
+  Iterable<CT> get columns;
 
-  Series<CT, dynamic> getByPos(int position);
+  /// Labels
+  Iterable<LT> get labels;
 
-  void setByPos(int position, List value);
+  SeriesFix<LT, dynamic> operator [](CT column);
 
-  Pair<LT, Series<CT, dynamic>> pairByPos(int position);
+  operator []=(CT column, /* SeriesView<LT, dynamic> | IterView */ value);
 
-  FrameByPosition get byPos;
+  SeriesFix<LT, VT> get<VT>(CT column);
 
-  Series<CT, dynamic> getByLabel(LT label);
+  void set<VT>(CT column, /* SeriesView<LT, VT> | IterView<VT> */ value);
 
-  void setByLabel(LT index, List value);
+  DynamicSeriesViewBase<CT> getByPos(int position);
 
-  Pair<LT, Series<CT, dynamic>> pairByLabel(LT label);
+  void setByPos(int position, /* SeriesView<CT, dynamic> | IterView */ value);
 
-  FrameByLabel get byLabel;
+  DynamicSeriesViewBase<CT> getByLabel(LT label);
 
-  Iterable<Pair<LT, Series<CT, dynamic>>> get enumerate;
+  void setByLabel(LT label, /* SeriesView<CT, dynamic> | IterView */ value);
 
-  Iterable<Pair<LT, Series<CT, dynamic>>> enumerateSliced(int start, [int end]);
+  Pair<LT, DynamicSeriesViewBase<CT>> pairByPos(int position);
 
+  Pair<LT, DynamicSeriesViewBase<CT>> pairByLabel(LT label);
+
+  Iterable<Pair<LT, DynamicSeriesViewBase<CT>>> get enumerate;
+
+  Iterable<Pair<LT, DynamicSeriesViewBase<CT>>> enumerateSliced(int start,
+      [int end]);
+
+  /* TODO
   void addColumnFromList<VVT>(CT column, List<VVT> value,
       {SeriesMaker<LT, VVT> maker});
 
@@ -44,8 +52,5 @@ abstract class DataFrameBase<LT, CT> {
   Series<CT, dynamic> min({dynamic name, bool numericOnly: false});
 
   DataFrameBase<int, CT> mode();
-
-  List<int> get shape;
-
-  int get length;
+  */
 }

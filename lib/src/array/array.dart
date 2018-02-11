@@ -24,7 +24,7 @@ abstract class Array<E> implements ArrayFix<E>, Iter<E> {
 
   void remove(E value);
 
-  void removeMany(ArrayView<E> value);
+  void removeMany(IterView<E> value);
 }
 
 /// A mutable 1 dimensional fixed sized array of element [E]
@@ -121,13 +121,8 @@ abstract class ArrayView<E> implements IterView<E> {
 
   StringArray toStringArray();
 
-  /* TODO
   Series<E, int> valueCounts(
-      {bool sortByValue: false,
-      bool ascending: false,
-      bool dropNull: false,
-      dynamic name});
-      */
+      {bool sortByValue: false, bool descending: false, name});
 }
 
 abstract class BoolArray implements Array<bool>, BoolArrayView {}
@@ -149,8 +144,7 @@ abstract class BoolArrayView implements ArrayView<bool> {
 
   Numeric1D<int> toIntArray({int trueVal: 1, int falseVal: 0});
 
-  StringArray toStringArray(
-      {String trueVal: 'True', String falseVal: 'False'});
+  StringArray toStringArray({String trueVal: 'True', String falseVal: 'False'});
 
   @override
   BoolArray clone();
