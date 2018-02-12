@@ -47,7 +47,9 @@ abstract class StringArrayView implements ArrayView<String> {
 
   // TODO split
 
-  Numeric1D<int> toInt({int radix, int defaultValue, int onError(String source)});
+  Numeric1D<int> toInt(
+      {int radix, int defaultValue, int onError(String source)});
 
-  Numeric1D<double> toDouble({double onError(String source), double defaultValue});
+  Numeric1D<double> toDouble(
+      {double onError(String source), double defaultValue});
 }

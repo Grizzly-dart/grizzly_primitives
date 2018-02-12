@@ -1,7 +1,10 @@
 part of grizzly.primitives.series;
 
 abstract class NumericSeries<LT, VT extends num>
-    implements NumericSeriesView<LT, VT>, Series<LT, VT> {}
+    implements Series<LT, VT>, NumericFixSeries<LT, VT> {}
+
+abstract class NumericFixSeries<LT, VT extends num>
+    implements SeriesFix<LT, VT>, NumericSeriesView<LT, VT> {}
 
 abstract class NumericSeriesView<LT, VT extends num>
     implements SeriesView<LT, VT> {

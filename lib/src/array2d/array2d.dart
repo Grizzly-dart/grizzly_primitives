@@ -9,6 +9,7 @@ part 'numeric.dart';
 part 'numeric_axis.dart';
 part 'bool_axis.dart';
 part 'string_axis.dart';
+part 'dynamic_axis.dart';
 
 abstract class Array2D<E> implements Array2DFix<E> {
   ArrayFix<E> operator [](int i);

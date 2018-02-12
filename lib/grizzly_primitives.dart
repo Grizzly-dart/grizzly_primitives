@@ -65,3 +65,5 @@ class LabelNotFound<LT> {
 
   String toString() => 'Label $label not found!';
 }
+
+LabelNotFound<LT> labelNotFound<LT>(LT label) => new LabelNotFound<LT>(label);

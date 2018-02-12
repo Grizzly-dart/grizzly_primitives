@@ -17,8 +17,6 @@ typedef Series<LT, VT> SeriesMaker<LT, VT>(Iterable<VT> data,
 
 /// A series with index of type [LT] and value of type [VT]
 abstract class Series<LT, VT> implements SeriesFix<LT, VT> {
-  SeriesByPosition<LT, VT> get byPos;
-
   void append(LT label, VT value);
 
   /// Remove element at position [position]
@@ -55,13 +53,11 @@ abstract class SeriesFix<LT, VT> implements SeriesView<LT, VT> {
   /// Sets [value] by [position]
   void setByPos(int position, VT value);
 
-  SeriesByPosition<LT, VT> get byPos;
-
   void apply(VT func(VT value));
 
   void assign(/* Series<LT, VT> | IterView<VT> */ other);
 
   void assignMap(Map<LT, VT> other);
 
-  SeriesFix<LT, VT> get fix;
+  SeriesFix<LT, VT> get fixed;
 }

@@ -25,8 +25,6 @@ abstract class SeriesView<LT, VT> {
   /// Lookup by [position]
   VT getByPos(int position);
 
-  SeriesViewByPosition<LT, VT> get byPos;
-
   /// Returns label at [position]
   LT labelAt(int position);
 
@@ -47,7 +45,7 @@ abstract class SeriesView<LT, VT> {
   Series<VT, int> valueCounts(
       {bool sortByValue: false, bool descending: false, bool dropNull: false});
 
-  SeriesView<LT, VT> toView();
+  SeriesView<LT, VT> get view;
 
   Series<LT, VT> toSeries();
 
@@ -65,7 +63,8 @@ abstract class SeriesView<LT, VT> {
 
   Array<VT> makeVTArraySized(int size);
 
-  bool labelsMatch(/* IterView<LT> | Series<LT, dynamic> | Iterable<LT> */ labels);
+  bool labelsMatch(
+      /* IterView<LT> | Series<LT, dynamic> | Iterable<LT> */ labels);
 
   int compareVT(VT a, VT b);
 }

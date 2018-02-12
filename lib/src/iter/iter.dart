@@ -66,7 +66,7 @@ class IterFixImpl<T> implements IterFix<T> {
   T get last => _asList.last;
 
   operator []=(int index, T v) {
-    if(index >= length) throw new Exception('Fixed size list!');
+    if (index >= length) throw new Exception('Fixed size list!');
     _asList[index] = v;
   }
 }
@@ -76,9 +76,9 @@ class IterImpl<T> implements Iter<T> {
 
   const IterImpl(List<T> list) : _list = list;
 
-  IterImpl.sized([int length = 0]): _list = new List<T>(length);
+  IterImpl.sized([int length = 0]) : _list = new List<T>(length);
 
-  IterImpl.from(iterable): _list = new List<T>(iterable.toList());
+  IterImpl.from(iterable) : _list = new List<T>(iterable.toList());
 
   int get length => asIterable.length;
 
