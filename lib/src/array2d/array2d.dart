@@ -7,6 +7,9 @@ import 'package:grizzly_primitives/src/array/array.dart';
 part 'axis.dart';
 part 'numeric.dart';
 part 'numeric_axis.dart';
+part 'bool_axis.dart';
+part 'string_axis.dart';
+part 'dynamic_axis.dart';
 
 abstract class Array2D<E> implements Array2DFix<E> {
   ArrayFix<E> operator [](int i);
@@ -52,11 +55,6 @@ abstract class Array2DView<E> {
   Array2D<E> make(Iterable<Iterable<E>> newData);
 
   Array<E> makeArray(Iterable<E> newData);
-
-  // TODO convert to Iterable<ArrayView<E>>?
-  Iterable<Iterable<E>> get iterable;
-
-  Iterator<ArrayView<E>> get iterator;
 
   /// Number of rows in the array
   int get numCols;

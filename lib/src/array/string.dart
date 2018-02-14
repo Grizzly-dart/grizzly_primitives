@@ -1,5 +1,7 @@
 part of grizzly.primitives.array;
 
+abstract class StringArray implements StringFixArray, Array<String> {}
+
 abstract class StringFixArray implements ArrayFix<String>, StringArrayView {
   void toLowerCase();
 
@@ -45,7 +47,9 @@ abstract class StringArrayView implements ArrayView<String> {
 
   // TODO split
 
-  Numeric1D<int> toInt({int radix, int defaultValue, int onError(String source)});
+  Numeric1D<int> toInt(
+      {int radix, int defaultValue, int onError(String source)});
 
-  Numeric1D<double> toDouble({double onError(String source), double defaultValue});
+  Numeric1D<double> toDouble(
+      {double onError(String source), double defaultValue});
 }
