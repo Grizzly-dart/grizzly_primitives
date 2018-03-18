@@ -6,51 +6,52 @@ import 'package:grizzly_primitives/src/series/series.dart';
 part 'indexed.dart';
 part 'positioned.dart';
 
-abstract class DataFrameBase<LT, CT> {
+abstract class DataFrameBase<LT> {
   int get numCols;
 
   int get numRows;
 
   Index2D get shape;
 
-  Iterable<CT> get columns;
+  Iterable<String> get columns;
 
   /// Labels
   Iterable<LT> get labels;
 
-  SeriesFix<LT, dynamic> operator [](CT column);
+  SeriesFix<LT, dynamic> operator [](String column);
 
-  operator []=(CT column, /* SeriesView<LT, dynamic> | IterView */ value);
+  operator []=(String column, /* SeriesView<LT, dynamic> | IterView */ value);
 
-  SeriesFix<LT, VT> get<VT>(CT column);
+  SeriesFix<LT, VT> get<VT>(String column);
 
-  void set<VT>(CT column, /* SeriesView<LT, VT> | IterView<VT> */ value);
+  void set<VT>(String column, /* SeriesView<LT, VT> | IterView<VT> */ value);
 
-  DynamicSeriesViewBase<CT> getByPos(int position);
+  DynamicSeriesViewBase<String> getByPos(int position);
 
-  void setByPos(int position, /* SeriesView<CT, dynamic> | IterView */ value);
+  void setByPos(
+      int position, /* SeriesView<String, dynamic> | IterView */ value);
 
-  DynamicSeriesViewBase<CT> getByLabel(LT label);
+  DynamicSeriesViewBase<String> getByLabel(LT label);
 
-  void setByLabel(LT label, /* SeriesView<CT, dynamic> | IterView */ value);
+  void setByLabel(LT label, /* SeriesView<String, dynamic> | IterView */ value);
 
-  Pair<LT, DynamicSeriesViewBase<CT>> pairByPos(int position);
+  Pair<LT, DynamicSeriesViewBase<String>> pairByPos(int position);
 
-  Pair<LT, DynamicSeriesViewBase<CT>> pairByLabel(LT label);
+  Pair<LT, DynamicSeriesViewBase<String>> pairByLabel(LT label);
 
-  Iterable<Pair<LT, DynamicSeriesViewBase<CT>>> get enumerate;
+  Iterable<Pair<LT, DynamicSeriesViewBase<String>>> get enumerate;
 
-  Iterable<Pair<LT, DynamicSeriesViewBase<CT>>> enumerateSliced(int start,
+  Iterable<Pair<LT, DynamicSeriesViewBase<String>>> enumerateSliced(int start,
       [int end]);
 
   /* TODO
-  void addColumnFromList<VVT>(CT column, List<VVT> value,
+  void addColumnFromList<VVT>(String column, List<VVT> value,
       {SeriesMaker<LT, VVT> maker});
 
-  Series<CT, dynamic> max({dynamic name, bool numericOnly: false});
+  Series<String, dynamic> max({dynamic name, bool numericOnly: false});
 
-  Series<CT, dynamic> min({dynamic name, bool numericOnly: false});
+  Series<String, dynamic> min({dynamic name, bool numericOnly: false});
 
-  DataFrameBase<int, CT> mode();
+  DataFrameBase<int, String> mode();
   */
 }

@@ -2,7 +2,7 @@ part of grizzly.primitives.series;
 
 abstract class SeriesView<LT, VT> {
   /// Name of the series
-  dynamic get name;
+  String get name;
 
   /// Labels of the series
   Iterable<LT> get labels;
@@ -51,7 +51,7 @@ abstract class SeriesView<LT, VT> {
 
   Series<LT, String> toStringSeries();
 
-  DataFrameBase<LT, dynamic> toDataFrame<CT>({CT column});
+  DataFrameBase<LT> toDataFrame({String column});
 
   SeriesView<IIT, VT> makeView<IIT>(Iterable<VT> data,
       {dynamic name, List<IIT> labels});
