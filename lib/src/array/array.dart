@@ -161,7 +161,8 @@ abstract class DynamicArrayView implements ArrayView<dynamic> {
 
   Numeric1D<int> toIntArray({int defaultValue, int onInvalid(value)});
 
-  Numeric1D<double> toDoubleArray({double defaultValue, double onInvalid(value)});
+  Numeric1D<double> toDoubleArray(
+      {double defaultValue, double onInvalid(value)});
 
   BoolArrayView toBoolArray({bool defaultValue, bool onInvalid(value)});
 

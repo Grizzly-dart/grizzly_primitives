@@ -2,13 +2,15 @@ part of grizzly.primitives.series;
 
 abstract class SeriesView<LT, VT> {
   /// Name of the series
-  dynamic get name;
+  String get name;
 
   /// Labels of the series
   Iterable<LT> get labels;
 
   /// Data of the series
   ArrayView<VT> get data;
+
+  List<VT> toList();
 
   /// Length of the series
   int get length;
@@ -51,17 +53,17 @@ abstract class SeriesView<LT, VT> {
 
   Series<LT, String> toStringSeries();
 
-  DataFrameBase<LT, dynamic> toDataFrame<CT>({CT column});
+  DataFrameBase<LT> toDataFrame({String column});
 
-  SeriesView<IIT, VT> makeView<IIT>(Iterable<VT> data,
-      {dynamic name, List<IIT> labels});
+  SeriesView<NLT, VT> makeView<NLT>(Iterable<VT> data,
+      {dynamic name, Iterable<NLT> labels});
 
-  Series<IIT, VT> make<IIT>(/* Iterable<String> | ArrayView<String> */ data,
-      {dynamic name, List<IIT> labels});
+  Series<NLT, VT> make<NLT>(/* Iterable<VT> | ArrayView<VT> */ data,
+      {dynamic name, Iterable<NLT> labels});
 
-  Array<VT> makeVTArray(Iterable<VT> data);
+  Array<VT> makeValueArray(Iterable<VT> data);
 
-  Array<VT> makeVTArraySized(int size);
+  Array<VT> makeValueArraySized(int size);
 
   bool labelsMatch(
       /* IterView<LT> | Series<LT, dynamic> | Iterable<LT> */ labels);
