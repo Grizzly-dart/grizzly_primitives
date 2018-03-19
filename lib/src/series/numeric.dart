@@ -25,16 +25,18 @@ abstract class NumericSeriesView<LT, VT extends num>
 
   double get std;
 
-  /*
   NumericSeriesView<LT, VT> operator +(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
+      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
 
+  /*
   NumericSeriesView<LT, VT> addition(
       /* E | IterView<E> | NumericSeriesView<int> */ other);
+       */
 
   NumericSeriesView<LT, VT> operator -(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
+      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
 
+  /*
   NumericSeriesView<LT, VT> subtract(
       /* E | IterView<E> | NumericSeriesView<int> */ other);
   */
