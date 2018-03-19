@@ -69,4 +69,24 @@ abstract class SeriesView<LT, VT> {
       /* IterView<LT> | Series<LT, dynamic> | Iterable<LT> */ labels);
 
   int compareVT(VT a, VT b);
+
+  BoolSeriesBase<LT> operator <(
+      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+
+  BoolSeriesBase<LT> operator <=(
+      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+
+  BoolSeriesBase<LT> operator >(
+      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+
+  BoolSeriesBase<LT> operator >=(
+      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+
+  BoolSeriesBase<LT> isEqual(
+      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+
+  BoolSeriesBase<LT> isNotEqual(
+      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+
+
 }

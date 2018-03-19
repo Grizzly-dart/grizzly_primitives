@@ -11,6 +11,7 @@ abstract class Numeric1D<E extends num> implements Array<E>, Numeric1DFix<E> {
   Numeric1D<double> divide(/* E | Iterable<E> */ other, {bool self: false});
 
   Numeric1D<int> truncDiv(/* E | Iterable<E> */ other, {bool self: false});
+
 }
 
 /// A mutable 1 dimensional fixed sized array of numbers
@@ -37,6 +38,8 @@ abstract class Numeric1DFix<E extends num>
   Numeric1DFix<int> operator ~/(/* E | Iterable<E> */ other);
 
   Numeric1DFix<int> truncDiv(/* E | Iterable<E> */ other, {bool self: false});
+
+  void negate();
 }
 
 /// A read-only 1 dimensional array of numbers
@@ -92,6 +95,10 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
   BoolArray operator >(/* Numeric1D | num */ other);
 
   BoolArray operator >=(/* Numeric1D | num */ other);
+
+  BoolArray isEqual(/* Numeric1D | num */ other);
+
+  BoolArray isNotEqual(/* Numeric1D | num */ other);
 
   E dot(Iterable<num> other);
 
