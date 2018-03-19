@@ -18,6 +18,8 @@ abstract class DataFrameBase<LT> {
   /// Labels
   Iterable<LT> get labels;
 
+  LT labelAt(int pos);
+
   SeriesFix<LT, dynamic> operator [](String column);
 
   operator []=(String column, /* SeriesView<LT, dynamic> | IterView */ value);

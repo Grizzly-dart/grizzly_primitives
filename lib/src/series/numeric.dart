@@ -37,10 +37,12 @@ abstract class NumericSeriesView<LT, VT extends num>
 
   NumericSeriesView<LT, VT> subtract(
       /* E | IterView<E> | NumericSeriesView<int> */ other);
+  */
 
   NumericSeriesView<LT, VT> operator *(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
+      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
 
+  /*
   NumericSeriesView<LT, VT> multiply(
       /* E | IterView<E> | NumericSeriesView<int> */ other);
 

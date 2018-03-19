@@ -53,15 +53,15 @@ abstract class SeriesView<LT, VT> {
 
   DataFrameBase<LT> toDataFrame({String column});
 
-  SeriesView<IIT, VT> makeView<IIT>(Iterable<VT> data,
-      {dynamic name, List<IIT> labels});
+  SeriesView<NLT, VT> makeView<NLT>(Iterable<VT> data,
+      {dynamic name, Iterable<NLT> labels});
 
-  Series<IIT, VT> make<IIT>(/* Iterable<String> | ArrayView<String> */ data,
-      {dynamic name, List<IIT> labels});
+  Series<NLT, VT> make<NLT>(/* Iterable<VT> | ArrayView<VT> */ data,
+      {dynamic name, Iterable<NLT> labels});
 
-  Array<VT> makeVTArray(Iterable<VT> data);
+  Array<VT> makeValueArray(Iterable<VT> data);
 
-  Array<VT> makeVTArraySized(int size);
+  Array<VT> makeValueArraySized(int size);
 
   bool labelsMatch(
       /* IterView<LT> | Series<LT, dynamic> | Iterable<LT> */ labels);
