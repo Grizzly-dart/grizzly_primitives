@@ -10,6 +10,8 @@ abstract class SeriesView<LT, VT> {
   /// Data of the series
   ArrayView<VT> get data;
 
+  List<VT> toList();
+
   /// Length of the series
   int get length;
 

@@ -20,6 +20,8 @@ abstract class DataFrameBase<LT> {
 
   LT labelAt(int pos);
 
+  int posOf(LT label);
+
   SeriesFix<LT, dynamic> operator [](String column);
 
   operator []=(String column, /* SeriesView<LT, dynamic> | IterView */ value);
