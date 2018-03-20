@@ -1,6 +1,6 @@
 part of grizzly.primitives.series;
 
-abstract class SeriesView<LT, VT> {
+abstract class SeriesView<LT, VT> implements Labeled<LT> {
   /// Name of the series
   String get name;
 
@@ -68,25 +68,33 @@ abstract class SeriesView<LT, VT> {
   bool labelsMatch(
       /* IterView<LT> | Series<LT, dynamic> | Iterable<LT> */ labels);
 
-  int compareVT(VT a, VT b);
+  int compareValue(VT a, VT b);
 
   BoolSeriesBase<LT> operator <(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
 
   BoolSeriesBase<LT> operator <=(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
 
   BoolSeriesBase<LT> operator >(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
 
   BoolSeriesBase<LT> operator >=(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
 
-  BoolSeriesBase<LT> isEqual(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+  BoolSeriesBase<LT> eq(
+      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
 
-  BoolSeriesBase<LT> isNotEqual(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+  BoolSeriesBase<LT> ne(
+      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
 
+  NumericSeriesView<LT, int> get asInt;
 
+  NumericSeriesView<LT, double> get asDouble;
+
+  BoolSeriesViewBase<LT> get asBool;
+
+  StringSeriesViewBase<LT> get asString;
+
+  DynamicSeriesViewBase<LT> get asDynamic;
 }

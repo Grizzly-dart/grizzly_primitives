@@ -1,5 +1,6 @@
 library grizzly.primitives.array;
 
+import 'dart:math' as math;
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/iter/iter.dart';
 import 'package:grizzly_primitives/src/array2d/array2d.dart';
@@ -124,9 +125,19 @@ abstract class ArrayView<E> implements IterView<E> {
   Series<E, int> valueCounts(
       {bool sortByValue: false, bool descending: false, name});
 
-  BoolArray eq(/* Numeric1D | num */ other);
+  int compareValue(E a, E b);
 
-  BoolArray ne(/* Numeric1D | num */ other);
+  BoolArray eq(/* ArrayView | E */ other);
+
+  BoolArray ne(/* ArrayView | E */ other);
+
+  BoolArray operator <(/* ArrayView | E */ other);
+
+  BoolArray operator <=(/* ArrayView | E */ other);
+
+  BoolArray operator >(/* ArrayView | E */ other);
+
+  BoolArray operator >=(/* ArrayView | E */ other);
 }
 
 abstract class BoolArray implements Array<bool>, BoolArrayView {}

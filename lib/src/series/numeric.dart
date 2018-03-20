@@ -43,6 +43,8 @@ abstract class NumericSeriesView<LT, VT extends num>
 
   double get std;
 
+  Stats<VT> get stats;
+
   NumericSeriesView<LT, VT> operator +(
       /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
 

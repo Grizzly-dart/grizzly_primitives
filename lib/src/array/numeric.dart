@@ -44,25 +44,23 @@ abstract class Numeric1DFix<E extends num>
 
 /// A read-only 1 dimensional array of numbers
 abstract class Numeric1DView<E extends num> implements ArrayView<E> {
-  E get ptp;
-
-  Extent<E> get extent;
-
   double get mean;
 
   E get sum;
 
   E get prod;
 
-  double average(Iterable<num> weights);
-
   Numeric1DView<E> get cumsum;
 
   Numeric1DView<E> get cumprod;
 
+  double average(Iterable<num> weights);
+
   double get variance;
 
   double get std;
+
+  Stats<E> get stats;
 
   Numeric1DFix<E> operator +(/* E | Iterable<E> */ other);
 
@@ -88,14 +86,6 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
 
   Numeric1DFix<E> abs();
 
-  BoolArray operator <(/* Numeric1D | num */ other);
-
-  BoolArray operator <=(/* Numeric1D | num */ other);
-
-  BoolArray operator >(/* Numeric1D | num */ other);
-
-  BoolArray operator >=(/* Numeric1D | num */ other);
-
   E dot(Iterable<num> other);
 
   Array<double> get log;
@@ -109,12 +99,50 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
   Numeric1D<double> get toDouble;
 
   Numeric1D<int> get toInt;
+}
+
+abstract class Stats<T extends num> {
+  IterView<T> get values;
+
+  int get length;
+
+  T operator [](int index);
+
+  T get min;
+
+  T get max;
+
+  Extent<T> get extent;
+
+  T get ptp;
+
+  T get mode;
+
+  T get median;
+
+  double average(Iterable<num> weights);
+
+  double get mean;
+
+  double get variance;
+
+  double get std;
+
+  int count(T v);
+
+  int get countNonNull;
+
+  T get sum;
+
+  T get prod;
 
   double cov(Numeric1DView y);
 
-  Array<double> covMatrix(Numeric2DView y);
+  Numeric1D<double> covMatrix(Numeric2DView y);
 
   double corrcoef(Numeric1DView y);
 
-  Array<double> corrcoefMatrix(Numeric2DView y);
+  Numeric1D<double> corrcoefMatrix(Numeric2DView y);
+
+  String describe();
 }
