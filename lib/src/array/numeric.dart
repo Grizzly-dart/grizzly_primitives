@@ -96,10 +96,6 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
 
   BoolArray operator >=(/* Numeric1D | num */ other);
 
-  BoolArray isEqual(/* Numeric1D | num */ other);
-
-  BoolArray isNotEqual(/* Numeric1D | num */ other);
-
   E dot(Iterable<num> other);
 
   Array<double> get log;

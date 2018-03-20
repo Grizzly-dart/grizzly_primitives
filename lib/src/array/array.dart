@@ -123,6 +123,10 @@ abstract class ArrayView<E> implements IterView<E> {
 
   Series<E, int> valueCounts(
       {bool sortByValue: false, bool descending: false, name});
+
+  BoolArray eq(/* Numeric1D | num */ other);
+
+  BoolArray ne(/* Numeric1D | num */ other);
 }
 
 abstract class BoolArray implements Array<bool>, BoolArrayView {}
