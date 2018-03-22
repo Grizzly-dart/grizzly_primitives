@@ -1,6 +1,5 @@
 library grizzly.primitives.array;
 
-import 'dart:math' as math;
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/iter/iter.dart';
 import 'package:grizzly_primitives/src/array2d/array2d.dart';
@@ -8,6 +7,8 @@ import 'package:grizzly_primitives/src/series/series.dart';
 
 part 'numeric.dart';
 part 'string.dart';
+part 'bool.dart';
+part 'dynamic.dart';
 
 /// A mutable 1 dimensional array of element [E]
 abstract class Array<E> implements ArrayFix<E>, Iter<E> {
@@ -138,48 +139,4 @@ abstract class ArrayView<E> implements IterView<E> {
   BoolArray operator >(/* ArrayView | E */ other);
 
   BoolArray operator >=(/* ArrayView | E */ other);
-}
-
-abstract class BoolArray implements Array<bool>, BoolArrayView {}
-
-abstract class BoolArrayView implements ArrayView<bool> {
-  bool get isTrue;
-
-  bool get isFalse;
-
-  double get mean;
-
-  int get sum;
-
-  BoolArrayView operator &(Array<bool> other);
-
-  BoolArrayView operator |(Array<bool> other);
-
-  BoolArrayView operator ~();
-
-  Numeric1D<int> toIntArray({int trueVal: 1, int falseVal: 0});
-
-  StringArray toStringArray({String trueVal: 'True', String falseVal: 'False'});
-
-  @override
-  BoolArray clone();
-
-// TODO ArrayView<dynamic> toDynamic({trueVal: 1, falseVal: 0});
-}
-
-abstract class DynamicArray implements Array<dynamic>, DynamicArrayFix {}
-
-abstract class DynamicArrayFix implements ArrayFix<dynamic>, DynamicArrayView {}
-
-abstract class DynamicArrayView implements ArrayView<dynamic> {
-  Comparator get comparator;
-
-  Numeric1D<int> toIntArray({int defaultValue, int onInvalid(value)});
-
-  Numeric1D<double> toDoubleArray(
-      {double defaultValue, double onInvalid(value)});
-
-  BoolArrayView toBoolArray({bool defaultValue, bool onInvalid(value)});
-
-  StringArray toStringArray({String defaultValue, String onInvalid(value)});
 }

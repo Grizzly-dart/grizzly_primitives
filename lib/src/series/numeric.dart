@@ -54,13 +54,11 @@ abstract class NumericSeriesView<LT, VT extends num>
   NumericSeriesView<LT, VT> operator *(
       /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
 
-  /*
   NumericSeriesView<LT, double> operator /(
       /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
 
-  NumericSeriesView<LT, double> operator ~/(
+  NumericSeriesView<LT, int> operator ~/(
       /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
-  */
 
   NumericSeriesView<LT, VT> operator -();
 
