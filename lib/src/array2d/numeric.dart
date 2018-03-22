@@ -61,7 +61,7 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
 
   Array2D<double> get corrcoefMatrix;
 
-  Numeric1D<E> dot(Iterable<num> other);
+  Numeric1D<E> dot(IterView<num> other);
 
   Array2D<double> get log;
 
