@@ -5,21 +5,22 @@ abstract class NumericSeries<LT, VT extends num>
 
 abstract class NumericSeriesFix<LT, VT extends num>
     implements SeriesFix<LT, VT>, NumericSeriesView<LT, VT> {
-/*
-  NumericSeriesView<LT, VT> addition(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+  /// Data of the series
+  Numeric1DFix<VT> get data;
 
-  NumericSeriesView<LT, VT> subtract(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+  void addition(
+      /* E | IterView<E> | NumericSeriesView<E> | Iterable<num> */ other);
 
-  NumericSeriesView<LT, VT> multiply(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
-  NumericSeriesView<LT, double> divide(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+  void subtract(
+      /* E | IterView<E> | NumericSeriesView<E> | Iterable<num> */ other);
 
-  NumericSeriesView<LT, double> truncDiv(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
-      */
+  void multiply(
+      /* E | IterView<E> | NumericSeriesView<E> | Iterable<num> */ other);
+  void divide(
+      /* E | IterView<E> | NumericSeriesView<E> | Iterable<num> */ other);
+
+  void truncDiv(
+      /* E | IterView<E> | NumericSeriesView<E> | Iterable<num> */ other);
 
   void negate();
 }
@@ -46,19 +47,19 @@ abstract class NumericSeriesView<LT, VT extends num>
   Stats<VT> get stats;
 
   NumericSeriesView<LT, VT> operator +(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+      /* E | IterView<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, VT> operator -(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+      /* E | IterView<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, VT> operator *(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+      /* E | IterView<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, double> operator /(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+      /* E | IterView<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, int> operator ~/(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
+      /* E | IterView<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, VT> operator -();
 

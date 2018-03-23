@@ -10,13 +10,8 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
   /// Data of the series
   ArrayView<VT> get data;
 
-  List<VT> toList();
-
   /// Length of the series
   int get length;
-
-  /// Checks if Series contains the label
-  bool containsLabel(LT label);
 
   /// Lookup value by [label]
   VT operator [](LT label);
@@ -42,6 +37,8 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
 
   Iterable<Pair<LT, VT>> enumerateSliced(int start, [int end]);
 
+  List<VT> toList();
+
   Series<int, VT> mode();
 
   Series<VT, int> valueCounts(
@@ -65,9 +62,6 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
 
   Array<VT> makeValueArraySized(int size);
 
-  bool labelsMatch(
-      /* IterView<LT> | Series<LT, dynamic> | Iterable<LT> */ labels);
-
   int compareValue(VT a, VT b);
 
   BoolSeriesBase<LT> operator <(
@@ -87,6 +81,20 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
 
   BoolSeriesBase<LT> ne(
       /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
+
+  BoolSeriesBase<LT> boolean(SeriesCond<LT, VT> cond);
+
+  Iter<LT> labelsWhere(SeriesCond<LT, VT> cond);
+
+  Series<LT, VT> select(mask);
+
+  Series<LT, VT> selectOnly(Labeled<LT> mask);
+
+  Series<LT, VT> selectLabels(/* Iterable<LT> | IterView<LT> */ mask);
+
+  Series<LT, VT> selectIf(BoolSeriesViewBase<LT> mask);
+
+  Series<LT, VT> selectWhen(SeriesCond<LT, VT> cond);
 
   NumericSeriesView<LT, int> get asInt;
 

@@ -17,6 +17,12 @@ typedef Series<LT, VT> SeriesMaker<LT, VT>(Iterable<VT> data,
 
 /// A series with index of type [LT] and value of type [VT]
 abstract class Series<LT, VT> implements SeriesFix<LT, VT> {
+  /// Name of the series
+  // TODO String name;
+
+  /// Data of the series
+  ArrayFix<VT> get data;
+
   void append(LT label, VT value);
 
   /// Remove element at position [position]
@@ -47,7 +53,7 @@ abstract class Series<LT, VT> implements SeriesFix<LT, VT> {
 
   void keepIf(BoolSeriesViewBase<LT> mask);
 
-  void keepWhen(SeriesCond<LT> cond);
+  void keepWhen(SeriesCond<LT, VT> cond);
 
   NumericSeries<LT, int> get asInt;
 
@@ -62,6 +68,9 @@ abstract class Series<LT, VT> implements SeriesFix<LT, VT> {
 
 /// A series with index of type [LT] and value of type [VT]
 abstract class SeriesFix<LT, VT> implements SeriesView<LT, VT> {
+  /// Data of the series
+  ArrayFix<VT> get data;
+
   /// Sets [value] by [label]
   operator []=(LT label, VT value);
 
@@ -90,4 +99,4 @@ abstract class SeriesFix<LT, VT> implements SeriesView<LT, VT> {
   DynamicSeriesFixBase<LT> get asDynamic;
 }
 
-typedef bool SeriesCond<LT>(LT lab, SeriesView<LT, dynamic> s);
+typedef bool SeriesCond<LT, VT>(LT lab, SeriesView<LT, VT> s);

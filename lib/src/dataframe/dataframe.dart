@@ -69,6 +69,16 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
 
   void keepWhen(DfCond<LT> cond);
 
+  DataFrameBase<LT> select(mask);
+
+  DataFrameBase<LT> selectOnly(Labeled<LT> mask);
+
+  DataFrameBase<LT> selectLabels(/* Iterable<LT> | IterView<LT> */ mask);
+
+  DataFrameBase<LT> selectIf(BoolSeriesViewBase<LT> mask);
+
+  DataFrameBase<LT> selectWhen(DfCond<LT> cond);
+
   // TODO append
 
   // TODO insert

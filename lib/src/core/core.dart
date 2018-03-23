@@ -9,6 +9,9 @@ part 'package:grizzly_primitives/src/core/index.dart';
 abstract class Labeled<LT> {
   Iterable<LT> get labels;
 
+  /// Returns label at [position]
+  LT labelAt(int position);
+
   int posOf(LT lab);
 
   bool containsLabel(LT lab);
