@@ -42,6 +42,25 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
 
   void setByLabel(LT label, /* SeriesView<String, dynamic> | IterView */ value);
 
+  void append(
+      LT label,
+      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> */ value);
+
+  void insert(
+      int pos,
+      LT label,
+      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> | DfCellSetter */ value);
+
+  void appendColumn(String name, value);
+
+  void insertColumn(int pos, String name, value);
+
+  void setColumn(String name, value);
+
+  void removeColumn(String name);
+
+  bool containsColumn(String column);
+
   Pair<LT, DynamicSeriesViewBase<String>> pairByPos(int position);
 
   Pair<LT, DynamicSeriesViewBase<String>> pairByLabel(LT label);
@@ -114,15 +133,6 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
       {bool skipInvalid: true, bool retype: false});
 
   Numeric2DView<int> asInt2D({bool skipInvalid: true, bool retype: false});
-
-  void append(
-      LT label,
-      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> */ value);
-
-  void insert(
-      int pos,
-      LT label,
-      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> | DfCellSetter */ value);
 
   /* TODO
   void addColumnFromList<VVT>(String column, List<VVT> value,

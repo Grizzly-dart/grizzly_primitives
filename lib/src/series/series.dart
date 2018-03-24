@@ -57,6 +57,10 @@ abstract class Series<LT, VT> implements SeriesFix<LT, VT> {
 
   void keepWhen(SeriesCond<LT, VT> cond);
 
+  // TODO addColumn
+
+  // TODO removeColumn
+
   NumericSeries<LT, int> get asInt;
 
   NumericSeries<LT, double> get asDouble;
