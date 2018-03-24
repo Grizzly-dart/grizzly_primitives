@@ -25,6 +25,8 @@ abstract class Series<LT, VT> implements SeriesFix<LT, VT> {
 
   void append(LT label, VT value);
 
+  void insert(int pos, LT label, VT value);
+
   /// Remove element at position [position]
   void remove(int position);
 

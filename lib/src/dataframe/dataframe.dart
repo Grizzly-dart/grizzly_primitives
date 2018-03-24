@@ -1,6 +1,7 @@
 library grizzly.primitives.dataframe;
 
 import 'package:grizzly_primitives/src/core/core.dart';
+import 'package:grizzly_primitives/src/array2d/array2d.dart';
 import 'package:grizzly_primitives/src/series/series.dart';
 
 abstract class DataFrameBase<LT> implements Labeled<LT> {
@@ -79,13 +80,49 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
 
   DataFrameBase<LT> selectWhen(DfCond<LT> cond);
 
-  // TODO append
+  void setIf(
+      BoolSeriesViewBase<LT> mask,
+      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> | DfCellSetter */ value);
 
-  // TODO insert
+  void setWhen(
+      DfCond<LT> cond,
+      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> | DfCellSetter */ value);
 
-  // TODO replace
+  DataFrameBase<LT> filter(mask);
 
-  // TODO replaceIf ...
+  DataFrameBase<LT> filterOnly(Labeled<String> mask);
+
+  DataFrameBase<LT> filterNamed(/* IterView<String> | Iterable<String> */ mask);
+
+  DataFrameBase<LT> filterIf(BoolSeriesViewBase<String> mask);
+
+  DataFrameBase<LT> filterWhen(DfCond cond);
+
+  Numeric2DView<double> toDouble2D(
+      {bool skipInvalid: true,
+      bool convert: true,
+      bool retype: false,
+      bool parse: false});
+
+  Numeric2DView<int> toInt2D(
+      {bool skipInvalid: true,
+      bool convert: true,
+      bool retype: false,
+      bool parse: false});
+
+  Numeric2DView<double> asDouble2D(
+      {bool skipInvalid: true, bool retype: false});
+
+  Numeric2DView<int> asInt2D({bool skipInvalid: true, bool retype: false});
+
+  void append(
+      LT label,
+      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> */ value);
+
+  void insert(
+      int pos,
+      LT label,
+      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> | DfCellSetter */ value);
 
   /* TODO
   void addColumnFromList<VVT>(String column, List<VVT> value,
@@ -100,3 +137,5 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
 }
 
 typedef bool DfCond<LT>(LT lav, DataFrameBase<LT> df);
+
+typedef VT DfCellSetter<LT, VT>(String col, LT label);
