@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.3
+
++ Has breaking changes
++ Better arithmetic operator methods for Array2D
+
 ## 0.2.1
 
 + New API

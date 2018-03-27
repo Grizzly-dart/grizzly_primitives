@@ -16,20 +16,19 @@ abstract class Numeric2DFix<E extends num>
 
   void clip({E min, E max});
 
-  Numeric2D<E> addition(/* int | Iterable<int> | Numeric2DArray */ other,
-      {bool self: false});
+  void addition(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<E> subtract(/* int | Iterable<int> | Numeric2DArray */ other,
-      {bool self: false});
+  void subtract(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<E> multiply(/* int | Iterable<int> | Numeric2DArray */ other,
-      {bool self: false});
+  void multiply(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<double> divide(/* int | Iterable<int> | Numeric2DArray */ other,
-      {bool self: false});
+  void divide(/* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<int> truncDiv(/* int | Iterable<int> | Numeric2DArray */ other,
-      {bool self: false});
+  void truncDiv(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 }
 
 abstract class Numeric2DView<E extends num> implements Array2DView<E> {
@@ -71,29 +70,22 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
 
   Array2D<double> get exp;
 
-  Numeric2D<E> operator +(/* num | Iterable<num> | Numeric2DArray */ other);
+  Numeric2D<E> operator -();
 
-  Numeric2D<E> addition(/* num | Iterable<num> | Numeric2DArray */ other);
+  Numeric2D<E> operator +(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<E> operator -(/* num | Iterable<num> | Numeric2DArray */ other);
+  Numeric2D<E> operator -(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<E> subtract(/* num | Iterable<num> | Numeric2DArray */ other);
-
-  Numeric2D<E> operator *(/* num | Iterable<num> | Numeric2DArray */ other);
-
-  Numeric2D<E> multiply(/* num | Iterable<num> | Numeric2DArray */ other);
+  Numeric2D<E> operator *(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<double> operator /(
-      /* num | Iterable<num> | Numeric2DArray */ other);
-
-  Numeric2D<double> divide(/* num | Iterable<num> | Numeric2DArray */ other);
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<int> operator ~/(
-      /* num | Iterable<num> | Numeric2DArray */ other);
-
-  Numeric2D<int> truncDiv(/* num | Iterable<num> | Numeric2DArray */ other);
-
-  Numeric2DView<E> operator -();
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
   /* TODO
   Array<bool> operator <(/* Numeric1D | num */ other);
