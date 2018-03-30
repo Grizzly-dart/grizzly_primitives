@@ -24,6 +24,10 @@ abstract class Array2D<E> implements Array2DFix<E> {
   void addScalar(E v);
 
   void insert(int index, ArrayView<E> row);
+
+  void reshape(Index2D newShape);
+
+  // TODO void flip();
 }
 
 abstract class Array2DFix<E> implements Array2DView<E> {
@@ -124,4 +128,10 @@ abstract class Array2DView<E> {
       bool dropNull: false,
       dynamic name});
       */
+
+  Array2D<E> reshaped(Index2D newShape);
+
+  // TODO Array2D<E> flipped();
+
+  Array2D<E> clone();
 }

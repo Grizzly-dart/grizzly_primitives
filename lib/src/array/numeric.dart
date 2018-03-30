@@ -68,6 +68,8 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
   Numeric1D<double> get toDouble;
 
   Numeric1D<int> get toInt;
+
+  Numeric2D<E> diagonal({Index2D shape, num def: 0});
 }
 
 abstract class Stats<T extends num> {

@@ -14,6 +14,8 @@ part 'dynamic.dart';
 abstract class Array<E> implements ArrayFix<E>, Iter<E> {
   void add(E a);
 
+  void addAll(IterView<E> a);
+
   void insert(int index, E a);
 
   void mask(ArrayView<bool> mask);
@@ -99,6 +101,8 @@ abstract class ArrayView<E> implements IterView<E> {
   Array<E> sample([int count = 10]);
 
   Array2D<E> to2D();
+
+  Array2D<E> diagonal();
 
   Array2D<E> repeat({int repeat: 1, bool transpose: false});
 

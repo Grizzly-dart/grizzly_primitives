@@ -16,6 +16,8 @@ abstract class Numeric2DFix<E extends num>
 
   void clip({E min, E max});
 
+  void negate();
+
   void addition(
       /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
@@ -52,8 +54,6 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
 
   double get std;
 
-  Array2D<double> get toDouble;
-
   // TODO Array2D<double> get toInt;
 
   Array2D<double> get covMatrix;
@@ -87,6 +87,8 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
   Numeric2D<int> operator ~/(
       /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
+  Numeric2D<E> matmul(Numeric2DView<E> other);
+
   /* TODO
   Array<bool> operator <(/* Numeric1D | num */ other);
 
@@ -98,4 +100,12 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
   */
 
   Numeric2DView<E> get view;
-}
+
+  Numeric2D<int> toInt();
+
+  Numeric2D<double> toDouble();
+
+  Numeric2D<E> reshaped(Index2D newShape);
+
+  // TODO Numeric2D<E> flipped();
+ }

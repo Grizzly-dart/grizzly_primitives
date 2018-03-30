@@ -6,7 +6,7 @@ part of grizzly.primitives;
 Index1D idx1D(int x) => new Index1D(x);
 
 /// Convenience method to create a 2D index with given [row] and [col]
-Index2D idx2D(int row, int col) => new Index2D(row, col);
+Index2D idx2D(int row, [int col]) => new Index2D(row, col ?? row);
 
 /// Interface for an index
 abstract class Index {
