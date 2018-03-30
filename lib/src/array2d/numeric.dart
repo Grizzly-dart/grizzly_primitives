@@ -4,6 +4,8 @@ abstract class Numeric2D<E extends num> implements Array2D<E>, Numeric2DFix<E> {
   Numeric2DAxis<E> get row;
 
   Numeric2DAxis<E> get col;
+
+  Numeric1DFix<E> operator [](int i);
 }
 
 abstract class Numeric2DFix<E extends num>
@@ -31,14 +33,22 @@ abstract class Numeric2DFix<E extends num>
 
   void truncDiv(
       /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+
+  Numeric2DFix<E> get fixed;
 }
 
 abstract class Numeric2DView<E extends num> implements Array2DView<E> {
+  Numeric1DView<E> operator [](int i);
+
   Numeric2DAxisView<E> get row;
 
   Numeric2DAxisView<E> get col;
 
-  Numeric1DView<E> operator [](int i);
+  Numeric2D<E> get transpose;
+
+  Numeric1D<E> get diagonal;
+
+  Numeric1D<E> unique();
 
   // TODO E get ptp;
 
@@ -108,4 +118,6 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
   Numeric2D<E> reshaped(Index2D newShape);
 
   // TODO Numeric2D<E> flipped();
- }
+
+  Numeric2D<E> clone();
+}

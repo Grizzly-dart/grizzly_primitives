@@ -1,31 +1,29 @@
 part of grizzly.primitives.array2d;
 
 abstract class Axis2D<E> implements Axis2DFix<E> {
-  void add(ArrayView<E> col);
+  void add(IterView<E> col);
 
   void addScalar(E v);
 
-  void insert(int index, ArrayView<E> col);
+  void insert(int index, IterView<E> col);
 }
 
 abstract class Axis2DFix<E> implements Axis2DView<E> {
   Iterable<ArrayFix<E>> get iterable;
 
-  Iterator<ArrayFix<E>> get iterator;
-
   ArrayFix<E> operator [](int r);
 
-  operator []=(int index, ArrayView<E> v);
+  operator []=(int index, IterView<E> v);
 
   // TODO set?
 
   void sort({bool descending: false});
+
+  void swap(int i, int j);
 }
 
 abstract class Axis2DView<E> {
   Iterable<ArrayView<E>> get iterable;
-
-  Iterator<ArrayView<E>> get iterator;
 
   ArrayView<E> operator [](int r);
 

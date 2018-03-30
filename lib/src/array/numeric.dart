@@ -23,6 +23,23 @@ abstract class Numeric1DFix<E extends num>
 
 /// A read-only 1 dimensional array of numbers
 abstract class Numeric1DView<E extends num> implements ArrayView<E> {
+  Numeric1D<E> slice(int start, [int end]);
+
+  Numeric1D<E> clone();
+
+  Numeric2D<E> get transpose;
+
+  Numeric2D<E> to2D();
+
+  Numeric2D<E> diagonal({Index2D shape, num def: 0});
+
+  Numeric2D<E> repeat({int repeat: 1, bool transpose: false});
+
+  Numeric1DView<E> get view;
+
+  /// Returns the unique items in the array
+  Numeric1D<E> unique();
+
   double get mean;
 
   E get sum;
@@ -68,8 +85,6 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
   Numeric1D<double> get toDouble;
 
   Numeric1D<int> get toInt;
-
-  Numeric2D<E> diagonal({Index2D shape, num def: 0});
 }
 
 abstract class Stats<T extends num> {

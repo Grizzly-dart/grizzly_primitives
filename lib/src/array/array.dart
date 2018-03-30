@@ -18,7 +18,7 @@ abstract class Array<E> implements ArrayFix<E>, Iter<E> {
 
   void insert(int index, E a);
 
-  void mask(ArrayView<bool> mask);
+  void keepIf(IterView<bool> mask);
 
   void removeAt(int pos);
 
@@ -39,7 +39,7 @@ abstract class ArrayFix<E> implements ArrayView<E>, IterFix<E> {
 
   void set(E v);
 
-  void assign(ArrayView<E> other);
+  void assign(IterView<E> other);
 
   ArrayFix<E> get fixed;
 
@@ -100,13 +100,13 @@ abstract class ArrayView<E> implements IterView<E> {
   /// returned
   Array<E> sample([int count = 10]);
 
+  Array2D<E> get transpose;
+
   Array2D<E> to2D();
 
   Array2D<E> diagonal();
 
   Array2D<E> repeat({int repeat: 1, bool transpose: false});
-
-  Array2D<E> get transpose;
 
   ArrayView<E> get view;
 
@@ -117,13 +117,9 @@ abstract class ArrayView<E> implements IterView<E> {
 
   Array<int> uniqueIndices();
 
-  Array<E> pickByIndices(ArrayView<int> indices);
+  Array<E> pickByIndices(IterView<int> indices);
 
   bool contains(E value);
-
-  Iterator<E> get iterator;
-
-  Iterable<int> get i;
 
   StringArray toStringArray();
 
@@ -143,4 +139,6 @@ abstract class ArrayView<E> implements IterView<E> {
   BoolArray operator >(/* ArrayView | E */ other);
 
   BoolArray operator >=(/* ArrayView | E */ other);
+
+  Array<E> selectIf(ArrayView<bool> mask);
 }

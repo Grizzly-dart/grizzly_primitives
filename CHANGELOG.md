@@ -5,6 +5,10 @@
 + Has breaking changes
 + Better arithmetic operator methods for Array2D
 
+## 0.2.4
+
++ Several improvements to Array and Array2D
+
 ## 0.2.1
 
 + New API
