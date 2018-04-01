@@ -29,6 +29,8 @@ abstract class Array<E> implements ArrayFix<E>, Iter<E> {
   void remove(E value);
 
   void removeMany(IterView<E> value);
+
+  void clear();
 }
 
 /// A mutable 1 dimensional fixed sized array of element [E]
@@ -37,9 +39,9 @@ abstract class ArrayFix<E> implements ArrayView<E>, IterFix<E> {
 
   // TODO [Index] based indexing
 
-  void set(E v);
+  set set(E v);
 
-  void assign(IterView<E> other);
+  set assign(IterView<E> other);
 
   ArrayFix<E> get fixed;
 

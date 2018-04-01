@@ -10,15 +10,17 @@ abstract class Numeric1DFix<E extends num>
 
   void negate();
 
-  void addition(/* E | Iterable<E> */ other);
+  void addition(/* num | IterView<num> | Iterable<num> */ other);
 
-  void subtract(/* E | Iterable<E> */ other);
+  void subtract(/* num | IterView<num> | Iterable<num> */ other);
 
-  void multiply(/* E | Iterable<E> */ other);
+  void multiply(/* num | IterView<num> | Iterable<num> */ other);
 
-  void divide(/* E | Iterable<E> */ other);
+  void divide(/* num | IterView<num> | Iterable<num> */ other);
 
-  void truncDiv(/* E | Iterable<E> */ other);
+  void truncDiv(/* num | IterView<num> | Iterable<num> */ other);
+
+  void rdivMe(/* num | IterView<num> | Iterable<num> */ other);
 }
 
 /// A read-only 1 dimensional array of numbers
@@ -60,15 +62,17 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
 
   Numeric1D<E> operator -();
 
-  Numeric1D<E> operator +(/* num | Numeric1DView | Numeric2DView */ other);
+  Numeric1D<E> operator +(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1D<E> operator -(/* num | Numeric1DView | Numeric2DView */ other);
+  Numeric1D<E> operator -(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1D<E> operator *(/* num | Numeric1DView | Numeric2DView */ other);
+  Numeric1D<E> operator *(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1D<double> operator /(/* num | Numeric1DView | Numeric2DView */ other);
+  Numeric1D<double> operator /(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1D<int> operator ~/(/* num | Numeric1DView | Numeric2DView */ other);
+  Numeric1D<int> operator ~/(/* num | IterView<num> | Iterable<num> */ other);
+
+  Numeric1D<double> rdiv(/* num | IterView<num> | Iterable<num> */ other);
 
   Numeric1DFix<E> abs();
 

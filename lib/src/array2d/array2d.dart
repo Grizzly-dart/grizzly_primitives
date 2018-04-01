@@ -35,6 +35,8 @@ abstract class Array2DFix<E> implements Array2DView<E> {
 
   operator []=(int i, IterView<E> val);
 
+  set diagonal(covariant dynamic v);
+
   Iterable<ArrayFix<E>> get rows;
 
   Iterable<ArrayFix<E>> get cols;

@@ -34,6 +34,9 @@ abstract class Numeric2DFix<E extends num>
   void truncDiv(
       /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
+  void rdivMe(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<double> */ other);
+
   Numeric2DFix<E> get fixed;
 }
 
@@ -97,7 +100,11 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
   Numeric2D<int> operator ~/(
       /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<E> matmul(Numeric2DView<E> other);
+  Numeric2D<double> rdiv(/* num | Iterable<num> | Numeric2DArray */ other);
+
+  Numeric2D<E> matmul(Array2DView<E> other);
+
+  Numeric2D<E> matmulDiag(ArrayView<E> other);
 
   /* TODO
   Array<bool> operator <(/* Numeric1D | num */ other);
