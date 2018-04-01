@@ -1,8 +1,8 @@
 part of grizzly.primitives.array;
 
-abstract class StringArray implements StringFixArray, Array<String> {}
+abstract class StringArray implements StringArrayFix, Array<String> {}
 
-abstract class StringFixArray implements ArrayFix<String>, StringArrayView {
+abstract class StringArrayFix implements ArrayFix<String>, StringArrayView {
   void toLowerCase();
 
   void toUpperCase();

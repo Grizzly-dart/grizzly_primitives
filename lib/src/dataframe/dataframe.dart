@@ -1,12 +1,10 @@
 library grizzly.primitives.dataframe;
 
 import 'package:grizzly_primitives/src/core/core.dart';
+import 'package:grizzly_primitives/src/array2d/array2d.dart';
 import 'package:grizzly_primitives/src/series/series.dart';
 
-part 'indexed.dart';
-part 'positioned.dart';
-
-abstract class DataFrameBase<LT> {
+abstract class DataFrameBase<LT> implements Labeled<LT> {
   int get numCols;
 
   int get numRows;
@@ -22,13 +20,18 @@ abstract class DataFrameBase<LT> {
 
   int posOf(LT label);
 
+  bool containsLabel(LT label);
+
   SeriesFix<LT, dynamic> operator [](String column);
 
-  operator []=(String column, /* SeriesView<LT, dynamic> | IterView */ value);
+  operator []=(
+      String column, /* SeriesView<LT, dynamic> | IterView | Iterable */ value);
 
   SeriesFix<LT, VT> get<VT>(String column);
 
-  void set<VT>(String column, /* SeriesView<LT, VT> | IterView<VT> */ value);
+  void set<VT>(
+      String column,
+      /* SeriesView<LT, VT> | IterView<VT> | Iterable<VT>*/ value);
 
   DynamicSeriesViewBase<String> getByPos(int position);
 
@@ -39,6 +42,25 @@ abstract class DataFrameBase<LT> {
 
   void setByLabel(LT label, /* SeriesView<String, dynamic> | IterView */ value);
 
+  void append(
+      LT label,
+      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> */ value);
+
+  void insert(
+      int pos,
+      LT label,
+      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> | DfCellSetter */ value);
+
+  void appendColumn(String name, value);
+
+  void insertColumn(int pos, String name, value);
+
+  void setColumn(String name, value);
+
+  void removeColumn(String name);
+
+  bool containsColumn(String column);
+
   Pair<LT, DynamicSeriesViewBase<String>> pairByPos(int position);
 
   Pair<LT, DynamicSeriesViewBase<String>> pairByLabel(LT label);
@@ -47,6 +69,70 @@ abstract class DataFrameBase<LT> {
 
   Iterable<Pair<LT, DynamicSeriesViewBase<String>>> enumerateSliced(int start,
       [int end]);
+
+  /// Remove element at position [pos]
+  void removeByPos(int pos);
+
+  void removeManyByPos(List<int> positions);
+
+  void drop(LT label);
+
+  void dropMany(/* Iterable<LT> | IterView<LT> | Labeled */ labels);
+
+  void keep(mask);
+
+  void keepOnly(Labeled<LT> mask);
+
+  void keepLabels(/* Iterable<LT> | IterView<LT> */ mask);
+
+  void keepIf(BoolSeriesViewBase<LT> mask);
+
+  void keepWhen(DfCond<LT> cond);
+
+  DataFrameBase<LT> select(mask);
+
+  DataFrameBase<LT> selectOnly(Labeled<LT> mask);
+
+  DataFrameBase<LT> selectLabels(/* Iterable<LT> | IterView<LT> */ mask);
+
+  DataFrameBase<LT> selectIf(BoolSeriesViewBase<LT> mask);
+
+  DataFrameBase<LT> selectWhen(DfCond<LT> cond);
+
+  void setIf(
+      BoolSeriesViewBase<LT> mask,
+      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> | DfCellSetter */ value);
+
+  void setWhen(
+      DfCond<LT> cond,
+      /* SeriesView<String, dynamic> | IterView | Map<String, dynamic> | DfCellSetter */ value);
+
+  DataFrameBase<LT> filter(mask);
+
+  DataFrameBase<LT> filterOnly(Labeled<String> mask);
+
+  DataFrameBase<LT> filterNamed(/* IterView<String> | Iterable<String> */ mask);
+
+  DataFrameBase<LT> filterIf(BoolSeriesViewBase<String> mask);
+
+  DataFrameBase<LT> filterWhen(DfCond cond);
+
+  Numeric2DView<double> toDouble2D(
+      {bool skipInvalid: true,
+      bool convert: true,
+      bool retype: false,
+      bool parse: false});
+
+  Numeric2DView<int> toInt2D(
+      {bool skipInvalid: true,
+      bool convert: true,
+      bool retype: false,
+      bool parse: false});
+
+  Numeric2DView<double> asDouble2D(
+      {bool skipInvalid: true, bool retype: false});
+
+  Numeric2DView<int> asInt2D({bool skipInvalid: true, bool retype: false});
 
   /* TODO
   void addColumnFromList<VVT>(String column, List<VVT> value,
@@ -59,3 +145,7 @@ abstract class DataFrameBase<LT> {
   DataFrameBase<int, String> mode();
   */
 }
+
+typedef bool DfCond<LT>(LT lav, DataFrameBase<LT> df);
+
+typedef VT DfCellSetter<LT, VT>(String col, LT label);

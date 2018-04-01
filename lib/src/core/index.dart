@@ -6,7 +6,7 @@ part of grizzly.primitives;
 Index1D idx1D(int x) => new Index1D(x);
 
 /// Convenience method to create a 2D index with given [row] and [col]
-Index2D idx2D(int row, int col) => new Index2D(row, col);
+Index2D idx2D(int row, [int col]) => new Index2D(row, col ?? row);
 
 /// Interface for an index
 abstract class Index {
@@ -112,6 +112,8 @@ class Index1D implements Index {
   ///     print(i1 <= idx1D(10)); // => true
   ///     print(i1 <= idx1D(5)); // => true
   bool operator <=(@checked Index1D other) => x <= other.x;
+
+  String toString() => 'Shape($x)';
 }
 
 /// A 2-dimensional index
@@ -221,4 +223,6 @@ class Index2D implements Index {
 
   /// Returns a 2D index with 0th row and 0th column
   static const Index2D zero = const Index2D(0, 0);
+
+  String toString() => 'Shape(${row}x${col})';
 }

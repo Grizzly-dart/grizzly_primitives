@@ -1,49 +1,46 @@
 part of grizzly.primitives.array;
 
 /// A mutable 1 dimensional array of numbers
-abstract class Numeric1D<E extends num> implements Array<E>, Numeric1DFix<E> {
-  Numeric1D<E> addition(/* E | Iterable<E> */ other, {bool self: false});
-
-  Numeric1D<E> subtract(/* E | Iterable<E> */ other, {bool self: false});
-
-  Numeric1D<E> multiply(/* E | Iterable<E> */ other, {bool self: false});
-
-  Numeric1D<double> divide(/* E | Iterable<E> */ other, {bool self: false});
-
-  Numeric1D<int> truncDiv(/* E | Iterable<E> */ other, {bool self: false});
-}
+abstract class Numeric1D<E extends num> implements Array<E>, Numeric1DFix<E> {}
 
 /// A mutable 1 dimensional fixed sized array of numbers
 abstract class Numeric1DFix<E extends num>
     implements ArrayFix<E>, Numeric1DView<E> {
   void clip({E min, E max});
 
-  Numeric1DFix<E> operator +(/* E | Iterable<E> */ other);
+  void negate();
 
-  Numeric1DFix<E> addition(/* E | Iterable<E> */ other, {bool self: false});
+  void addition(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1DFix<E> operator -(/* E | Iterable<E> */ other);
+  void subtract(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1DFix<E> subtract(/* E | Iterable<E> */ other, {bool self: false});
+  void multiply(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1DFix<E> operator *(/* E | Iterable<E> */ other);
+  void divide(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1DFix<E> multiply(/* E | Iterable<E> */ other, {bool self: false});
+  void truncDiv(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1DFix<double> operator /(/* E | Iterable<E> */ other);
-
-  Numeric1DFix<double> divide(/* E | Iterable<E> */ other, {bool self: false});
-
-  Numeric1DFix<int> operator ~/(/* E | Iterable<E> */ other);
-
-  Numeric1DFix<int> truncDiv(/* E | Iterable<E> */ other, {bool self: false});
+  void rdivMe(/* num | IterView<num> | Iterable<num> */ other);
 }
 
 /// A read-only 1 dimensional array of numbers
 abstract class Numeric1DView<E extends num> implements ArrayView<E> {
-  E get ptp;
+  Numeric1D<E> slice(int start, [int end]);
 
-  Extent<E> get extent;
+  Numeric1D<E> clone();
+
+  Numeric2D<E> get transpose;
+
+  Numeric2D<E> to2D();
+
+  Numeric2D<E> diagonal({Index2D shape, num def: 0});
+
+  Numeric2D<E> repeat({int repeat: 1, bool transpose: false});
+
+  Numeric1DView<E> get view;
+
+  /// Returns the unique items in the array
+  Numeric1D<E> unique();
 
   double get mean;
 
@@ -51,49 +48,35 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
 
   E get prod;
 
-  double average(Iterable<num> weights);
-
   Numeric1DView<E> get cumsum;
 
   Numeric1DView<E> get cumprod;
+
+  double average(Iterable<num> weights);
 
   double get variance;
 
   double get std;
 
-  Numeric1DFix<E> operator +(/* E | Iterable<E> */ other);
+  Stats<E> get stats;
 
-  Numeric1DFix<E> addition(/* E | Iterable<E> */ other);
+  Numeric1D<E> operator -();
 
-  Numeric1DFix<E> operator -(/* E | Iterable<E> */ other);
+  Numeric1D<E> operator +(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1DFix<E> subtract(/* E | Iterable<E> */ other);
+  Numeric1D<E> operator -(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1DFix<E> operator *(/* E | Iterable<E> */ other);
+  Numeric1D<E> operator *(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1DFix<E> multiply(/* E | Iterable<E> */ other);
+  Numeric1D<double> operator /(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1DFix<double> operator /(/* E | Iterable<E> */ other);
+  Numeric1D<int> operator ~/(/* num | IterView<num> | Iterable<num> */ other);
 
-  Numeric1DFix<double> divide(/* E | Iterable<E> */ other);
-
-  Numeric1DFix<int> operator ~/(/* E | Iterable<E> */ other);
-
-  Numeric1DFix<int> truncDiv(/* E | Iterable<E> */ other);
-
-  Numeric1DFix<E> operator -();
+  Numeric1D<double> rdiv(/* num | IterView<num> | Iterable<num> */ other);
 
   Numeric1DFix<E> abs();
 
-  BoolArray operator <(/* Numeric1D | num */ other);
-
-  BoolArray operator <=(/* Numeric1D | num */ other);
-
-  BoolArray operator >(/* Numeric1D | num */ other);
-
-  BoolArray operator >=(/* Numeric1D | num */ other);
-
-  E dot(Iterable<num> other);
+  E dot(IterView<num> other);
 
   Array<double> get log;
 
@@ -106,12 +89,50 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
   Numeric1D<double> get toDouble;
 
   Numeric1D<int> get toInt;
+}
+
+abstract class Stats<T extends num> {
+  IterView<T> get values;
+
+  int get length;
+
+  T operator [](int index);
+
+  T get min;
+
+  T get max;
+
+  Extent<T> get extent;
+
+  T get ptp;
+
+  T get mode;
+
+  T get median;
+
+  double average(Iterable<num> weights);
+
+  double get mean;
+
+  double get variance;
+
+  double get std;
+
+  int count(T v);
+
+  int get countNonNull;
+
+  T get sum;
+
+  T get prod;
 
   double cov(Numeric1DView y);
 
-  Array<double> covMatrix(Numeric2DView y);
+  Numeric1D<double> covMatrix(Numeric2DView y);
 
   double corrcoef(Numeric1DView y);
 
-  Array<double> corrcoefMatrix(Numeric2DView y);
+  Numeric1D<double> corrcoefMatrix(Numeric2DView y);
+
+  String describe();
 }

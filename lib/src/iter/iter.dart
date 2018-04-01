@@ -12,16 +12,18 @@ abstract class IterView<T> {
   T get first;
 
   T get last;
+
+  IterView<T> slice(int start, [int end]);
 }
 
 abstract class IterFix<T> implements IterView<T> {
-  factory IterFix(Iterable<T> iterable) => new IterFixImpl<T>(iterable);
+  factory IterFix([List<T> iterable]) => new IterFixImpl<T>(iterable);
 
   operator []=(int index, T v);
 }
 
 abstract class Iter<T> implements IterFix<T> {
-  factory Iter(Iterable<T> iterable) => new IterImpl<T>(iterable);
+  factory Iter([List<T> iterable]) => new IterImpl<T>(iterable);
 
   void add(T v);
 
@@ -46,12 +48,17 @@ class IterViewImpl<T> implements IterView<T> {
   T get last => asIterable.last;
 
   List<T> toList() => asIterable.toList();
+
+  IterView<T> slice(int start, [int end]) {
+    end ??= length;
+    return new IterView<T>(asIterable.skip(start).take(end - start));
+  }
 }
 
 class IterFixImpl<T> implements IterFix<T> {
   final List<T> _asList;
 
-  const IterFixImpl(List<T> list) : _asList = list;
+  IterFixImpl([List<T> list]) : _asList = list ?? <T>[];
 
   int get length => asIterable.length;
 
@@ -69,12 +76,17 @@ class IterFixImpl<T> implements IterFix<T> {
     if (index >= length) throw new Exception('Fixed size list!');
     _asList[index] = v;
   }
+
+  IterView<T> slice(int start, [int end]) {
+    end ??= length;
+    return new IterView<T>(asIterable.skip(start).take(end - start));
+  }
 }
 
 class IterImpl<T> implements Iter<T> {
   final List<T> _list;
 
-  const IterImpl(List<T> list) : _list = list;
+  IterImpl([List<T> list]) : _list = list ?? <T>[];
 
   IterImpl.sized([int length = 0]) : _list = new List<T>(length);
 
@@ -101,4 +113,9 @@ class IterImpl<T> implements Iter<T> {
   void insert(int pos, T v) => _list.insert(pos, v);
 
   List<T> toList() => _list.toList();
+
+  IterView<T> slice(int start, [int end]) {
+    end ??= length;
+    return new IterView<T>(asIterable.skip(start).take(end - start));
+  }
 }

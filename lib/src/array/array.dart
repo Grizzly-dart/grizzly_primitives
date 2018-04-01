@@ -7,14 +7,18 @@ import 'package:grizzly_primitives/src/series/series.dart';
 
 part 'numeric.dart';
 part 'string.dart';
+part 'bool.dart';
+part 'dynamic.dart';
 
 /// A mutable 1 dimensional array of element [E]
 abstract class Array<E> implements ArrayFix<E>, Iter<E> {
   void add(E a);
 
+  void addAll(IterView<E> a);
+
   void insert(int index, E a);
 
-  void mask(ArrayView<bool> mask);
+  void keepIf(IterView<bool> mask);
 
   void removeAt(int pos);
 
@@ -25,6 +29,8 @@ abstract class Array<E> implements ArrayFix<E>, Iter<E> {
   void remove(E value);
 
   void removeMany(IterView<E> value);
+
+  void clear();
 }
 
 /// A mutable 1 dimensional fixed sized array of element [E]
@@ -33,9 +39,9 @@ abstract class ArrayFix<E> implements ArrayView<E>, IterFix<E> {
 
   // TODO [Index] based indexing
 
-  void set(E v);
+  set set(E v);
 
-  void assign(ArrayView<E> other);
+  set assign(IterView<E> other);
 
   ArrayFix<E> get fixed;
 
@@ -96,11 +102,13 @@ abstract class ArrayView<E> implements IterView<E> {
   /// returned
   Array<E> sample([int count = 10]);
 
+  Array2D<E> get transpose;
+
   Array2D<E> to2D();
 
-  Array2D<E> repeat({int repeat: 1, bool transpose: false});
+  Array2D<E> diagonal();
 
-  Array2D<E> get transpose;
+  Array2D<E> repeat({int repeat: 1, bool transpose: false});
 
   ArrayView<E> get view;
 
@@ -111,60 +119,28 @@ abstract class ArrayView<E> implements IterView<E> {
 
   Array<int> uniqueIndices();
 
-  Array<E> pickByIndices(ArrayView<int> indices);
+  Array<E> pickByIndices(IterView<int> indices);
 
   bool contains(E value);
-
-  Iterator<E> get iterator;
-
-  Iterable<int> get i;
 
   StringArray toStringArray();
 
   Series<E, int> valueCounts(
       {bool sortByValue: false, bool descending: false, name});
-}
 
-abstract class BoolArray implements Array<bool>, BoolArrayView {}
+  int compareValue(E a, E b);
 
-abstract class BoolArrayView implements ArrayView<bool> {
-  bool get isTrue;
+  BoolArray eq(/* ArrayView | E */ other);
 
-  bool get isFalse;
+  BoolArray ne(/* ArrayView | E */ other);
 
-  double get mean;
+  BoolArray operator <(/* ArrayView | E */ other);
 
-  int get sum;
+  BoolArray operator <=(/* ArrayView | E */ other);
 
-  BoolArrayView operator &(Array<bool> other);
+  BoolArray operator >(/* ArrayView | E */ other);
 
-  BoolArrayView operator |(Array<bool> other);
+  BoolArray operator >=(/* ArrayView | E */ other);
 
-  BoolArrayView operator ~();
-
-  Numeric1D<int> toIntArray({int trueVal: 1, int falseVal: 0});
-
-  StringArray toStringArray({String trueVal: 'True', String falseVal: 'False'});
-
-  @override
-  BoolArray clone();
-
-// TODO ArrayView<dynamic> toDynamic({trueVal: 1, falseVal: 0});
-}
-
-abstract class DynamicArray implements Array<dynamic>, DynamicArrayFix {}
-
-abstract class DynamicArrayFix implements ArrayFix<dynamic>, DynamicArrayView {}
-
-abstract class DynamicArrayView implements ArrayView<dynamic> {
-  Comparator get comparator;
-
-  Numeric1D<int> toIntArray({int defaultValue, int onInvalid(value)});
-
-  Numeric1D<double> toDoubleArray(
-      {double defaultValue, double onInvalid(value)});
-
-  BoolArrayView toBoolArray({bool defaultValue, bool onInvalid(value)});
-
-  StringArray toStringArray({String defaultValue, String onInvalid(value)});
+  Array<E> selectIf(ArrayView<bool> mask);
 }

@@ -1,10 +1,29 @@
 part of grizzly.primitives.series;
 
 abstract class NumericSeries<LT, VT extends num>
-    implements Series<LT, VT>, NumericFixSeries<LT, VT> {}
+    implements Series<LT, VT>, NumericSeriesFix<LT, VT> {}
 
-abstract class NumericFixSeries<LT, VT extends num>
-    implements SeriesFix<LT, VT>, NumericSeriesView<LT, VT> {}
+abstract class NumericSeriesFix<LT, VT extends num>
+    implements SeriesFix<LT, VT>, NumericSeriesView<LT, VT> {
+  /// Data of the series
+  Numeric1DFix<VT> get data;
+
+  void addition(
+      /* E | IterView<E> | NumericSeriesView<E> | Iterable<num> */ other);
+
+  void subtract(
+      /* E | IterView<E> | NumericSeriesView<E> | Iterable<num> */ other);
+
+  void multiply(
+      /* E | IterView<E> | NumericSeriesView<E> | Iterable<num> */ other);
+  void divide(
+      /* E | IterView<E> | NumericSeriesView<E> | Iterable<num> */ other);
+
+  void truncDiv(
+      /* E | IterView<E> | NumericSeriesView<E> | Iterable<num> */ other);
+
+  void negate();
+}
 
 abstract class NumericSeriesView<LT, VT extends num>
     implements SeriesView<LT, VT> {
@@ -25,49 +44,26 @@ abstract class NumericSeriesView<LT, VT extends num>
 
   double get std;
 
-  /*
-  NumericSeriesView<LT, VT> operator +(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
+  Stats<VT> get stats;
 
-  NumericSeriesView<LT, VT> addition(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
+  NumericSeriesView<LT, VT> operator +(
+      /* E | IterView<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, VT> operator -(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
-
-  NumericSeriesView<LT, VT> subtract(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
-  */
+      /* E | IterView<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, VT> operator *(
-      /* E | IterView<E> | NumericSeriesView<E> | Numeric1DView<E> */ other);
-
-  /*
-  NumericSeriesView<LT, VT> multiply(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
+      /* E | IterView<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, double> operator /(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
+      /* E | IterView<E> | NumericSeriesView<E> */ other);
 
-  NumericSeriesView<LT, double> divide(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
-
-  NumericSeriesView<LT, double> operator ~/(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
-
-  NumericSeriesView<LT, double> truncDiv(
-      /* E | IterView<E> | NumericSeriesView<int> */ other);
+  NumericSeriesView<LT, int> operator ~/(
+      /* E | IterView<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, VT> operator -();
 
-  Series<LT, bool> operator <(/* Numeric1D | num */ other);
-
-  Series<LT, bool> operator <=(/* Numeric1D | num */ other);
-
-  Series<LT, bool> operator >(/* Numeric1D | num */ other);
-
-  Series<LT, bool> operator >=(/* Numeric1D | num */ other);
-
+/*
   VT dot(Iterable<num> other);
   */
 

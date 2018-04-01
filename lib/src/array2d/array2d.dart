@@ -3,6 +3,7 @@ library grizzly.primitives.array2d;
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/series/series.dart';
 import 'package:grizzly_primitives/src/array/array.dart';
+import 'package:grizzly_primitives/src/iter/iter.dart';
 
 part 'axis.dart';
 part 'numeric.dart';
@@ -18,17 +19,23 @@ abstract class Array2D<E> implements Array2DFix<E> {
 
   Axis2D<E> get col;
 
-  void add(ArrayView<E> row);
+  void add(IterView<E> row);
 
   void addScalar(E v);
 
-  void insert(int index, ArrayView<E> row);
+  void insert(int index, IterView<E> row);
+
+  void reshape(Index2D newShape);
+
+  // TODO void flip();
 }
 
 abstract class Array2DFix<E> implements Array2DView<E> {
   ArrayFix<E> operator [](int i);
 
-  operator []=(int i, ArrayView<E> val);
+  operator []=(int i, IterView<E> val);
+
+  set diagonal(covariant dynamic v);
 
   Iterable<ArrayFix<E>> get rows;
 
@@ -41,8 +48,6 @@ abstract class Array2DFix<E> implements Array2DView<E> {
   void set(E v);
 
   void assign(Array2DView<E> other);
-
-  Array2DView<E> get view;
 
   Array2DFix<E> get fixed;
 }
@@ -123,4 +128,10 @@ abstract class Array2DView<E> {
       bool dropNull: false,
       dynamic name});
       */
+
+  Array2D<E> reshaped(Index2D newShape);
+
+  // TODO Array2D<E> flipped();
+
+  Array2D<E> clone();
 }

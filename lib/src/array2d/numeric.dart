@@ -4,6 +4,8 @@ abstract class Numeric2D<E extends num> implements Array2D<E>, Numeric2DFix<E> {
   Numeric2DAxis<E> get row;
 
   Numeric2DAxis<E> get col;
+
+  Numeric1DFix<E> operator [](int i);
 }
 
 abstract class Numeric2DFix<E extends num>
@@ -16,28 +18,40 @@ abstract class Numeric2DFix<E extends num>
 
   void clip({E min, E max});
 
-  Numeric2D<E> addition(/* int | Iterable<int> | Numeric2DArray */ other,
-      {bool self: false});
+  void negate();
 
-  Numeric2D<E> subtract(/* int | Iterable<int> | Numeric2DArray */ other,
-      {bool self: false});
+  void addition(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<E> multiply(/* int | Iterable<int> | Numeric2DArray */ other,
-      {bool self: false});
+  void subtract(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<double> divide(/* int | Iterable<int> | Numeric2DArray */ other,
-      {bool self: false});
+  void multiply(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<int> truncDiv(/* int | Iterable<int> | Numeric2DArray */ other,
-      {bool self: false});
+  void divide(/* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+
+  void truncDiv(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+
+  void rdivMe(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<double> */ other);
+
+  Numeric2DFix<E> get fixed;
 }
 
 abstract class Numeric2DView<E extends num> implements Array2DView<E> {
+  Numeric1DView<E> operator [](int i);
+
   Numeric2DAxisView<E> get row;
 
   Numeric2DAxisView<E> get col;
 
-  Numeric1DView<E> operator [](int i);
+  Numeric2D<E> get transpose;
+
+  Numeric1D<E> get diagonal;
+
+  Numeric1D<E> unique();
 
   // TODO E get ptp;
 
@@ -53,15 +67,13 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
 
   double get std;
 
-  Array2D<double> get toDouble;
-
   // TODO Array2D<double> get toInt;
 
   Array2D<double> get covMatrix;
 
   Array2D<double> get corrcoefMatrix;
 
-  Numeric1D<E> dot(Iterable<num> other);
+  Numeric1D<E> dot(IterView<num> other);
 
   Array2D<double> get log;
 
@@ -71,29 +83,28 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
 
   Array2D<double> get exp;
 
-  Numeric2D<E> operator +(/* num | Iterable<num> | Numeric2DArray */ other);
+  Numeric2D<E> operator -();
 
-  Numeric2D<E> addition(/* num | Iterable<num> | Numeric2DArray */ other);
+  Numeric2D<E> operator +(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<E> operator -(/* num | Iterable<num> | Numeric2DArray */ other);
+  Numeric2D<E> operator -(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<E> subtract(/* num | Iterable<num> | Numeric2DArray */ other);
-
-  Numeric2D<E> operator *(/* num | Iterable<num> | Numeric2DArray */ other);
-
-  Numeric2D<E> multiply(/* num | Iterable<num> | Numeric2DArray */ other);
+  Numeric2D<E> operator *(
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<double> operator /(
-      /* num | Iterable<num> | Numeric2DArray */ other);
-
-  Numeric2D<double> divide(/* num | Iterable<num> | Numeric2DArray */ other);
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<int> operator ~/(
-      /* num | Iterable<num> | Numeric2DArray */ other);
+      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
 
-  Numeric2D<int> truncDiv(/* num | Iterable<num> | Numeric2DArray */ other);
+  Numeric2D<double> rdiv(/* num | Iterable<num> | Numeric2DArray */ other);
 
-  Numeric2DView<E> operator -();
+  Numeric2D<E> matmul(Array2DView<E> other);
+
+  Numeric2D<E> matmulDiag(ArrayView<E> other);
 
   /* TODO
   Array<bool> operator <(/* Numeric1D | num */ other);
@@ -106,4 +117,14 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
   */
 
   Numeric2DView<E> get view;
+
+  Numeric2D<int> toInt();
+
+  Numeric2D<double> toDouble();
+
+  Numeric2D<E> reshaped(Index2D newShape);
+
+  // TODO Numeric2D<E> flipped();
+
+  Numeric2D<E> clone();
 }
