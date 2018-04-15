@@ -6,6 +6,9 @@ part 'package:grizzly_primitives/src/core/pair.dart';
 part 'package:grizzly_primitives/src/core/extent.dart';
 part 'package:grizzly_primitives/src/core/index.dart';
 
+/// Prototype of name makers for `Series` and `Array`
+typedef String NameMaker();
+
 abstract class Labeled<LT> {
   Iterable<LT> get labels;
 

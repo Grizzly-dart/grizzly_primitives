@@ -26,6 +26,8 @@ export 'src/series/series.dart';
 
 export 'src/dataframe/dataframe.dart';
 
+export 'src/ranger/ranger.dart';
+
 class LengthMismatch implements Exception {
   final int expected;
 
