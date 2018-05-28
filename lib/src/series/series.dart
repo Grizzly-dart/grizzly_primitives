@@ -1,7 +1,6 @@
 library grizzly.primitives.series;
 
 import 'package:grizzly_primitives/src/core/core.dart';
-import 'package:grizzly_primitives/src/iter/iter.dart';
 import 'package:grizzly_primitives/src/array/array.dart';
 import 'package:grizzly_primitives/src/dataframe/dataframe.dart';
 
@@ -51,7 +50,7 @@ abstract class Series<LT, VT> implements SeriesFix<LT, VT> {
 
   void keepOnly(Labeled<LT> mask);
 
-  void keepLabels(/* Iterable<LT> | IterView<LT> */ mask);
+  void keepLabels(Iterable<LT> mask);
 
   void keepIf(BoolSeriesViewBase<LT> mask);
 

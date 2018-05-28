@@ -10,24 +10,24 @@ abstract class Numeric1DFix<E extends num>
 
   void negate();
 
-  void addition(/* num | IterView<num> | Iterable<num> */ other);
+  void addition(/* num | Iterable<num> */ other);
 
-  void subtract(/* num | IterView<num> | Iterable<num> */ other);
+  void subtract(/* num | Iterable<num> */ other);
 
-  void multiply(/* num | IterView<num> | Iterable<num> */ other);
+  void multiply(/* num | Iterable<num> */ other);
 
-  void divide(/* num | IterView<num> | Iterable<num> */ other);
+  void divide(/* num | Iterable<num> */ other);
 
-  void truncDiv(/* num | IterView<num> | Iterable<num> */ other);
+  void truncDiv(/* num | Iterable<num> */ other);
 
-  void rdivMe(/* num | IterView<num> | Iterable<num> */ other);
+  void rdivMe(/* num | Iterable<num> */ other);
 }
 
 /// A read-only 1 dimensional array of numbers
 abstract class Numeric1DView<E extends num> implements ArrayView<E> {
   Numeric1D<E> slice(int start, [int end]);
 
-  Numeric1D<E> clone();
+  Numeric1D<E> clone({String name});
 
   Numeric2D<E> get transpose;
 
@@ -62,21 +62,21 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
 
   Numeric1D<E> operator -();
 
-  Numeric1D<E> operator +(/* num | IterView<num> | Iterable<num> */ other);
+  Numeric1D<E> operator +(/* num | Iterable<num> */ other);
 
-  Numeric1D<E> operator -(/* num | IterView<num> | Iterable<num> */ other);
+  Numeric1D<E> operator -(/* num | Iterable<num> */ other);
 
-  Numeric1D<E> operator *(/* num | IterView<num> | Iterable<num> */ other);
+  Numeric1D<E> operator *(/* num | Iterable<num> */ other);
 
-  Numeric1D<double> operator /(/* num | IterView<num> | Iterable<num> */ other);
+  Numeric1D<double> operator /(/* num | Iterable<num> */ other);
 
-  Numeric1D<int> operator ~/(/* num | IterView<num> | Iterable<num> */ other);
+  Numeric1D<int> operator ~/(/* num | Iterable<num> */ other);
 
-  Numeric1D<double> rdiv(/* num | IterView<num> | Iterable<num> */ other);
+  Numeric1D<double> rdiv(/* num | Iterable<num> */ other);
 
   Numeric1DFix<E> abs();
 
-  E dot(IterView<num> other);
+  E dot(Iterable<num> other);
 
   Array<double> get log;
 
@@ -89,50 +89,4 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
   Numeric1D<double> get toDouble;
 
   Numeric1D<int> get toInt;
-}
-
-abstract class Stats<T extends num> {
-  IterView<T> get values;
-
-  int get length;
-
-  T operator [](int index);
-
-  T get min;
-
-  T get max;
-
-  Extent<T> get extent;
-
-  T get ptp;
-
-  T get mode;
-
-  T get median;
-
-  double average(Iterable<num> weights);
-
-  double get mean;
-
-  double get variance;
-
-  double get std;
-
-  int count(T v);
-
-  int get countNonNull;
-
-  T get sum;
-
-  T get prod;
-
-  double cov(Numeric1DView y);
-
-  Numeric1D<double> covMatrix(Numeric2DView y);
-
-  double corrcoef(Numeric1DView y);
-
-  Numeric1D<double> corrcoefMatrix(Numeric2DView y);
-
-  String describe();
 }

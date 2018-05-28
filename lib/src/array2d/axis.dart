@@ -1,11 +1,11 @@
 part of grizzly.primitives.array2d;
 
 abstract class Axis2D<E> implements Axis2DFix<E> {
-  void add(IterView<E> col);
+  void add(Iterable<E> col);
 
   void addScalar(E v);
 
-  void insert(int index, IterView<E> col);
+  void insert(int index, Iterable<E> col);
 }
 
 abstract class Axis2DFix<E> implements Axis2DView<E> {
@@ -13,7 +13,7 @@ abstract class Axis2DFix<E> implements Axis2DView<E> {
 
   ArrayFix<E> operator [](int r);
 
-  operator []=(int index, IterView<E> v);
+  operator []=(int index, Iterable<E> v);
 
   // TODO set?
 

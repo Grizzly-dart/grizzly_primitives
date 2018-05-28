@@ -16,8 +16,6 @@ library grizzly_primitives;
 
 export 'package:grizzly_primitives/src/core/core.dart';
 
-export 'src/iter/iter.dart';
-
 export 'src/array/array.dart';
 
 export 'src/array2d/array2d.dart';

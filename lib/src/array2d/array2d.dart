@@ -3,7 +3,6 @@ library grizzly.primitives.array2d;
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/series/series.dart';
 import 'package:grizzly_primitives/src/array/array.dart';
-import 'package:grizzly_primitives/src/iter/iter.dart';
 
 part 'axis.dart';
 part 'numeric.dart';
@@ -19,11 +18,11 @@ abstract class Array2D<E> implements Array2DFix<E> {
 
   Axis2D<E> get col;
 
-  void add(IterView<E> row);
+  void add(Iterable<E> row);
 
   void addScalar(E v);
 
-  void insert(int index, IterView<E> row);
+  void insert(int index, Iterable<E> row);
 
   void reshape(Index2D newShape);
 
@@ -31,9 +30,11 @@ abstract class Array2D<E> implements Array2DFix<E> {
 }
 
 abstract class Array2DFix<E> implements Array2DView<E> {
+  ArrayFix<String> get names;
+
   ArrayFix<E> operator [](int i);
 
-  operator []=(int i, IterView<E> val);
+  operator []=(int i, Iterable<E> val);
 
   set diagonal(covariant dynamic v);
 
@@ -52,7 +53,9 @@ abstract class Array2DFix<E> implements Array2DView<E> {
   Array2DFix<E> get fixed;
 }
 
-abstract class Array2DView<E> {
+abstract class Array2DView<E> implements Iterable<Iterable<E>> {
+  ArrayView<String> get names;
+
   Array2DView<E> makeView(Iterable<Iterable<E>> newData);
 
   Array2DFix<E> makeFix(Iterable<Iterable<E>> newData);

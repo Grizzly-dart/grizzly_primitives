@@ -20,5 +20,5 @@ abstract class Labeled<LT> {
   bool containsLabel(LT lab);
 
   bool labelsMatch(
-      final /* IterView<LT> | Labeled<LT> | Iterable<LT> */ labels);
+      final /*Labeled<LT> | Iterable<LT> */ labels);
 }
