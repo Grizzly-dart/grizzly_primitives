@@ -21,21 +21,21 @@ abstract class Numeric2DFix<E extends num>
   void negate();
 
   void addition(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
   void subtract(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
   void multiply(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
-  void divide(/* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+  void divide(/* num | Iterable<num> | Numeric2D<int> */ other);
 
   void truncDiv(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
   void rdivMe(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<double> */ other);
+      /* num | Iterable<num> | Numeric2D<double> */ other);
 
   Numeric2DFix<E> get fixed;
 }
