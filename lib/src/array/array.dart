@@ -106,13 +106,9 @@ abstract class ArrayView<E> implements Iterable<E> {
   /// returned
   Array<E> sample([int count = 10]);
 
-  Array2D<E> get transpose;
-
-  Array2D<E> to2D();
+  Array2D<E> to2D({int repeat: 1, bool t: false});
 
   Array2D<E> diagonal();
-
-  Array2D<E> repeat({int repeat: 1, bool transpose: false});
 
   ArrayView<E> get view;
 

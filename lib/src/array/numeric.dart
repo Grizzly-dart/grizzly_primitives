@@ -29,13 +29,9 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
 
   Numeric1D<E> clone({String name});
 
-  Numeric2D<E> get transpose;
-
-  Numeric2D<E> to2D();
+  Numeric2D<E> to2D({int repeat: 1, bool t: false});
 
   Numeric2D<E> diagonal({Index2D shape, num def: 0});
-
-  Numeric2D<E> repeat({int repeat: 1, bool transpose: false});
 
   Numeric1DView<E> get view;
 
