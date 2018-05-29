@@ -85,4 +85,6 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
   Numeric1D<double> toDouble();
 
   Numeric1D<int> toInt();
+
+  Numeric1D<double> sin();
 }

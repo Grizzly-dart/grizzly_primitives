@@ -116,6 +116,8 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
   Array<bool> operator >=(/* Numeric1D | num */ other);
   */
 
+  Numeric2D<double> sin();
+
   Numeric2DView<E> get view;
 
   Numeric2D<int> toInt();
