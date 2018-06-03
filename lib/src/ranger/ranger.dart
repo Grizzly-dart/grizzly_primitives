@@ -9,27 +9,31 @@ part 'int_iterable.dart';
 part 'time.dart';
 
 abstract class Ranger {
-  static Iterable<T> between<T extends num>(T start, T stop, [T step]) {
+  static Iterable<T> range<T extends num>(T start, T stop, [T step]) {
     if (start is int) {
-      return new IntRangeIterable(start, stop as int, step as int ?? 1)
+      return new IntRangeIterable(start, stop as int, step?.toInt() ?? 1)
           as Iterable<T>;
     } else if (start is double) {
       return new DoubleRangeIterable(
-          start, stop as double, step as double ?? 1.0) as Iterable<T>;
+          start, stop as double, step?.toDouble() ?? 1.0) as Iterable<T>;
     }
 
-    throw new Exception('Unknown type T');
+    throw new Exception('Unknown type $T');
   }
+
+  @deprecated
+  static Iterable<T> between<T extends num>(T start, T stop, [T step]) =>
+      range<T>(start, stop, step);
 
   static Iterable<T> until<T extends num>(T stop, [T step]) {
     if (stop is int) {
-      return new IntRangeIterable.until(stop, step as int ?? 1) as Iterable<T>;
+      return new IntRangeIterable.until(stop, step?.toInt() ?? 1) as Iterable<T>;
     } else if (stop is double) {
-      return new DoubleRangeIterable.until(stop, step as double ?? 1.0)
+      return new DoubleRangeIterable.until(stop, step?.toDouble() ?? 1.0)
           as Iterable<T>;
     }
 
-    throw new Exception('Unknown type T');
+    throw new Exception('Unknown type $T');
   }
 
   static Iterable<int> indices(int length) =>
