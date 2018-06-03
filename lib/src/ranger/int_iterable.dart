@@ -49,7 +49,7 @@ class IntRangeIterable extends IterableBase<int> {
     if (count == 0)
       throw new ArgumentError.value(count, 'count', 'Must not be 0');
 
-    int step = (stop - start) ~/ count;
+    int step = (stop - start) ~/ (count - 1);
 
     if (step == 0) step = 1;
 
@@ -99,9 +99,9 @@ class IntRangeIterator implements Iterator<int> {
 
   bool moveNext() {
     if (_step > 0) {
-      if (_pos + _step > _stop) return false;
+      if (_pos >= _stop) return false;
     } else {
-      if (_pos + _step < _stop) return false;
+      if (_pos <= _stop) return false;
     }
 
     _pos += _step;

@@ -30,7 +30,7 @@ class DoubleRangeIterable extends IterableBase<double> {
     if (count == 0)
       throw new ArgumentError.value(count, 'count', 'Must not be 0');
 
-    final double step = (stop - start) / count;
+    final double step = (stop - start) / (count - 1);
 
     if (step == 0.0)
       throw new ArgumentError.value(step, 'step', 'Must not be 0');
@@ -41,9 +41,7 @@ class DoubleRangeIterable extends IterableBase<double> {
   Iterator<double> get iterator => new DoubleRangeIterator(start, stop, step);
 
   int get length {
-    if ((step > 0 && start > stop) || (step < 0 && start < stop)) {
-      return 0;
-    }
+    if ((step > 0 && start > stop) || (step < 0 && start < stop)) return 0;
     return ((stop - start) / step).ceil();
   }
 
@@ -81,9 +79,13 @@ class DoubleRangeIterator implements Iterator<double> {
 
   bool moveNext() {
     if (_step > 0) {
-      if (_pos + _step > _stop) return false;
+      if (_pos >= _stop) {
+        return false;
+      }
     } else {
-      if (_pos + _step < _stop) return false;
+      if (_pos <= _stop) {
+        return false;
+      }
     }
 
     _pos += _step;
