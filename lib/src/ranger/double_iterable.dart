@@ -42,7 +42,7 @@ class DoubleRangeIterable extends IterableBase<double> {
 
   int get length {
     if ((step > 0 && start > stop) || (step < 0 && start < stop)) return 0;
-    return ((stop - start) / step).ceil();
+    return ((stop - start) / step).ceil() + 1;
   }
 
   bool get isEmpty => length == 0;
@@ -79,11 +79,11 @@ class DoubleRangeIterator implements Iterator<double> {
 
   bool moveNext() {
     if (_step > 0) {
-      if (_pos >= _stop) {
+      if (_pos >= (_stop - 1e-12)) {
         return false;
       }
     } else {
-      if (_pos <= _stop) {
+      if (_pos <= (_stop + 1e-12)) {
         return false;
       }
     }
