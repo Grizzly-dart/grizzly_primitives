@@ -16,8 +16,6 @@ library grizzly_primitives;
 
 export 'package:grizzly_primitives/src/core/core.dart';
 
-export 'src/iter/iter.dart';
-
 export 'src/array/array.dart';
 
 export 'src/array2d/array2d.dart';
@@ -25,6 +23,8 @@ export 'src/array2d/array2d.dart';
 export 'src/series/series.dart';
 
 export 'src/dataframe/dataframe.dart';
+
+export 'src/ranger/ranger.dart';
 
 class LengthMismatch implements Exception {
   final int expected;

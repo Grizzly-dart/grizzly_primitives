@@ -21,21 +21,21 @@ abstract class Numeric2DFix<E extends num>
   void negate();
 
   void addition(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
   void subtract(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
   void multiply(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
-  void divide(/* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+  void divide(/* num | Iterable<num> | Numeric2D<int> */ other);
 
   void truncDiv(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
   void rdivMe(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<double> */ other);
+      /* num | Iterable<num> | Numeric2D<double> */ other);
 
   Numeric2DFix<E> get fixed;
 }
@@ -73,7 +73,7 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
 
   Array2D<double> get corrcoefMatrix;
 
-  Numeric1D<E> dot(IterView<num> other);
+  Numeric1D<E> dot(Iterable<num> other);
 
   Array2D<double> get log;
 
@@ -86,19 +86,19 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
   Numeric2D<E> operator -();
 
   Numeric2D<E> operator +(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* numInt | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<E> operator -(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* numInt | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<E> operator *(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* numInt | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<double> operator /(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* numInt | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<int> operator ~/(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* numInt | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<double> rdiv(/* num | Iterable<num> | Numeric2DArray */ other);
 
@@ -115,6 +115,8 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
 
   Array<bool> operator >=(/* Numeric1D | num */ other);
   */
+
+  Numeric2D<double> sin();
 
   Numeric2DView<E> get view;
 

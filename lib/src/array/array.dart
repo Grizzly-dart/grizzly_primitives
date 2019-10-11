@@ -1,7 +1,6 @@
 library grizzly.primitives.array;
 
 import 'package:grizzly_primitives/src/core/core.dart';
-import 'package:grizzly_primitives/src/iter/iter.dart';
 import 'package:grizzly_primitives/src/array2d/array2d.dart';
 import 'package:grizzly_primitives/src/series/series.dart';
 
@@ -9,16 +8,19 @@ part 'numeric.dart';
 part 'string.dart';
 part 'bool.dart';
 part 'dynamic.dart';
+part 'stats.dart';
 
 /// A mutable 1 dimensional array of element [E]
-abstract class Array<E> implements ArrayFix<E>, Iter<E> {
+abstract class Array<E> implements ArrayFix<E> {
+  String name;
+
   void add(E a);
 
-  void addAll(IterView<E> a);
+  void addAll(Iterable<E> a);
 
   void insert(int index, E a);
 
-  void keepIf(IterView<bool> mask);
+  void keepIf(Iterable<bool> mask);
 
   void removeAt(int pos);
 
@@ -28,20 +30,20 @@ abstract class Array<E> implements ArrayFix<E>, Iter<E> {
 
   void remove(E value);
 
-  void removeMany(IterView<E> value);
+  void removeMany(Iterable<E> value);
 
   void clear();
 }
 
 /// A mutable 1 dimensional fixed sized array of element [E]
-abstract class ArrayFix<E> implements ArrayView<E>, IterFix<E> {
+abstract class ArrayFix<E> implements ArrayView<E> {
   operator []=(int i, E val);
 
   // TODO [Index] based indexing
 
   set set(E v);
 
-  set assign(IterView<E> other);
+  set assign(Iterable<E> other);
 
   ArrayFix<E> get fixed;
 
@@ -49,12 +51,14 @@ abstract class ArrayFix<E> implements ArrayView<E>, IterFix<E> {
 }
 
 /// A read-only 1 dimensional array of element [E]
-abstract class ArrayView<E> implements IterView<E> {
-  ArrayView<E> makeView(Iterable<E> newData);
+abstract class ArrayView<E> implements Iterable<E> {
+  String get name;
 
-  ArrayFix<E> makeFix(Iterable<E> newData);
+  ArrayView<E> makeView(Iterable<E> newData, [String name]);
 
-  Array<E> makeArray(Iterable<E> newData);
+  ArrayFix<E> makeFix(Iterable<E> newData, [String name]);
+
+  Array<E> makeArray(Iterable<E> newData, [String name]);
 
   Index1D get shape;
 
@@ -64,7 +68,7 @@ abstract class ArrayView<E> implements IterView<E> {
 
   Array<E> slice(int start, [int end]);
 
-  Array<E> clone();
+  Array<E> clone({String name});
 
   E get first;
 
@@ -102,13 +106,9 @@ abstract class ArrayView<E> implements IterView<E> {
   /// returned
   Array<E> sample([int count = 10]);
 
-  Array2D<E> get transpose;
-
-  Array2D<E> to2D();
+  Array2D<E> to2D({int repeat: 1, bool t: false});
 
   Array2D<E> diagonal();
-
-  Array2D<E> repeat({int repeat: 1, bool transpose: false});
 
   ArrayView<E> get view;
 
@@ -119,9 +119,9 @@ abstract class ArrayView<E> implements IterView<E> {
 
   Array<int> uniqueIndices();
 
-  Array<E> pickByIndices(IterView<int> indices);
+  Array<E> pickByIndices(Iterable<int> indices);
 
-  bool contains(E value);
+  bool contains(Object value);
 
   StringArray toStringArray();
 
@@ -142,5 +142,5 @@ abstract class ArrayView<E> implements IterView<E> {
 
   BoolArray operator >=(/* ArrayView | E */ other);
 
-  Array<E> selectIf(ArrayView<bool> mask);
+  Array<E> selectIf(Iterable<bool> mask);
 }

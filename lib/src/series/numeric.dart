@@ -79,7 +79,7 @@ abstract class NumericSeriesView<LT, VT extends num>
 
   NumericSeries<LT, double> get abs;
 
-  NumericSeries<LT, double> get toDouble;
+  NumericSeries<LT, double> toDouble();
 
-  NumericSeries<LT, int> get toInt;
+  NumericSeries<LT, int> toInt();
 }

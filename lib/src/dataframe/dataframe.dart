@@ -83,7 +83,7 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
 
   void keepOnly(Labeled<LT> mask);
 
-  void keepLabels(/* Iterable<LT> | IterView<LT> */ mask);
+  void keepLabels(Iterable<LT> mask);
 
   void keepIf(BoolSeriesViewBase<LT> mask);
 
@@ -93,7 +93,7 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
 
   DataFrameBase<LT> selectOnly(Labeled<LT> mask);
 
-  DataFrameBase<LT> selectLabels(/* Iterable<LT> | IterView<LT> */ mask);
+  DataFrameBase<LT> selectLabels(Iterable<LT> mask);
 
   DataFrameBase<LT> selectIf(BoolSeriesViewBase<LT> mask);
 
@@ -111,7 +111,7 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
 
   DataFrameBase<LT> filterOnly(Labeled<String> mask);
 
-  DataFrameBase<LT> filterNamed(/* IterView<String> | Iterable<String> */ mask);
+  DataFrameBase<LT> filterNamed(Iterable<String> mask);
 
   DataFrameBase<LT> filterIf(BoolSeriesViewBase<String> mask);
 

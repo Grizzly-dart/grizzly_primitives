@@ -6,6 +6,9 @@ part 'package:grizzly_primitives/src/core/pair.dart';
 part 'package:grizzly_primitives/src/core/extent.dart';
 part 'package:grizzly_primitives/src/core/index.dart';
 
+/// Prototype of name makers for `Series` and `Array`
+typedef String NameMaker();
+
 abstract class Labeled<LT> {
   Iterable<LT> get labels;
 
@@ -17,5 +20,5 @@ abstract class Labeled<LT> {
   bool containsLabel(LT lab);
 
   bool labelsMatch(
-      final /* IterView<LT> | Labeled<LT> | Iterable<LT> */ labels);
+      final /*Labeled<LT> | Iterable<LT> */ labels);
 }

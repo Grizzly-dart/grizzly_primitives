@@ -55,7 +55,7 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
   SeriesView<NLT, VT> makeView<NLT>(Iterable<VT> data,
       {dynamic name, Iterable<NLT> labels});
 
-  Series<NLT, VT> make<NLT>(/* Iterable<VT> | ArrayView<VT> */ data,
+  Series<NLT, VT> make<NLT>(Iterable<VT> data,
       {dynamic name, Iterable<NLT> labels});
 
   Array<VT> makeValueArray(Iterable<VT> data);
@@ -65,32 +65,32 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
   int compareValue(VT a, VT b);
 
   BoolSeriesBase<LT> operator <(
-      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
+      /* E | Iterable<E> | SeriesView<E> */ other);
 
   BoolSeriesBase<LT> operator <=(
-      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
+      /* E | Iterable<E> | SeriesView<E> */ other);
 
   BoolSeriesBase<LT> operator >(
-      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
+      /* E | Iterable<E> | SeriesView<E> */ other);
 
   BoolSeriesBase<LT> operator >=(
-      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
+      /* E | Iterable<E> | SeriesView<E> */ other);
 
   BoolSeriesBase<LT> eq(
-      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
+      /* E | Iterable<E> | SeriesView<E> */ other);
 
   BoolSeriesBase<LT> ne(
-      /* E | IterView<E> | SeriesView<E> | ArrayView<E> */ other);
+      /* E | Iterable<E> | SeriesView<E> */ other);
 
   BoolSeriesBase<LT> boolean(SeriesCond<LT, VT> cond);
 
-  Iter<LT> labelsWhere(SeriesCond<LT, VT> cond);
+  Iterable<LT> labelsWhere(SeriesCond<LT, VT> cond);
 
   Series<LT, VT> select(mask);
 
   Series<LT, VT> selectOnly(Labeled<LT> mask);
 
-  Series<LT, VT> selectLabels(/* Iterable<LT> | IterView<LT> */ mask);
+  Series<LT, VT> selectLabels(Iterable<LT> mask);
 
   Series<LT, VT> selectIf(BoolSeriesViewBase<LT> mask);
 

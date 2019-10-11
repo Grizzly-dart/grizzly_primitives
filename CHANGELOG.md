@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.5
+
++ Moved `Ranger` from `grizzly_scales`
+
 ## 0.2.3
 
 + Has breaking changes

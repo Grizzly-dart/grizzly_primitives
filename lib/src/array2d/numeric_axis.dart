@@ -24,17 +24,17 @@ abstract class Numeric2DAxisView<E extends num> implements Axis2DView<E> {
   Numeric1D<double> get std;
 
   Numeric2D<E> operator +(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<E> operator -(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<E> operator *(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<double> operator /(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 
   Numeric2D<int> operator ~/(
-      /* num | IterView<num> | Iterable<num> | Numeric2D<int> */ other);
+      /* num | Iterable<num> | Numeric2D<int> */ other);
 }
