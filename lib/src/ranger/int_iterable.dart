@@ -82,7 +82,7 @@ class IntRange extends IterableBase<int> {
       step = (start - stop + 1) ~/ count;
 
     if (step == 0) step = 1;
-    if(stop < step) step = -step;
+    if (stop < step) step = -step;
 
     return IntRange._(start, stop, step);
   }
@@ -90,10 +90,18 @@ class IntRange extends IterableBase<int> {
   Iterator<int> get iterator => IntRangeIterator(start, stop, step);
 
   int get length {
-    if ((step > 0 && start > stop) || (step < 0 && start < stop)) {
-      return 0;
+    if (step == 0) throw Exception("Step cannot be 0");
+    if (!step.isNegative) {
+      if (start > stop)
+        throw Exception(
+            "start cannot be greater than stop when step is positive!");
+      return ((stop - start + 1) / step).ceil();
+    } else {
+      if (start < stop)
+        throw Exception(
+            "start cannot be less than stop when step is negative!");
+      return ((start - stop + 1) / -step).ceil();
     }
-    return ((stop - start) / step).ceil();
   }
 
   bool get isEmpty => length == 0;

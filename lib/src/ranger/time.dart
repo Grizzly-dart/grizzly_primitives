@@ -1,5 +1,94 @@
 part of grizzly.viz.scales.ranger;
 
+class TimeRange extends IterableBase<DateTime> {
+  /// Starting value of the range
+  final DateTime start;
+
+  /// End value of the sequence
+  final DateTime stop;
+
+  /// Spacing between values
+  final Duration step;
+
+  TimeRange._(this.start, this.stop, this.step);
+
+  /// Returns an iterable of integers from [start] inclusive to [stop] inclusive
+  /// with [step].
+  ///
+  ///     print(IntRange(0, 5)); => (0, 1, 2, 3, 4, 5)
+  factory TimeRange(DateTime start, DateTime stop, Duration step) {
+    if (step.isNegative)
+      throw ArgumentError.value(step, 'step', 'Must be greater than 0');
+    if (stop.isBefore(start)) step = -step;
+    return TimeRange._(start, stop, step);
+  }
+
+  Iterator<DateTime> get iterator => TimeRangeIterator(start, stop, step);
+
+  int get length {
+    if (step.inMicroseconds == 0) throw Exception("Step cannot be 0");
+    if (!step.isNegative) {
+      if (start.isAfter(stop))
+        throw Exception("start cannot be after stop when step is positive!");
+      int ret =
+          (stop.difference(start).inMicroseconds / step.inMicroseconds).ceil();
+      final last = start.add(step * ret);
+      if (last.isBefore(stop) || last.isAtSameMomentAs(stop)) ret++;
+      return ret;
+    } else {
+      if (start.isBefore(stop))
+        throw Exception("start cannot be before stop when step is negative!");
+      int ret =
+          (start.difference(stop).inMicroseconds / -step.inMicroseconds).ceil();
+      final last = start.add(step * ret);
+      if (last.isAfter(stop) || last.isAtSameMomentAs(stop)) ret++;
+      return ret;
+    }
+  }
+
+  bool get isEmpty => length == 0;
+
+  int get hashCode {
+    int result = 17;
+    result = 37 * result + start.hashCode;
+    result = 37 * result + stop.hashCode;
+    result = 37 * result + step.hashCode;
+    return result;
+  }
+
+  bool operator ==(other) =>
+      other is TimeRange &&
+      start == other.start &&
+      stop == other.stop &&
+      step == other.step;
+}
+
+class TimeRangeIterator implements Iterator<DateTime> {
+  DateTime _pos;
+  final DateTime _stop;
+  final Duration _step;
+
+  TimeRangeIterator(DateTime pos, DateTime stop, Duration step)
+      : _stop = stop,
+        _pos = pos.subtract(step),
+        _step = step;
+
+  DateTime get current => _pos;
+
+  bool moveNext() {
+    final next = _pos.add(_step);
+    if (!_step.isNegative) {
+      if (next.isAfter(_stop)) return false;
+    } else {
+      if (next.isBefore(_stop)) return false;
+    }
+
+    _pos = _pos.add(_step);
+    return true;
+  }
+}
+
+/*
 abstract class TimeRange {
   const TimeRange();
 
@@ -173,3 +262,4 @@ class YearsRange extends TimeRange {
 
   DateTime floor(DateTime date) => DateTime(date.year, 1, 1);
 }
+*/

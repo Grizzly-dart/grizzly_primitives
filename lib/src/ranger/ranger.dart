@@ -8,58 +8,44 @@ part 'double_iterable.dart';
 part 'int_iterable.dart';
 part 'time.dart';
 
+Iterable<T> range<T extends num>(T start, T stop, [T step]) {
+  if (start is int) {
+    return IntRange(start, stop as int, step?.toInt() ?? 1) as Iterable<T>;
+  } else if (start is double) {
+    return DoubleRange(start, stop as double, step?.toDouble() ?? 1.0)
+        as Iterable<T>;
+  }
+
+  throw Exception('Unknown type $T');
+}
+
+Iterable<T> until<T extends num>(T stop, [T step]) {
+  if (stop is int) {
+    return IntRange.until(stop, step?.toInt() ?? 1) as Iterable<T>;
+  } else if (stop is double) {
+    return DoubleRange.until(stop, step?.toDouble() ?? 1.0) as Iterable<T>;
+  }
+
+  throw Exception('Unknown type $T');
+}
+
+Iterable<int> indices(int length) => IntRange(0, length - 1);
+
+Iterable<T> linspace<T extends num>(T start, T stop, [int count = 100]) {
+  if (start is int) {
+    return IntRange.linspace(start, stop.toInt(), count) as Iterable<T>;
+  } else if (start is double) {
+    return DoubleRange.linspace(start, stop.toDouble(), count) as Iterable<T>;
+  }
+
+  throw Exception('Unknown type T');
+}
+
+Iterable<int> zeros([int length = 10]) => ConstantIterable(0, length);
+
+Iterable<int> ones([int length = 10]) => ConstantIterable(1, length);
+
 abstract class Ranger {
-  static Iterable<T> range<T extends num>(T start, T stop, [T step]) {
-    if (start is int) {
-      return IntRange(start, stop as int, step?.toInt() ?? 1)
-          as Iterable<T>;
-    } else if (start is double) {
-      return DoubleRange(start, stop as double, step?.toDouble() ?? 1.0)
-          as Iterable<T>;
-    }
-
-    throw Exception('Unknown type $T');
-  }
-
-  static Iterable<T> until<T extends num>(T stop, [T step]) {
-    if (stop is int) {
-      return IntRange.until(stop, step?.toInt() ?? 1) as Iterable<T>;
-    } else if (stop is double) {
-      return DoubleRange.until(stop, step?.toDouble() ?? 1.0)
-          as Iterable<T>;
-    }
-
-    throw Exception('Unknown type $T');
-  }
-
-  static Iterable<int> indices(int length) => IntRange(0, length - 1);
-
-  static Iterable<T> linspace<T extends num>(T start, T stop,
-      [int count = 50]) {
-    if (start is int) {
-      return IntRange.linspace(start, stop.toInt(), count)
-          as Iterable<T>;
-    } else if (start is double) {
-      return DoubleRange.linspace(start, stop.toDouble(), count)
-          as Iterable<T>;
-    }
-
-    throw Exception('Unknown type T');
-  }
-
-  static Iterable<int> zeros([int length = 10]) => ConstantIterable(0, length);
-
-  static Iterable<int> ones([int length = 10]) => ConstantIterable(1, length);
-
-  static Iterable<int> onesLike(Iterable iterable) =>
-      ConstantIterable(1, iterable.length);
-
-  static Iterable<T> filled<T>(T value, [int length = 10]) =>
-      ConstantIterable<T>(value, length);
-
-  static Iterable<T> filledLike<T>(T value, Iterable iterable) =>
-      ConstantIterable<T>(value, iterable.length);
-
   /// Returns an [Iterable] of approximately `count + 1` uniformly-spaced,
   /// nicely-rounded values between [start] and [stop] (inclusive).
   static Iterable<num> ticks(num start, num stop, num count) {
@@ -144,7 +130,7 @@ abstract class Ranger {
   static final num e10 = math.sqrt(50);
   static final num e5 = math.sqrt(10);
   static final num e2 = math.sqrt(2);
-
+/*
   static const MicrosecondsRange microsecondsRange = const MicrosecondsRange();
 
   static const MillisecondsRange millisecondsRange = const MillisecondsRange();
@@ -162,7 +148,6 @@ abstract class Ranger {
   static const MonthsRange monthsRange = const MonthsRange();
 
   static const YearsRange yearsRange = const YearsRange();
-
   static List<DateTime> microseconds(DateTime start, DateTime stop,
           [int skip = 0]) =>
       microsecondsRange.range(start, stop, skip);
@@ -193,6 +178,7 @@ abstract class Ranger {
 
   static List<DateTime> years(DateTime start, DateTime stop, [int skip = 0]) =>
       yearsRange.range(start, stop, skip);
+*/
 }
 
 typedef TimeRangerFunc = List<DateTime> Function(DateTime, DateTime, [int]);
