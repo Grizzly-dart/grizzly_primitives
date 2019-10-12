@@ -22,7 +22,10 @@ part of grizzly.viz.scales.ranger;
 
 // Copyright (c) 2011 Ravi Teja Gudapati <tejainece@gmail.com>
 
-class IntRangeIterable extends IterableBase<int> {
+/// Iterable of integers similar to python's range.
+///
+///     for(final i in IntRange(0, 5)) print(i);
+class IntRange extends IterableBase<int> {
   /// Starting value of the range
   final int start;
 
@@ -32,31 +35,59 @@ class IntRangeIterable extends IterableBase<int> {
   /// Spacing between values
   final int step;
 
-  IntRangeIterable._(this.start, this.stop, this.step);
+  IntRange._(this.start, this.stop, this.step);
 
-  /// Create a range [0, stop) with [step]
-  factory IntRangeIterable.until(int stop, [int step = 1]) {
-    if (step == 0) throw new ArgumentError.value(step, 'step', 'Must not be 0');
-    return new IntRangeIterable._(0, stop, step);
+  /// Returns an iterable of integers from [start] inclusive to [stop] inclusive
+  /// with [step].
+  ///
+  ///     print(IntRange(0, 5)); => (0, 1, 2, 3, 4, 5)
+  factory IntRange(int start, int stop, [int step]) {
+    if (step == null)
+      step = 1;
+    else {
+      if (step <= 0)
+        throw ArgumentError.value(step, 'step', 'Must be greater than 0');
+    }
+    if (stop < start) step = -step;
+    return IntRange._(start, stop, step);
   }
 
-  factory IntRangeIterable(int start, int stop, [int step = 1]) {
-    if (step == 0) throw new ArgumentError.value(step, 'step', 'Must not be 0');
-    return new IntRangeIterable._(start, stop, step);
+  /// Returns an iterable of integers from 0 inclusive to [stop] inclusive with
+  /// [step].
+  ///
+  ///     print(IntRange.until(5, 2)); => (0, 2, 4)
+  factory IntRange.until(int stop, [int step]) {
+    if (step == null)
+      step = 1;
+    else {
+      if (step <= 0)
+        throw ArgumentError.value(step, 'step', 'Must be greater than 0');
+    }
+    if (stop < 0) step = -step;
+    return IntRange._(0, stop, step);
   }
 
-  factory IntRangeIterable.linspace(int start, int stop, [int count = 50]) {
-    if (count == 0)
-      throw new ArgumentError.value(count, 'count', 'Must not be 0');
+  /// Returns an iterable of [count] integers from [start] inclusive to [stop]
+  /// inclusive.
+  ///
+  ///     print(IntRange.linspace(1, 10, 5)); => (1, 3, 5, 7, 9)
+  factory IntRange.linspace(int start, int stop, int count) {
+    if (count <= 0)
+      throw ArgumentError.value(count, 'count', 'Must be a positive integer');
 
-    int step = (stop - start) ~/ (count - 1);
+    int step = 0;
+    if (stop > start)
+      step = (stop - start + 1) ~/ count;
+    else
+      step = (start - stop + 1) ~/ count;
 
     if (step == 0) step = 1;
+    if(stop < step) step = -step;
 
-    return new IntRangeIterable._(start, stop, step);
+    return IntRange._(start, stop, step);
   }
 
-  Iterator<int> get iterator => new IntRangeIterator(start, stop, step);
+  Iterator<int> get iterator => IntRangeIterator(start, stop, step);
 
   int get length {
     if ((step > 0 && start > stop) || (step < 0 && start < stop)) {
@@ -75,11 +106,8 @@ class IntRangeIterable extends IterableBase<int> {
     return result;
   }
 
-  String toString() =>
-      step == 1 ? "Range($start, $stop)" : "Range($start, $stop, $step)";
-
   bool operator ==(other) =>
-      other is IntRangeIterable &&
+      other is IntRange &&
       start == other.start &&
       stop == other.stop &&
       step == other.step;
@@ -99,9 +127,9 @@ class IntRangeIterator implements Iterator<int> {
 
   bool moveNext() {
     if (_step > 0) {
-      if (_pos >= _stop) return false;
+      if (_pos + _step > _stop) return false;
     } else {
-      if (_pos <= _stop) return false;
+      if (_pos + _step < _stop) return false;
     }
 
     _pos += _step;

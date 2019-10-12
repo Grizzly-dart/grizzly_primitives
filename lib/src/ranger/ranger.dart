@@ -11,61 +11,54 @@ part 'time.dart';
 abstract class Ranger {
   static Iterable<T> range<T extends num>(T start, T stop, [T step]) {
     if (start is int) {
-      return new IntRangeIterable(start, stop as int, step?.toInt() ?? 1)
+      return IntRange(start, stop as int, step?.toInt() ?? 1)
           as Iterable<T>;
     } else if (start is double) {
-      return new DoubleRangeIterable(
-          start, stop as double, step?.toDouble() ?? 1.0) as Iterable<T>;
+      return DoubleRange(start, stop as double, step?.toDouble() ?? 1.0)
+          as Iterable<T>;
     }
 
-    throw new Exception('Unknown type $T');
+    throw Exception('Unknown type $T');
   }
-
-  @deprecated
-  static Iterable<T> between<T extends num>(T start, T stop, [T step]) =>
-      range<T>(start, stop, step);
 
   static Iterable<T> until<T extends num>(T stop, [T step]) {
     if (stop is int) {
-      return new IntRangeIterable.until(stop, step?.toInt() ?? 1) as Iterable<T>;
+      return IntRange.until(stop, step?.toInt() ?? 1) as Iterable<T>;
     } else if (stop is double) {
-      return new DoubleRangeIterable.until(stop, step?.toDouble() ?? 1.0)
+      return DoubleRange.until(stop, step?.toDouble() ?? 1.0)
           as Iterable<T>;
     }
 
-    throw new Exception('Unknown type $T');
+    throw Exception('Unknown type $T');
   }
 
-  static Iterable<int> indices(int length) =>
-      new IntRangeIterable(0, length - 1);
+  static Iterable<int> indices(int length) => IntRange(0, length - 1);
 
   static Iterable<T> linspace<T extends num>(T start, T stop,
       [int count = 50]) {
     if (start is int) {
-      return new IntRangeIterable.linspace(start, stop as int, count)
+      return IntRange.linspace(start, stop.toInt(), count)
           as Iterable<T>;
     } else if (start is double) {
-      return new DoubleRangeIterable.linspace(start, stop as double, count)
+      return DoubleRange.linspace(start, stop.toDouble(), count)
           as Iterable<T>;
     }
 
-    throw new Exception('Unknown type T');
+    throw Exception('Unknown type T');
   }
 
-  static Iterable<int> zeros([int length = 10]) =>
-      new ConstantIterable(0, length);
+  static Iterable<int> zeros([int length = 10]) => ConstantIterable(0, length);
 
-  static Iterable<int> ones([int length = 10]) =>
-      new ConstantIterable(1, length);
+  static Iterable<int> ones([int length = 10]) => ConstantIterable(1, length);
 
   static Iterable<int> onesLike(Iterable iterable) =>
-      new ConstantIterable(1, iterable.length);
+      ConstantIterable(1, iterable.length);
 
   static Iterable<T> filled<T>(T value, [int length = 10]) =>
-      new ConstantIterable<T>(value, length);
+      ConstantIterable<T>(value, length);
 
   static Iterable<T> filledLike<T>(T value, Iterable iterable) =>
-      new ConstantIterable<T>(value, iterable.length);
+      ConstantIterable<T>(value, iterable.length);
 
   /// Returns an [Iterable] of approximately `count + 1` uniformly-spaced,
   /// nicely-rounded values between [start] and [stop] (inclusive).
@@ -88,7 +81,7 @@ abstract class Ranger {
       start = (start / step).ceil();
       stop = (stop / step).floor();
       final int len = (stop - start + 1).ceil();
-      final ticks = new List<num>(len);
+      final ticks = List<num>(len);
       for (int i = 0; i < len; i++) {
         ticks[i] = (start + i) * step;
       }
@@ -99,7 +92,7 @@ abstract class Ranger {
       start = (start * step).floor();
       stop = (stop * step).ceil();
       final int len = (stop - start + 1).ceil();
-      final ticks = new List<num>(len);
+      final ticks = List<num>(len);
       for (int i = 0; i < len; i++) {
         ticks[i] = (start - i) / step;
       }

@@ -5,6 +5,7 @@ abstract class TimeRange {
 
   DateTime step(DateTime date, num steps);
 
+  /*
   DateTime floor(DateTime date);
 
   DateTime ceil(DateTime date) => step(floor(date), 1);
@@ -19,6 +20,7 @@ abstract class TimeRange {
       return d1;
     }
   }
+   */
 
   List<DateTime> range(DateTime start, DateTime stop, [int skip = 0]) {
     final values = <DateTime>[];
@@ -44,7 +46,7 @@ class MicrosecondsRange extends TimeRange {
   const MicrosecondsRange();
 
   DateTime step(DateTime date, num steps) =>
-      date.add(new Duration(microseconds: steps));
+      date.add(Duration(microseconds: steps));
 
   DateTime floor(DateTime date) => date;
 }
@@ -53,29 +55,27 @@ class MillisecondsRange extends TimeRange {
   const MillisecondsRange();
 
   DateTime step(DateTime date, num steps) =>
-      date.add(new Duration(milliseconds: steps));
+      date.add(Duration(milliseconds: steps));
 
   DateTime floor(DateTime date) =>
-      date.subtract(new Duration(microseconds: date.microsecond));
+      date.subtract(Duration(microseconds: date.microsecond));
 }
 
 class SecondsRange extends TimeRange {
   const SecondsRange();
 
-  DateTime step(DateTime date, num steps) =>
-      date.add(new Duration(seconds: steps));
+  DateTime step(DateTime date, num steps) => date.add(Duration(seconds: steps));
 
-  DateTime floor(DateTime date) => date.subtract(new Duration(
-      microseconds: date.microsecond, milliseconds: date.millisecond));
+  DateTime floor(DateTime date) => date.subtract(
+      Duration(microseconds: date.microsecond, milliseconds: date.millisecond));
 }
 
 class MinutesRange extends TimeRange {
   const MinutesRange();
 
-  DateTime step(DateTime date, num steps) =>
-      date.add(new Duration(minutes: steps));
+  DateTime step(DateTime date, num steps) => date.add(Duration(minutes: steps));
 
-  DateTime floor(DateTime date) => date.subtract(new Duration(
+  DateTime floor(DateTime date) => date.subtract(Duration(
       seconds: date.second,
       microseconds: date.microsecond,
       milliseconds: date.millisecond));
@@ -84,10 +84,9 @@ class MinutesRange extends TimeRange {
 class HoursRange extends TimeRange {
   const HoursRange();
 
-  DateTime step(DateTime date, num steps) =>
-      date.add(new Duration(hours: steps));
+  DateTime step(DateTime date, num steps) => date.add(Duration(hours: steps));
 
-  DateTime floor(DateTime date) => date.subtract(new Duration(
+  DateTime floor(DateTime date) => date.subtract(Duration(
       minutes: date.minute,
       seconds: date.second,
       milliseconds: date.millisecond,
@@ -97,10 +96,9 @@ class HoursRange extends TimeRange {
 class DaysRange extends TimeRange {
   const DaysRange();
 
-  DateTime step(DateTime date, num steps) =>
-      date.add(new Duration(days: steps));
+  DateTime step(DateTime date, num steps) => date.add(Duration(days: steps));
 
-  DateTime floor(DateTime date) => date.subtract(new Duration(
+  DateTime floor(DateTime date) => date.subtract(Duration(
       hours: date.hour,
       minutes: date.minute,
       seconds: date.second,
@@ -112,9 +110,9 @@ class WeeksRange extends TimeRange {
   const WeeksRange();
 
   DateTime step(DateTime date, num steps) =>
-      date.add(new Duration(days: steps * 7));
+      date.add(Duration(days: steps * 7));
 
-  DateTime floor(DateTime date) => date.subtract(new Duration(
+  DateTime floor(DateTime date) => date.subtract(Duration(
       days: date.weekday % 7,
       hours: date.hour,
       minutes: date.minute,
@@ -129,15 +127,8 @@ class MonthsRange extends TimeRange {
   static const Duration _day = const Duration(days: 1);
 
   DateTime step(DateTime date, num steps) {
-    DateTime ret = new DateTime(
-        date.year,
-        date.month + steps,
-        date.day,
-        date.hour,
-        date.minute,
-        date.second,
-        date.millisecond,
-        date.microsecond);
+    DateTime ret = DateTime(date.year, date.month + steps, date.day, date.hour,
+        date.minute, date.second, date.millisecond, date.microsecond);
 
     if (ret.month != DateTime.february) {
       if (date.day == 31 && ret.day != 31) {
@@ -146,7 +137,7 @@ class MonthsRange extends TimeRange {
     } else {
       if (ret.day >= 29 && ret.day <= 31) {
         if (date.day == 29 && ret.day != 29) {
-          ret = new DateTime(
+          ret = DateTime(
             ret.year,
             DateTime.february,
             29,
@@ -163,13 +154,13 @@ class MonthsRange extends TimeRange {
     return ret;
   }
 
-  DateTime floor(DateTime date) => new DateTime(date.year, date.month, 1);
+  DateTime floor(DateTime date) => DateTime(date.year, date.month, 1);
 }
 
 class YearsRange extends TimeRange {
   const YearsRange();
 
-  DateTime step(DateTime date, num steps) => new DateTime(
+  DateTime step(DateTime date, num steps) => DateTime(
         date.year + steps,
         date.month,
         date.day,
@@ -180,5 +171,5 @@ class YearsRange extends TimeRange {
         date.microsecond,
       );
 
-  DateTime floor(DateTime date) => new DateTime(date.year, 1, 1);
+  DateTime floor(DateTime date) => DateTime(date.year, 1, 1);
 }

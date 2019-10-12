@@ -6,27 +6,27 @@ void main() {
     setUp(() {});
 
     test('forward', () {
-      final ranger = new DoubleRangeIterable(0.0, 100.0, 10.0);
-      expect(ranger, new List.generate(11, (i) => i * 10));
+      final ranger = DoubleRange(0.0, 100.0, 10.0);
+      expect(ranger, List.generate(11, (i) => i * 10));
     });
 
     test('reverse', () {
-      final ranger = new DoubleRangeIterable(100.0, 0.0, -10.0);
-      expect(ranger, new List.generate(11, (i) => i * 10).reversed);
+      final ranger = DoubleRange(100.0, 0.0, -10.0);
+      expect(ranger, List.generate(11, (i) => i * 10).reversed);
     });
 
     test('until', () {
-      final ranger = new DoubleRangeIterable.until(10.0, 2.0);
-      expect(ranger, new List.generate(6, (i) => i * 2));
+      final ranger = DoubleRange.until(10.0, 2.0);
+      expect(ranger, List.generate(6, (i) => i * 2));
     });
 
     test('until.neg stop', () {
-      final ranger = new DoubleRangeIterable.until(-10.0, -2.0);
-      expect(ranger, new List.generate(6, (i) => -i * 2));
+      final ranger = DoubleRange.until(-10.0, -2.0);
+      expect(ranger, List.generate(6, (i) => -i * 2));
     });
 
     test('linspace.normal', () {
-      final ranger = new DoubleRangeIterable.linspace(0.0, 100.0, 10);
+      final ranger = DoubleRange.linspace(0.0, 100.0, 10);
       expect(ranger, [
         0.0,
         11.11111111111111,
@@ -42,7 +42,7 @@ void main() {
     });
 
     test('linspace.unit_space', () {
-      final ranger = new DoubleRangeIterable.linspace(0.0, 1.0, 10);
+      final ranger = DoubleRange.linspace(0.0, 1.0, 10);
       expect(ranger, [
         0.0,
         0.1111111111111111,

@@ -19,6 +19,5 @@ abstract class Labeled<LT> {
 
   bool containsLabel(LT lab);
 
-  bool labelsMatch(
-      final /*Labeled<LT> | Iterable<LT> */ labels);
+  bool labelsMatch(final /*Labeled<LT> | Iterable<LT> */ labels);
 }

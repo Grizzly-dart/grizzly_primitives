@@ -36,7 +36,7 @@ class LengthMismatch implements Exception {
   const LengthMismatch({this.expected, this.found, this.subject});
 
   String toString() {
-    final sb = new StringBuffer();
+    final sb = StringBuffer();
 
     sb.write('Length mismatch');
 
@@ -56,7 +56,7 @@ class LengthMismatch implements Exception {
 }
 
 LengthMismatch lengthMismatch({int expected, int found, String subject}) =>
-    new LengthMismatch(expected: expected, found: found, subject: subject);
+    LengthMismatch(expected: expected, found: found, subject: subject);
 
 class LabelNotFound<LT> {
   final LT label;
@@ -66,4 +66,4 @@ class LabelNotFound<LT> {
   String toString() => 'Label $label not found!';
 }
 
-LabelNotFound<LT> labelNotFound<LT>(LT label) => new LabelNotFound<LT>(label);
+LabelNotFound<LT> labelNotFound<LT>(LT label) => LabelNotFound<LT>(label);

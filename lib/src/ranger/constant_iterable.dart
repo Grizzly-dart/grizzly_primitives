@@ -7,7 +7,7 @@ class ConstantIterable<T> extends IterableBase<T> {
 
   ConstantIterable(this.constant, [this.length = 10]);
 
-  Iterator<T> get iterator => new ConstantIterator<T>(constant, length);
+  Iterator<T> get iterator => ConstantIterator<T>(constant, length);
 
   bool get isEmpty => length == 0;
 
@@ -39,10 +39,7 @@ class ConstantIterator<T> implements Iterator<T> {
 
   bool moveNext() {
     _pos++;
-    if (_pos < length) {
-      return true;
-    }
-
+    if (_pos < length) return true;
     return false;
   }
 }
