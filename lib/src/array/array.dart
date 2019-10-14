@@ -3,6 +3,7 @@ library grizzly.primitives.array;
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/array2d/array2d.dart';
 import 'package:grizzly_primitives/src/series/series.dart';
+import 'package:grizzly_range/grizzly_range.dart' show Extent;
 
 part 'numeric.dart';
 part 'string.dart';

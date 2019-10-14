@@ -10,6 +10,8 @@ environment:
 
 dependencies:
   meta: ^1.1.7
+  quiver_hashcode: ^2.0.0
+  grizzly_range: ^2.0.4
 
 dev_dependencies:
   test:

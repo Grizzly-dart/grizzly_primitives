@@ -1,13 +1,8 @@
 # grizzly_primitives
 
-Primitives (Range, Index, Pair, Extent) for Grizzly
+Primitives (Index, Pair, Extent) for Grizzly
 
 # Usage
-
-## Range
-
-```dart
-```
 
 ## Pair
 

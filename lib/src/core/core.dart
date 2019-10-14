@@ -1,9 +1,9 @@
 library grizzly.primitives;
 
 import 'package:meta/meta.dart';
+import 'package:quiver_hashcode/hashcode.dart';
 
 part 'package:grizzly_primitives/src/core/pair.dart';
-part 'package:grizzly_primitives/src/core/extent.dart';
 part 'package:grizzly_primitives/src/core/index.dart';
 
 /// Prototype of name makers for `Series` and `Array`
