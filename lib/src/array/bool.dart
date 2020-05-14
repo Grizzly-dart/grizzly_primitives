@@ -19,12 +19,14 @@ abstract class BoolArrayView implements ArrayView<bool> {
 
   BoolArrayView operator ~();
 
-  Numeric1D<int> toIntArray({int trueVal: 1, int falseVal: 0});
+  Numeric1D<int> toIntArray({int trueVal = 1, int falseVal = 0});
 
-  StringArray toStringArray({String trueVal: 'True', String falseVal: 'False'});
+  @override
+  StringArray toStringArray(
+      {String trueVal = 'True', String falseVal = 'False'});
 
   @override
   BoolArray clone({String name});
 
-// TODO ArrayView<dynamic> toDynamic({trueVal: 1, falseVal: 0});
+// TODO ArrayView<dynamic> toDynamic({trueVal = 1, falseVal = 0});
 }

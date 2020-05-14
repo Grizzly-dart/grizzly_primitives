@@ -10,12 +10,14 @@ abstract class StringSeriesFixBase<LT>
 }
 
 abstract class StringSeriesViewBase<LT> implements SeriesView<LT, String> {
+  @override
+
   /// Data of the series
   StringArrayView get data;
 
   NumericSeries<LT, double> toDouble(
-      {double defaultValue, double onError(String source)});
+      {double defaultValue, double Function(String source) onError});
 
   NumericSeries<LT, int> toInt(
-      {int radix, int defaultValue, int onError(String source)});
+      {int radix, int defaultValue, int Function(String source) onError});
 }

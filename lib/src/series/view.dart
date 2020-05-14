@@ -4,6 +4,8 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
   /// Name of the series
   String get name;
 
+  @override
+
   /// Labels of the series
   Iterable<LT> get labels;
 
@@ -22,9 +24,12 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
   /// Lookup by [position]
   VT getByPos(int position);
 
+  @override
+
   /// Returns label at [position]
   LT labelAt(int position);
 
+  @override
   int posOf(LT label);
 
   /// Returns pair by [label]
@@ -42,7 +47,9 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
   Series<int, VT> mode();
 
   Series<VT, int> valueCounts(
-      {bool sortByValue: false, bool descending: false, bool dropNull: false});
+      {bool sortByValue = false,
+      bool descending = false,
+      bool dropNull = false});
 
   SeriesView<LT, VT> get view;
 

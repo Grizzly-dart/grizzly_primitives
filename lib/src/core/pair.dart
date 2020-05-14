@@ -15,6 +15,7 @@ class Pair<KT, VT> {
   /// Creates a pair with key [key] and value [value]
   const Pair(this.key, this.value);
 
+  @override
   String toString() => '$key:$value';
 }
 

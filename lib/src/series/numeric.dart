@@ -27,6 +27,8 @@ abstract class NumericSeriesFix<LT, VT extends num>
 
 abstract class NumericSeriesView<LT, VT extends num>
     implements SeriesView<LT, VT> {
+  @override
+
   /// Data of the series
   Numeric1DView<VT> get data;
 

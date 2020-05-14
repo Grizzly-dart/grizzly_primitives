@@ -1,7 +1,6 @@
 library grizzly.primitives.array2d;
 
 import 'package:grizzly_primitives/src/core/core.dart';
-import 'package:grizzly_primitives/src/series/series.dart';
 import 'package:grizzly_primitives/src/array/array.dart';
 import 'package:grizzly_range/grizzly_range.dart';
 
@@ -13,10 +12,13 @@ part 'string_axis.dart';
 part 'dynamic_axis.dart';
 
 abstract class Array2D<E> implements Array2DFix<E> {
+  @override
   ArrayFix<E> operator [](int i);
 
+  @override
   Axis2D<E> get row;
 
+  @override
   Axis2D<E> get col;
 
   void add(Iterable<E> row);
@@ -31,20 +33,26 @@ abstract class Array2D<E> implements Array2DFix<E> {
 }
 
 abstract class Array2DFix<E> implements Array2DView<E> {
+  @override
   ArrayFix<String> get names;
 
+  @override
   ArrayFix<E> operator [](int i);
 
   operator []=(int i, Iterable<E> val);
 
   set diagonal(covariant dynamic v);
 
+  @override
   Iterable<ArrayFix<E>> get rows;
 
+  @override
   Iterable<ArrayFix<E>> get cols;
 
+  @override
   Axis2DFix<E> get row;
 
+  @override
   Axis2DFix<E> get col;
 
   void set(E v);

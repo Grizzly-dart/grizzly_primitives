@@ -5,6 +5,7 @@ abstract class Numeric2D<E extends num> implements Array2D<E>, Numeric2DFix<E> {
 
   Numeric2DAxis<E> get col;
 
+  @override
   Numeric1DFix<E> operator [](int i);
 }
 
@@ -37,20 +38,27 @@ abstract class Numeric2DFix<E extends num>
   void rdivMe(
       /* num | Iterable<num> | Numeric2D<double> */ other);
 
+  @override
   Numeric2DFix<E> get fixed;
 }
 
 abstract class Numeric2DView<E extends num> implements Array2DView<E> {
+  @override
   Numeric1DView<E> operator [](int i);
 
+  @override
   Numeric2DAxisView<E> get row;
 
+  @override
   Numeric2DAxisView<E> get col;
 
+  @override
   Numeric2D<E> get transpose;
 
+  @override
   Numeric1D<E> get diagonal;
 
+  @override
   Numeric1D<E> unique();
 
   // TODO E get ptp;
@@ -118,15 +126,18 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
 
   Numeric2D<double> sin();
 
+  @override
   Numeric2DView<E> get view;
 
   Numeric2D<int> toInt();
 
   Numeric2D<double> toDouble();
 
+  @override
   Numeric2D<E> reshaped(Index2D newShape);
 
   // TODO Numeric2D<E> flipped();
 
+  @override
   Numeric2D<E> clone();
 }

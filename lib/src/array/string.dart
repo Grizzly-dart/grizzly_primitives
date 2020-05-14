@@ -33,7 +33,8 @@ abstract class StringArrayView implements ArrayView<String> {
 
   Array<bool> endsWith(String pattern);
 
-  String join([String separator = ""]);
+  @override
+  String join([String separator = '']);
 
   Array<int> get lengths;
 
@@ -48,8 +49,8 @@ abstract class StringArrayView implements ArrayView<String> {
   // TODO split
 
   Numeric1D<int> toInt(
-      {int radix, int defaultValue, int onError(String source)});
+      {int radix, int defaultValue, int Function(String source) onError});
 
   Numeric1D<double> toDouble(
-      {double onError(String source), double defaultValue});
+      {double Function(String source) onError, double defaultValue});
 }

@@ -9,15 +9,17 @@ abstract class Axis2D<E> implements Axis2DFix<E> {
 }
 
 abstract class Axis2DFix<E> implements Axis2DView<E> {
+  @override
   Iterable<ArrayFix<E>> get iterable;
 
+  @override
   ArrayFix<E> operator [](int r);
 
   operator []=(int index, Iterable<E> v);
 
   // TODO set?
 
-  void sort({bool descending: false});
+  void sort({bool descending = false});
 
   void swap(int i, int j);
 }

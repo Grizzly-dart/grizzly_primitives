@@ -13,13 +13,18 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
 
   Iterable<String> get columns;
 
+  @override
+
   /// Labels
   Iterable<LT> get labels;
 
+  @override
   LT labelAt(int pos);
 
+  @override
   int posOf(LT label);
 
+  @override
   bool containsLabel(LT label);
 
   SeriesFix<LT, dynamic> operator [](String column);
@@ -118,34 +123,34 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
   DataFrameBase<LT> filterWhen(DfCond cond);
 
   Numeric2DView<double> toDouble2D(
-      {bool skipInvalid: true,
-      bool convert: true,
-      bool retype: false,
-      bool parse: false});
+      {bool skipInvalid = true,
+      bool convert = true,
+      bool retype = false,
+      bool parse = false});
 
   Numeric2DView<int> toInt2D(
-      {bool skipInvalid: true,
-      bool convert: true,
-      bool retype: false,
-      bool parse: false});
+      {bool skipInvalid = true,
+      bool convert = true,
+      bool retype = false,
+      bool parse = false});
 
   Numeric2DView<double> asDouble2D(
-      {bool skipInvalid: true, bool retype: false});
+      {bool skipInvalid = true, bool retype = false});
 
-  Numeric2DView<int> asInt2D({bool skipInvalid: true, bool retype: false});
+  Numeric2DView<int> asInt2D({bool skipInvalid = true, bool retype = false});
 
   /* TODO
   void addColumnFromList<VVT>(String column, List<VVT> value,
       {SeriesMaker<LT, VVT> maker});
 
-  Series<String, dynamic> max({dynamic name, bool numericOnly: false});
+  Series<String, dynamic> max({dynamic name, bool numericOnly = false});
 
-  Series<String, dynamic> min({dynamic name, bool numericOnly: false});
+  Series<String, dynamic> min({dynamic name, bool numericOnly = false});
 
   DataFrameBase<int, String> mode();
   */
 }
 
-typedef bool DfCond<LT>(LT lav, DataFrameBase<LT> df);
+typedef DfCond<LT> = bool Function(LT lav, DataFrameBase<LT> df);
 
-typedef VT DfCellSetter<LT, VT>(String col, LT label);
+typedef DfCellSetter<LT, VT> = VT Function(String col, LT label);

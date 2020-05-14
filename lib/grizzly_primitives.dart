@@ -31,6 +31,7 @@ class LengthMismatch implements Exception {
 
   const LengthMismatch({this.expected, this.found, this.subject});
 
+  @override
   String toString() {
     final sb = StringBuffer();
 
@@ -59,6 +60,7 @@ class LabelNotFound<LT> {
 
   const LabelNotFound(this.label);
 
+  @override
   String toString() => 'Label $label not found!';
 }
 

@@ -11,13 +11,15 @@ part 'positioned.dart';
 part 'numeric.dart';
 part 'view.dart';
 
-typedef Series<LT, VT> SeriesMaker<LT, VT>(Iterable<VT> data,
+typedef SeriesMaker<LT, VT> = Series<LT, VT> Function(Iterable<VT> data,
     {dynamic name, Iterable<LT> labels});
 
 /// A series with index of type [LT] and value of type [VT]
 abstract class Series<LT, VT> implements SeriesFix<LT, VT> {
   /// Name of the series
   // TODO String name;
+
+  @override
 
   /// Data of the series
   ArrayFix<VT> get data;
@@ -38,13 +40,15 @@ abstract class Series<LT, VT> implements SeriesFix<LT, VT> {
   /// Drop elements by label [label]
   void dropMany(/* Iterable<LT> | IterView<LT> | Labeled */ label);
 
-  void assign(/* Series<LT, VT> | IterView<VT> */ other, {bool addNew: true});
+  @override
+  void assign(/* Series<LT, VT> | IterView<VT> */ other, {bool addNew = true});
 
-  void assignMap(Map<LT, VT> other, {bool addNew: true});
+  @override
+  void assignMap(Map<LT, VT> other, {bool addNew = true});
 
-  void sortByValue({bool descending: false});
+  void sortByValue({bool descending = false});
 
-  void sortByLabel({bool descending: false});
+  void sortByLabel({bool descending = false});
 
   void keep(mask);
 
@@ -60,19 +64,26 @@ abstract class Series<LT, VT> implements SeriesFix<LT, VT> {
 
   // TODO removeColumn
 
+  @override
   NumericSeries<LT, int> get asInt;
 
+  @override
   NumericSeries<LT, double> get asDouble;
 
+  @override
   BoolSeriesBase<LT> get asBool;
 
+  @override
   StringSeriesBase<LT> get asString;
 
+  @override
   DynamicSeriesBase<LT> get asDynamic;
 }
 
 /// A series with index of type [LT] and value of type [VT]
 abstract class SeriesFix<LT, VT> implements SeriesView<LT, VT> {
+  @override
+
   /// Data of the series
   ArrayFix<VT> get data;
 
@@ -85,7 +96,7 @@ abstract class SeriesFix<LT, VT> implements SeriesView<LT, VT> {
   /// Sets [value] by [position]
   void setByPos(int position, VT value);
 
-  void apply(VT func(VT value));
+  void apply(VT Function(VT value) func);
 
   void assign(/* Series<LT, VT> | IterView<VT> */ other);
 
@@ -93,15 +104,20 @@ abstract class SeriesFix<LT, VT> implements SeriesView<LT, VT> {
 
   SeriesFix<LT, VT> get fixed;
 
+  @override
   NumericSeriesFix<LT, int> get asInt;
 
+  @override
   NumericSeriesFix<LT, double> get asDouble;
 
+  @override
   BoolSeriesFixBase<LT> get asBool;
 
+  @override
   StringSeriesFixBase<LT> get asString;
 
+  @override
   DynamicSeriesFixBase<LT> get asDynamic;
 }
 
-typedef bool SeriesCond<LT, VT>(LT lab, SeriesView<LT, VT> s);
+typedef SeriesCond<LT, VT> = bool Function(LT lab, SeriesView<LT, VT> s);

@@ -16,6 +16,7 @@ abstract class Index {
   /// Get index at dimension [d]
   int operator [](int d);
 
+  @override
   bool operator ==(other);
 
   bool operator >(covariant Index other);
@@ -45,11 +46,15 @@ class Index1D implements Index {
   /// Creates an [Index] instance with given index [x]
   const Index1D(this.x);
 
+  @override
+
   /// Number of dimensions
   ///
   ///     final i1 = idx1D(5);
   ///     print(i1.dim);  // => 1
   int get dim => 1;
+
+  @override
 
   /// Get index at dimension [d]
   ///
@@ -60,11 +65,15 @@ class Index1D implements Index {
     return x;
   }
 
+  @override
+
   /// Converts [Index] to [List] of [int] with one element
   ///
   ///     final i1 = idx1D(5);
   ///     print(i1.toList()); // => [5]
   List<int> toList() => <int>[x];
+
+  @override
 
   /// Checks if two [Index1D] are equal
   ///
@@ -73,7 +82,7 @@ class Index1D implements Index {
   ///     print(i1 == [2]); // => false
   bool operator ==(other) {
     if (other is Index1D) {
-      return other.x == this.x;
+      return other.x == x;
     } else if (other is Iterable<int>) {
       if (other.length != 1) return false;
       if (other.elementAt(0) != x) return false;
@@ -83,6 +92,8 @@ class Index1D implements Index {
     return false;
   }
 
+  @override
+
   /// Compares if this [Index1D] is greater than [other]
   ///
   ///     final i1 = idx1D(5);
@@ -90,12 +101,16 @@ class Index1D implements Index {
   ///     print(i1 > idx1D(10)); // => false
   bool operator >(Index1D other) => x > other.x;
 
+  @override
+
   /// Compares if this [Index1D] is less than [other]
   ///
   ///     final i1 = idx1D(5);
   ///     print(i1 < idx1D(2)); // => false
   ///     print(i1 < idx1D(10)); // => true
-  bool operator <(@checked Index1D other) => x < other.x;
+  bool operator <(covariant Index1D other) => x < other.x;
+
+  @override
 
   /// Compares if this [Index1D] is greater than or equal [other]
   ///
@@ -103,7 +118,9 @@ class Index1D implements Index {
   ///     print(i1 >= idx1D(2)); // => true
   ///     print(i1 >= idx1D(10)); // => false
   ///     print(i1 >= idx1D(5)); // => true
-  bool operator >=(@checked Index1D other) => x >= other.x;
+  bool operator >=(covariant Index1D other) => x >= other.x;
+
+  @override
 
   /// Compares if this [Index1D] is less than or equal [other]
   ///
@@ -111,8 +128,9 @@ class Index1D implements Index {
   ///     print(i1 <= idx1D(2)); // => false
   ///     print(i1 <= idx1D(10)); // => true
   ///     print(i1 <= idx1D(5)); // => true
-  bool operator <=(@checked Index1D other) => x <= other.x;
+  bool operator <=(covariant Index1D other) => x <= other.x;
 
+  @override
   String toString() => 'Shape($x)';
 }
 
@@ -138,11 +156,15 @@ class Index2D implements Index {
   /// Constructs a new 2D index with given [row] and [col]
   const Index2D(this.row, this.col);
 
+  @override
+
   /// Number of dimensions of this [Index]
   ///
   ///     final i2 = idx2D(5, 25);
   ///     print(i2.dim);  // => 2
   int get dim => 2;
+
+  @override
 
   /// Gets the index with the given dimension [d]
   ///
@@ -155,11 +177,15 @@ class Index2D implements Index {
     return col;
   }
 
+  @override
+
   /// Converts [Index] to [List] of [int] with two element
   ///
   ///     final i2 = idx2D(5, 25);
   ///     print(i2.toList()); // => [5, 25]
   List<int> toList() => <int>[row, col];
+
+  @override
 
   /// Checks if two [Index2D] are equal
   ///
@@ -168,7 +194,7 @@ class Index2D implements Index {
   ///     print(i2 == [5, 24]); // => false
   bool operator ==(other) {
     if (other is Index2D) {
-      return other.row == this.row && other.col == this.col;
+      return other.row == row && other.col == col;
     } else if (other is Iterable<int>) {
       if (other.length != 2) return false;
       if (other.elementAt(0) != row) return false;
@@ -179,19 +205,27 @@ class Index2D implements Index {
     return false;
   }
 
+  @override
+
   /// Compares if this [Index2D] is greater than [other]
   ///
   ///     final i2 = idx2D(5, 25);
   ///     print(i2 > idx2D(0, 0)); // => true
   ///     print(i2 > idx2D(10, 20)); // => false
-  bool operator >(@checked Index2D other) => row > other.row && col > other.col;
+  bool operator >(covariant Index2D other) =>
+      row > other.row && col > other.col;
+
+  @override
 
   /// Compares if this [Index2D] is less than [other]
   ///
   ///     final i2 = idx2D(5, 25);
   ///     print(i2 < idx2D(4, 30)); // => false
   ///     print(i2 < idx2D(10, 30)); // => true
-  bool operator <(@checked Index2D other) => row < other.row && col < other.col;
+  bool operator <(covariant Index2D other) =>
+      row < other.row && col < other.col;
+
+  @override
 
   /// Compares if this [Index2D] is greater than or equal [other]
   ///
@@ -199,8 +233,10 @@ class Index2D implements Index {
   ///     print(i2 >= idx2D(5, 5)); // => true
   ///     print(i2 >= idx2D(4, 30)); // => false
   ///     print(i2 >= idx2D(5, 25)); // => true
-  bool operator >=(@checked Index2D other) =>
+  bool operator >=(covariant Index2D other) =>
       row >= other.row && col >= other.col;
+
+  @override
 
   /// Compares if this [Index2D] is less than or equal [other]
   ///
@@ -208,7 +244,7 @@ class Index2D implements Index {
   ///     print(i2 <= idx2D(10, 20)); // => false
   ///     print(i2 <= idx2D(10, 30)); // => true
   ///     print(i2 <= idx2D(5, 25)); // => true
-  bool operator <=(@checked Index2D other) =>
+  bool operator <=(covariant Index2D other) =>
       row <= other.row && col <= other.col;
 
   /// Returns the transpose of the index
@@ -221,7 +257,8 @@ class Index2D implements Index {
   Index2D withRow(int row) => Index2D(row, col);
 
   /// Returns a 2D index with 0th row and 0th column
-  static const Index2D zero = const Index2D(0, 0);
+  static const Index2D zero = Index2D(0, 0);
 
+  @override
   String toString() => 'Shape(${row}x${col})';
 }

@@ -13,6 +13,7 @@ part 'stats.dart';
 
 /// A mutable 1 dimensional array of element [E]
 abstract class Array<E> implements ArrayFix<E> {
+  @override
   String name;
 
   void add(E a);
@@ -48,7 +49,7 @@ abstract class ArrayFix<E> implements ArrayView<E> {
 
   ArrayFix<E> get fixed;
 
-  void sort({bool descending: false});
+  void sort({bool descending = false});
 }
 
 /// A read-only 1 dimensional array of element [E]
@@ -63,6 +64,7 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   Index1D get shape;
 
+  @override
   int get length;
 
   E operator [](int i);
@@ -71,8 +73,10 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   Array<E> clone({String name});
 
+  @override
   E get first;
 
+  @override
   E get last;
 
   int count(E v);
@@ -107,7 +111,7 @@ abstract class ArrayView<E> implements Iterable<E> {
   /// returned
   Array<E> sample([int count = 10]);
 
-  Array2D<E> to2D({int repeat: 1, bool t: false});
+  Array2D<E> to2D({int repeat = 1, bool t = false});
 
   Array2D<E> diagonal();
 
@@ -122,12 +126,13 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   Array<E> pickByIndices(Iterable<int> indices);
 
+  @override
   bool contains(Object value);
 
   StringArray toStringArray();
 
   Series<E, int> valueCounts(
-      {bool sortByValue: false, bool descending: false, name});
+      {bool sortByValue = false, bool descending = false, name});
 
   int compareValue(E a, E b);
 

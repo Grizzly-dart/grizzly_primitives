@@ -38,9 +38,9 @@ void main() {
       expect(i2.col, 25);
       expect(i2[0], 5);
       expect(i2[1], 25);
-      expect(i2.toList(), [5, 25]);
-      expect(i2 == [5, 25], true);
-      expect(i2 == [5, 24], false);
+      expect(i2.toList(), Index2D(5, 25));
+      expect(i2 == Index2D(5, 25), true);
+      expect(i2 == Index2D(5, 24), false);
 
       expect(i2 > idx2D(0, 0), true);
       expect(i2 > idx2D(10, 20), false);

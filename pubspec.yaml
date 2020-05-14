@@ -1,6 +1,6 @@
 name: grizzly_primitives
 description: Primitives (Index, Pair, Extent) for Grizzly
-version: 2.0.1
+version: 2.0.2
 homepage: https://github.com/grizzly-dart/grizzly_primitives
 author: Ravi Teja Gudapati <tejainece@gmail.com>
 
@@ -14,3 +14,4 @@ dependencies:
 
 dev_dependencies:
   test:
+  pedantic:
