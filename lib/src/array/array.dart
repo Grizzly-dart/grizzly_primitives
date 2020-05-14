@@ -3,6 +3,7 @@ library grizzly.primitives.array;
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/array2d/array2d.dart';
 import 'package:grizzly_primitives/src/series/series.dart';
+import 'package:grizzly_range/grizzly_range.dart' show Extent;
 
 part 'numeric.dart';
 part 'string.dart';
@@ -94,13 +95,13 @@ abstract class ArrayView<E> implements Iterable<E> {
   /// returned
   Array<E> head([int count = 10]);
 
-  /// Returns a new  [Array] containing last [count] elements of this array
+  /// Returns a  [Array] containing last [count] elements of this array
   ///
   /// If the length of the array is shorter than [count], all elements are
   /// returned
   Array<E> tail([int count = 10]);
 
-  /// Returns a new  [Array] containing random [count] elements of this array
+  /// Returns a  [Array] containing random [count] elements of this array
   ///
   /// If the length of the array is shorter than [count], all elements are
   /// returned

@@ -3,10 +3,10 @@ part of grizzly.primitives;
 /// Convenience method to create a 1D index with index [x]
 ///
 ///
-Index1D idx1D(int x) => new Index1D(x);
+Index1D idx1D(int x) => Index1D(x);
 
 /// Convenience method to create a 2D index with given [row] and [col]
-Index2D idx2D(int row, [int col]) => new Index2D(row, col ?? row);
+Index2D idx2D(int row, [int col]) => Index2D(row, col ?? row);
 
 /// Interface for an index
 abstract class Index {
@@ -18,13 +18,13 @@ abstract class Index {
 
   bool operator ==(other);
 
-  bool operator >(Index other);
+  bool operator >(covariant Index other);
 
-  bool operator <(Index other);
+  bool operator <(covariant Index other);
 
-  bool operator >=(Index other);
+  bool operator >=(covariant Index other);
 
-  bool operator <=(Index other);
+  bool operator <=(covariant Index other);
 
   /// Converts [Index] to [List] of [int]
   List<int> toList();
@@ -56,7 +56,7 @@ class Index1D implements Index {
   ///     final i1 = idx1D(5);
   ///     print(i1[0]);  // => 5
   int operator [](int d) {
-    if (d >= dim) throw new RangeError.range(d, 0, 0, 'd', 'Out of range!');
+    if (d >= dim) throw RangeError.range(d, 0, 0, 'd', 'Out of range!');
     return x;
   }
 
@@ -88,7 +88,7 @@ class Index1D implements Index {
   ///     final i1 = idx1D(5);
   ///     print(i1 > idx1D(2)); // => true
   ///     print(i1 > idx1D(10)); // => false
-  bool operator >(@checked Index1D other) => x > other.x;
+  bool operator >(Index1D other) => x > other.x;
 
   /// Compares if this [Index1D] is less than [other]
   ///
@@ -150,8 +150,7 @@ class Index2D implements Index {
   ///     print(i2[0]);  // => 5
   ///     print(i2[1]);  // => 25
   int operator [](int d) {
-    if (d >= dim)
-      throw new RangeError.range(d, 0, dim - 1, 'd', 'Out of range!');
+    if (d >= dim) throw RangeError.range(d, 0, dim - 1, 'd', 'Out of range!');
     if (d == 0) return row;
     return col;
   }
@@ -213,13 +212,13 @@ class Index2D implements Index {
       row <= other.row && col <= other.col;
 
   /// Returns the transpose of the index
-  Index2D get transpose => new Index2D(col, row);
+  Index2D get transpose => Index2D(col, row);
 
   /// Creates a new 2D Index with given [col] and existing [row]
-  Index2D withColumn(int col) => new Index2D(row, col);
+  Index2D withColumn(int col) => Index2D(row, col);
 
   /// Creates a new 2D Index with given [row] and existing [col]
-  Index2D withRow(int row) => new Index2D(row, col);
+  Index2D withRow(int row) => Index2D(row, col);
 
   /// Returns a 2D index with 0th row and 0th column
   static const Index2D zero = const Index2D(0, 0);

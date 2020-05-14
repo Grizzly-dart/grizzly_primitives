@@ -3,6 +3,7 @@ library grizzly.primitives.array2d;
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/series/series.dart';
 import 'package:grizzly_primitives/src/array/array.dart';
+import 'package:grizzly_range/grizzly_range.dart';
 
 part 'axis.dart';
 part 'numeric.dart';
@@ -24,7 +25,7 @@ abstract class Array2D<E> implements Array2DFix<E> {
 
   void insert(int index, Iterable<E> row);
 
-  void reshape(Index2D newShape);
+  void reshape(Index2D Shape);
 
   // TODO void flip();
 }
@@ -56,13 +57,13 @@ abstract class Array2DFix<E> implements Array2DView<E> {
 abstract class Array2DView<E> implements Iterable<Iterable<E>> {
   ArrayView<String> get names;
 
-  Array2DView<E> makeView(Iterable<Iterable<E>> newData);
+  Array2DView<E> makeView(Iterable<Iterable<E>> Data);
 
-  Array2DFix<E> makeFix(Iterable<Iterable<E>> newData);
+  Array2DFix<E> makeFix(Iterable<Iterable<E>> Data);
 
-  Array2D<E> make(Iterable<Iterable<E>> newData);
+  Array2D<E> make(Iterable<Iterable<E>> Data);
 
-  Array<E> makeArray(Iterable<E> newData);
+  Array<E> makeArray(Iterable<E> Data);
 
   /// Number of rows in the array
   int get numCols;

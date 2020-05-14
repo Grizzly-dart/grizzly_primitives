@@ -2,16 +2,14 @@
 ///
 /// 1. [Pair]
 /// Data structure to hold a key-value pair
-/// 2. [Extent]
-/// Holds a lower-upper extent
-/// 3. [Index1D]
-/// 4. [Index2D]
-/// 5. [Series]
-/// 6. [DataFrame]
-/// 7. [Array]
-/// 8. [Numeric1D]
-/// 9. [Array2D]
-/// 10. [Numeric2D]
+/// 2. [Index1D]
+/// 3. [Index2D]
+/// 4. [Series]
+/// 5. [DataFrame]
+/// 6. [Array]
+/// 7. [Numeric1D]
+/// 8. [Array2D]
+/// 9. [Numeric2D]
 library grizzly_primitives;
 
 export 'package:grizzly_primitives/src/core/core.dart';
@@ -24,8 +22,6 @@ export 'src/series/series.dart';
 
 export 'src/dataframe/dataframe.dart';
 
-export 'src/ranger/ranger.dart';
-
 class LengthMismatch implements Exception {
   final int expected;
 
@@ -36,7 +32,7 @@ class LengthMismatch implements Exception {
   const LengthMismatch({this.expected, this.found, this.subject});
 
   String toString() {
-    final sb = new StringBuffer();
+    final sb = StringBuffer();
 
     sb.write('Length mismatch');
 
@@ -56,7 +52,7 @@ class LengthMismatch implements Exception {
 }
 
 LengthMismatch lengthMismatch({int expected, int found, String subject}) =>
-    new LengthMismatch(expected: expected, found: found, subject: subject);
+    LengthMismatch(expected: expected, found: found, subject: subject);
 
 class LabelNotFound<LT> {
   final LT label;
@@ -66,4 +62,4 @@ class LabelNotFound<LT> {
   String toString() => 'Label $label not found!';
 }
 
-LabelNotFound<LT> labelNotFound<LT>(LT label) => new LabelNotFound<LT>(label);
+LabelNotFound<LT> labelNotFound<LT>(LT label) => LabelNotFound<LT>(label);

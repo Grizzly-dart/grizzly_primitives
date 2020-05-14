@@ -11,3 +11,5 @@ doc/api/
 .idea
 grizzly_primitives.iml
 .dart_tool
+
+*.iml

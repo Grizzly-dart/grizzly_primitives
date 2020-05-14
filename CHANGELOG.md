@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.1
+
++ Dart 2 support
++ Range improvements
+
 ## 0.2.5
 
 + Moved `Ranger` from `grizzly_scales`
