@@ -122,22 +122,17 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
 
   DataFrameBase<LT> filterWhen(DfCond cond);
 
-  Numeric2DView<double> toDouble2D(
+  Numeric2D<double> toDouble2D(
       {bool skipInvalid = true,
       bool convert = true,
       bool retype = false,
       bool parse = false});
 
-  Numeric2DView<int> toInt2D(
+  Numeric2D<int> toInt2D(
       {bool skipInvalid = true,
       bool convert = true,
       bool retype = false,
       bool parse = false});
-
-  Numeric2DView<double> asDouble2D(
-      {bool skipInvalid = true, bool retype = false});
-
-  Numeric2DView<int> asInt2D({bool skipInvalid = true, bool retype = false});
 
   /* TODO
   void addColumnFromList<VVT>(String column, List<VVT> value,

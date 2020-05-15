@@ -1,21 +1,11 @@
 part of grizzly.primitives.array2d;
 
-abstract class Numeric2D<E extends num> implements Array2D<E>, Numeric2DFix<E> {
+abstract class Numeric2D<E extends num> implements Array2D<E> {
   Numeric2DAxis<E> get row;
 
   Numeric2DAxis<E> get col;
 
-  @override
-  Numeric1DFix<E> operator [](int i);
-}
-
-abstract class Numeric2DFix<E extends num>
-    implements Array2DFix<E>, Numeric2DView<E> {
-  Numeric2DAxisFix<E> get row;
-
-  Numeric2DAxisFix<E> get col;
-
-  Numeric1DFix<E> operator [](int i);
+  Numeric1DFix<E> operator[](int i);
 
   void clip({E min, E max});
 
@@ -37,20 +27,6 @@ abstract class Numeric2DFix<E extends num>
 
   void rdivMe(
       /* num | Iterable<num> | Numeric2D<double> */ other);
-
-  @override
-  Numeric2DFix<E> get fixed;
-}
-
-abstract class Numeric2DView<E extends num> implements Array2DView<E> {
-  @override
-  Numeric1DView<E> operator [](int i);
-
-  @override
-  Numeric2DAxisView<E> get row;
-
-  @override
-  Numeric2DAxisView<E> get col;
 
   @override
   Numeric2D<E> get transpose;
@@ -110,7 +86,7 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
 
   Numeric2D<double> rdiv(/* num | Iterable<num> | Numeric2DArray */ other);
 
-  Numeric2D<E> matmul(Array2DView<E> other);
+  Numeric2D<E> matmul(Array2D<E> other);
 
   Numeric2D<E> matmulDiag(ArrayView<E> other);
 
@@ -125,9 +101,6 @@ abstract class Numeric2DView<E extends num> implements Array2DView<E> {
   */
 
   Numeric2D<double> sin();
-
-  @override
-  Numeric2DView<E> get view;
 
   Numeric2D<int> toInt();
 

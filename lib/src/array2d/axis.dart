@@ -1,14 +1,12 @@
 part of grizzly.primitives.array2d;
 
-abstract class Axis2D<E> implements Axis2DFix<E> {
+abstract class Axis2D<E> {
   void add(Iterable<E> col);
 
   void addScalar(E v);
 
   void insert(int index, Iterable<E> col);
-}
 
-abstract class Axis2DFix<E> implements Axis2DView<E> {
   @override
   Iterable<ArrayFix<E>> get iterable;
 
@@ -22,12 +20,6 @@ abstract class Axis2DFix<E> implements Axis2DView<E> {
   void sort({bool descending = false});
 
   void swap(int i, int j);
-}
-
-abstract class Axis2DView<E> {
-  Iterable<ArrayView<E>> get iterable;
-
-  ArrayView<E> operator [](int r);
 
   int get length;
 

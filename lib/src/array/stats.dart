@@ -37,11 +37,11 @@ abstract class Stats<T extends num> {
 
   double cov(Numeric1DView y);
 
-  Numeric1D<double> covMatrix(Numeric2DView y);
+  Numeric1D<double> covMatrix(Numeric2D y);
 
   double corrcoef(Numeric1DView y);
 
-  Numeric1D<double> corrcoefMatrix(Numeric2DView y);
+  Numeric1D<double> corrcoefMatrix(Numeric2D y);
 
   String describe();
 }

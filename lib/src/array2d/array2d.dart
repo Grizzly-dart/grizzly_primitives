@@ -11,10 +11,7 @@ part 'bool_axis.dart';
 part 'string_axis.dart';
 part 'dynamic_axis.dart';
 
-abstract class Array2D<E> implements Array2DFix<E> {
-  @override
-  ArrayFix<E> operator [](int i);
-
+abstract class Array2D<E> implements Iterable<Iterable<E>> {
   @override
   Axis2D<E> get row;
 
@@ -30,14 +27,9 @@ abstract class Array2D<E> implements Array2DFix<E> {
   void reshape(Index2D Shape);
 
   // TODO void flip();
-}
-
-abstract class Array2DFix<E> implements Array2DView<E> {
-  @override
-  ArrayFix<String> get names;
 
   @override
-  ArrayFix<E> operator [](int i);
+  ArrayFix<E> operator[](int i);
 
   operator []=(int i, Iterable<E> val);
 
@@ -49,25 +41,11 @@ abstract class Array2DFix<E> implements Array2DView<E> {
   @override
   Iterable<ArrayFix<E>> get cols;
 
-  @override
-  Axis2DFix<E> get row;
-
-  @override
-  Axis2DFix<E> get col;
-
   void set(E v);
 
-  void assign(Array2DView<E> other);
+  void assign(Array2D<E> other);
 
-  Array2DFix<E> get fixed;
-}
-
-abstract class Array2DView<E> implements Iterable<Iterable<E>> {
   ArrayView<String> get names;
-
-  Array2DView<E> makeView(Iterable<Iterable<E>> Data);
-
-  Array2DFix<E> makeFix(Iterable<Iterable<E>> Data);
 
   Array2D<E> make(Iterable<Iterable<E>> Data);
 
@@ -83,16 +61,6 @@ abstract class Array2DView<E> implements Iterable<Iterable<E>> {
   Index2D get shape;
 
   bool get isSquare;
-
-  ArrayView<E> operator [](int i);
-
-  Iterable<ArrayView<E>> get rows;
-
-  Iterable<ArrayView<E>> get cols;
-
-  Axis2DView<E> get row;
-
-  Axis2DView<E> get col;
 
   E get min;
 
@@ -127,8 +95,6 @@ abstract class Array2DView<E> implements Iterable<Iterable<E>> {
   Array2D<E> get transpose;
 
   Array<E> get diagonal;
-
-  Array2DView<E> get view;
 
   /// Returns the unique items in the array by column
   Array<E> unique();
