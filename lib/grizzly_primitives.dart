@@ -55,7 +55,7 @@ class LengthMismatch implements Exception {
 LengthMismatch lengthMismatch({int expected, int found, String subject}) =>
     LengthMismatch(expected: expected, found: found, subject: subject);
 
-class LabelNotFound<LT> {
+class LabelNotFound<LT> implements Exception {
   final LT label;
 
   const LabelNotFound(this.label);
