@@ -1,5 +1,9 @@
 # Changelog
 
+# 3.0.0
+
++ Removed 2d view and fix arrays
+
 ## 2.0.2
 
 + Dart analyzer fixes

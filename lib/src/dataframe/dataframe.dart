@@ -66,13 +66,14 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
 
   bool containsColumn(String column);
 
-  Pair<LT, DynamicSeriesViewBase<String>> pairByPos(int position);
+  MapEntry<LT, DynamicSeriesViewBase<String>> pairByPos(int position);
 
-  Pair<LT, DynamicSeriesViewBase<String>> pairByLabel(LT label);
+  MapEntry<LT, DynamicSeriesViewBase<String>> pairByLabel(LT label);
 
-  Iterable<Pair<LT, DynamicSeriesViewBase<String>>> get enumerate;
+  Iterable<MapEntry<LT, DynamicSeriesViewBase<String>>> get enumerate;
 
-  Iterable<Pair<LT, DynamicSeriesViewBase<String>>> enumerateSliced(int start,
+  Iterable<MapEntry<LT, DynamicSeriesViewBase<String>>> enumerateSliced(
+      int start,
       [int end]);
 
   /// Remove element at position [pos]

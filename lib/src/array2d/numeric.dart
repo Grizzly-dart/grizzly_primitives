@@ -5,7 +5,7 @@ abstract class Numeric2D<E extends num> implements Array2D<E> {
 
   Numeric2DAxis<E> get col;
 
-  Numeric1DFix<E> operator[](int i);
+  Numeric1DFix<E> operator [](int i);
 
   void clip({E min, E max});
 

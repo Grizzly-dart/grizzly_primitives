@@ -1,10 +1,6 @@
 import 'package:grizzly_primitives/grizzly_primitives.dart';
 
 void main() {
-  final p1 = intPair<String>(1, 'one');
-  print(p1.key); // => 1
-  print(p1.value); // => one
-
   final Index1D i1 = idx1D(5);
   print(i1.dim); // => 1
   print(i1.x); // => 5

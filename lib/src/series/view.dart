@@ -33,14 +33,14 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
   int posOf(LT label);
 
   /// Returns pair by [label]
-  Pair<LT, VT> pairByLabel(LT label);
+  MapEntry<LT, VT> pairByLabel(LT label);
 
   /// Returns pair by [position]
-  Pair<LT, VT> pairByPos(int position);
+  MapEntry<LT, VT> pairByPos(int position);
 
-  Iterable<Pair<LT, VT>> get enumerate;
+  Iterable<MapEntry<LT, VT>> get enumerate;
 
-  Iterable<Pair<LT, VT>> enumerateSliced(int start, [int end]);
+  Iterable<MapEntry<LT, VT>> enumerateSliced(int start, [int end]);
 
   List<VT> toList();
 

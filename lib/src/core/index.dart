@@ -1,8 +1,6 @@
 part of grizzly.primitives;
 
 /// Convenience method to create a 1D index with index [x]
-///
-///
 Index1D idx1D(int x) => Index1D(x);
 
 /// Convenience method to create a 2D index with given [row] and [col]

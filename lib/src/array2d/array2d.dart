@@ -29,7 +29,7 @@ abstract class Array2D<E> implements Iterable<Iterable<E>> {
   // TODO void flip();
 
   @override
-  ArrayFix<E> operator[](int i);
+  ArrayFix<E> operator [](int i);
 
   operator []=(int i, Iterable<E> val);
 

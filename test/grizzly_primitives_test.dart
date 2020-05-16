@@ -5,12 +5,6 @@ void main() {
   group('Tests', () {
     setUp(() {});
 
-    test('IntPair', () {
-      final p1 = intPair<String>(1, 'one');
-      expect(p1.key, 1);
-      expect(p1.value, 'one');
-    });
-
     test('Index1', () {
       final i1 = idx1D(5);
       expect(i1.dim, 1);

@@ -88,9 +88,9 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   int get argMax;
 
-  IntPair<E> pairAt(int index);
+  MapEntry<int, E> pairAt(int index);
 
-  Iterable<IntPair<E>> enumerate();
+  Iterable<MapEntry<int, E>> enumerate();
 
   /// Returns a new  [Array] containing first [count] elements of this array
   ///
