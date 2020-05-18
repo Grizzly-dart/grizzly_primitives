@@ -7,10 +7,8 @@ abstract class Axis2D<E> {
 
   void insert(int index, Iterable<E> col);
 
-  @override
   Iterable<ArrayFix<E>> get iterable;
 
-  @override
   ArrayFix<E> operator [](int r);
 
   operator []=(int index, Iterable<E> v);

@@ -1,5 +1,33 @@
 part of grizzly.primitives.series;
 
+abstract class IntNumericSeries<LT>
+    implements IntNumericSeriesFix<LT>, NumericSeries<LT, int> {}
+
+abstract class DoubleNumericSeries<LT>
+    implements DoubleNumericSeriesFix<LT>, NumericSeries<LT, double> {
+
+}
+
+abstract class IntNumericSeriesFix<LT> extends NumericSeriesFix<LT, int> {
+  void absSelf();
+}
+
+abstract class DoubleNumericSeriesFix<LT> extends NumericSeriesFix<LT, double> {
+  void normalizeSelf();
+
+  void logSelf();
+
+  void log10Self();
+
+  void logNSelf(num n);
+
+  void expSelf();
+
+  // TODO pow
+
+  void absSelf();
+}
+
 abstract class NumericSeries<LT, VT extends num>
     implements Series<LT, VT>, NumericSeriesFix<LT, VT> {}
 
@@ -49,19 +77,19 @@ abstract class NumericSeriesView<LT, VT extends num>
   Stats<VT> get stats;
 
   NumericSeriesView<LT, VT> operator +(
-      /* E | IterView<E> | NumericSeriesView<E> */ other);
+      /* E | Iterable<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, VT> operator -(
-      /* E | IterView<E> | NumericSeriesView<E> */ other);
+      /* E | Iterable<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, VT> operator *(
-      /* E | IterView<E> | NumericSeriesView<E> */ other);
+      /* E | Iterable<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, double> operator /(
-      /* E | IterView<E> | NumericSeriesView<E> */ other);
+      /* E | Iterable<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, int> operator ~/(
-      /* E | IterView<E> | NumericSeriesView<E> */ other);
+      /* E | Iterable<E> | NumericSeriesView<E> */ other);
 
   NumericSeriesView<LT, VT> operator -();
 
@@ -69,19 +97,21 @@ abstract class NumericSeriesView<LT, VT extends num>
   VT dot(Iterable<num> other);
   */
 
-  NumericSeries<LT, double> get log;
+  DoubleNumericSeries<LT> get log;
 
-  NumericSeries<LT, double> get log10;
+  DoubleNumericSeries<LT> get log10;
 
-  NumericSeries<LT, double> logN(num n);
+  DoubleNumericSeries<LT> logN(num n);
 
-  NumericSeries<LT, double> get exp;
+  DoubleNumericSeries<LT> get exp;
 
   // TODO pow
 
-  NumericSeries<LT, double> get abs;
+  NumericSeries<LT, VT> get abs;
 
-  NumericSeries<LT, double> toDouble();
+  DoubleNumericSeries<LT> toDouble();
 
-  NumericSeries<LT, int> toInt();
+  IntNumericSeries<LT> toInt();
+
+  DoubleNumericSeries<LT> normalized();
 }

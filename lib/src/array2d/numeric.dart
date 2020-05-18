@@ -1,10 +1,13 @@
 part of grizzly.primitives.array2d;
 
 abstract class Numeric2D<E extends num> implements Array2D<E> {
+  @override
   Numeric2DAxis<E> get row;
 
+  @override
   Numeric2DAxis<E> get col;
 
+  @override
   Numeric1DFix<E> operator [](int i);
 
   void clip({E min, E max});

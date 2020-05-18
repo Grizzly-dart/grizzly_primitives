@@ -96,7 +96,7 @@ abstract class SeriesFix<LT, VT> implements SeriesView<LT, VT> {
   /// Sets [value] by [position]
   void setByPos(int position, VT value);
 
-  void apply(VT Function(VT value) func);
+  void apply(VT Function(VT value) func, {bool ignoreNull = true});
 
   void assign(/* Series<LT, VT> | IterView<VT> */ other);
 

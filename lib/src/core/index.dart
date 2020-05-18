@@ -1,11 +1,5 @@
 part of grizzly.primitives;
 
-/// Convenience method to create a 1D index with index [x]
-Index1D idx1D(int x) => Index1D(x);
-
-/// Convenience method to create a 2D index with given [row] and [col]
-Index2D idx2D(int row, [int col]) => Index2D(row, col ?? row);
-
 /// Interface for an index
 abstract class Index {
   /// Number of dimensions
@@ -24,6 +18,8 @@ abstract class Index {
   bool operator >=(covariant Index other);
 
   bool operator <=(covariant Index other);
+
+  Index get transpose;
 
   /// Converts [Index] to [List] of [int]
   List<int> toList();
@@ -127,6 +123,9 @@ class Index1D implements Index {
   ///     print(i1 <= idx1D(10)); // => true
   ///     print(i1 <= idx1D(5)); // => true
   bool operator <=(covariant Index1D other) => x <= other.x;
+
+  @override
+  Index1D get transpose => Index1D(x);
 
   @override
   String toString() => 'Shape($x)';
@@ -246,6 +245,7 @@ class Index2D implements Index {
       row <= other.row && col <= other.col;
 
   /// Returns the transpose of the index
+  @override
   Index2D get transpose => Index2D(col, row);
 
   /// Creates a new 2D Index with given [col] and existing [row]

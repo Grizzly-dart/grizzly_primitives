@@ -51,9 +51,9 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
 
   E get prod;
 
-  Numeric1DView<E> get cumsum;
+  Numeric1D<E> get cumsum;
 
-  Numeric1DView<E> get cumprod;
+  Numeric1D<E> get cumprod;
 
   double average(Iterable<num> weights);
 
@@ -94,4 +94,13 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
   Numeric1D<int> toInt();
 
   Numeric1D<double> sin();
+
+  List<Extent<E>> generateBins({Extent<E> range, int count = 10});
+
+  NumericSeries<Extent<E>, int> histogram(
+    /* Iterable<E> | int */ bins, {
+    Extent<E> range,
+    Iterable<int> weights,
+    /* bool Function<E>(Extent<E> e) inRange */
+  });
 }

@@ -1,5 +1,6 @@
 library grizzly.primitives.array;
 
+import 'package:grizzly_primitives/grizzly_primitives.dart';
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/array2d/array2d.dart';
 import 'package:grizzly_range/grizzly_range.dart' show Extent;
@@ -21,7 +22,7 @@ abstract class Array<E> implements ArrayFix<E> {
 
   void insert(int index, E a);
 
-  void keepIf(Iterable<bool> mask);
+  void keepByMask(Iterable<bool> mask);
 
   void removeAt(int pos);
 
@@ -42,9 +43,12 @@ abstract class ArrayFix<E> implements ArrayView<E> {
 
   // TODO [Index] based indexing
 
+  /// Sets all elements to [v]
   set set(E v);
 
-  set assign(Iterable<E> other);
+  // TODO setRange
+
+  set setAll(Iterable<E> other);
 
   ArrayFix<E> get fixed;
 
@@ -63,20 +67,11 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   Index1D get shape;
 
-  @override
-  int get length;
-
   E operator [](int i);
 
   Array<E> slice(int start, [int end]);
 
   Array<E> clone({String name});
-
-  @override
-  E get first;
-
-  @override
-  E get last;
 
   int count(E v);
 
@@ -84,8 +79,10 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   E get max;
 
+  /// Returns the index of min
   int get argMin;
 
+  /// Returns the index of max
   int get argMax;
 
   MapEntry<int, E> pairAt(int index);
@@ -96,13 +93,19 @@ abstract class ArrayView<E> implements Iterable<E> {
   ///
   /// If the length of the array is shorter than [count], all elements are
   /// returned
-  Array<E> head([int count = 10]);
+  Array<E> head([int count = 10]) {
+    if (length <= count) return makeArray(this);
+    return slice(0, count);
+  }
 
   /// Returns a  [Array] containing last [count] elements of this array
   ///
   /// If the length of the array is shorter than [count], all elements are
   /// returned
-  Array<E> tail([int count = 10]);
+  Array<E> tail([int count = 10]) {
+    if (length <= count) return makeArray(this);
+    return slice(length - count);
+  }
 
   /// Returns a  [Array] containing random [count] elements of this array
   ///
@@ -125,15 +128,10 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   Array<E> pickByIndices(Iterable<int> indices);
 
-  @override
-  bool contains(Object value);
-
   StringArray toStringArray();
 
-  /*
-  Series<E, int> valueCounts(
+  NumericSeries<E, int> valueCounts(
       {bool sortByValue = false, bool descending = false, name});
-   */
 
   int compareValue(E a, E b);
 
@@ -149,5 +147,5 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   BoolArray operator >=(/* ArrayView | E */ other);
 
-  Array<E> selectIf(Iterable<bool> mask);
+  Array<E> selectByMask(Iterable<bool> mask);
 }

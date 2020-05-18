@@ -12,10 +12,8 @@ part 'string_axis.dart';
 part 'dynamic_axis.dart';
 
 abstract class Array2D<E> implements Iterable<Iterable<E>> {
-  @override
   Axis2D<E> get row;
 
-  @override
   Axis2D<E> get col;
 
   void add(Iterable<E> row);
@@ -28,17 +26,14 @@ abstract class Array2D<E> implements Iterable<Iterable<E>> {
 
   // TODO void flip();
 
-  @override
   ArrayFix<E> operator [](int i);
 
   operator []=(int i, Iterable<E> val);
 
   set diagonal(covariant dynamic v);
 
-  @override
   Iterable<ArrayFix<E>> get rows;
 
-  @override
   Iterable<ArrayFix<E>> get cols;
 
   void set(E v);

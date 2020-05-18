@@ -2,8 +2,7 @@ library grizzly.primitives;
 
 import 'package:grizzly_primitives/grizzly_primitives.dart';
 
-part 'package:grizzly_primitives/src/core/pair.dart';
-part 'package:grizzly_primitives/src/core/index.dart';
+part 'index.dart';
 
 /// Interface for a labeled data-structure. Example: [Series] and [DataFrame]
 abstract class Labeled<LT> {
