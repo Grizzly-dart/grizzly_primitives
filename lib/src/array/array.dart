@@ -135,17 +135,17 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   int compareValue(E a, E b);
 
-  BoolArray eq(/* ArrayView | E */ other);
+  BoolArray eq(/* Iterable<E> | E */ other);
 
-  BoolArray ne(/* ArrayView | E */ other);
+  BoolArray ne(/* Iterable<E> | E */ other);
 
-  BoolArray operator <(/* ArrayView | E */ other);
+  BoolArray operator <(/* Iterable<E> | E */ other);
 
-  BoolArray operator <=(/* ArrayView | E */ other);
+  BoolArray operator <=(/* Iterable<E> | E */ other);
 
-  BoolArray operator >(/* ArrayView | E */ other);
+  BoolArray operator >(/* Iterable<E> | E */ other);
 
-  BoolArray operator >=(/* ArrayView | E */ other);
+  BoolArray operator >=(/* Iterable<E> | E */ other);
 
   Array<E> selectByMask(Iterable<bool> mask);
 }

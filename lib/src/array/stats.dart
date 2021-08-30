@@ -13,6 +13,7 @@ abstract class Stats<T extends num> {
 
   Extent<T> get extent;
 
+  /// Peek to peek difference of data
   T get ptp;
 
   T get mode;
