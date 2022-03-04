@@ -26,7 +26,7 @@ abstract class BoolArrayView implements ArrayView<bool> {
       {String trueVal = 'True', String falseVal = 'False'});
 
   @override
-  BoolArray clone({String name});
+  BoolArray clone();
 
 // TODO ArrayView<dynamic> toDynamic({trueVal = 1, falseVal = 0});
 }

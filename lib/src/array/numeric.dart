@@ -29,7 +29,7 @@ abstract class Numeric1DView<E extends num> implements ArrayView<E> {
   Numeric1D<E> slice(int start, [int end]);
 
   @override
-  Numeric1D<E> clone({String name});
+  Numeric1D<E> clone();
 
   @override
   Numeric2D<E> to2D({int repeat = 1, bool t = false});

@@ -23,11 +23,11 @@ export 'src/series/series.dart';
 export 'src/dataframe/dataframe.dart';
 
 class LengthMismatch implements Exception {
-  final int expected;
+  final int? expected;
 
-  final int found;
+  final int? found;
 
-  final String subject;
+  final String? subject;
 
   const LengthMismatch({this.expected, this.found, this.subject});
 
@@ -51,9 +51,6 @@ class LengthMismatch implements Exception {
     return sb.toString();
   }
 }
-
-LengthMismatch lengthMismatch({int expected, int found, String subject}) =>
-    LengthMismatch(expected: expected, found: found, subject: subject);
 
 class LabelNotFound<LT> implements Exception {
   final LT label;

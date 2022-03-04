@@ -22,7 +22,7 @@ abstract class DataFrameBase<LT> implements Labeled<LT> {
   LT labelAt(int pos);
 
   @override
-  int posOf(LT label);
+  int indexOfLabel(LT label);
 
   @override
   bool containsLabel(LT label);

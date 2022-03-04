@@ -30,7 +30,7 @@ abstract class SeriesView<LT, VT> implements Labeled<LT> {
   LT labelAt(int position);
 
   @override
-  int posOf(LT label);
+  int indexOfLabel(LT label);
 
   /// Returns pair by [label]
   MapEntry<LT, VT> pairByLabel(LT label);

@@ -258,5 +258,5 @@ class Index2D implements Index {
   static const Index2D zero = Index2D(0, 0);
 
   @override
-  String toString() => 'Shape(${row}x${col})';
+  String toString() => 'Shape(${row}x$col)';
 }

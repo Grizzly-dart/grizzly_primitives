@@ -13,7 +13,7 @@ abstract class Labeled<LT> {
   LT labelAt(int position);
 
   /// Returns the position of [label]. Returns -1, if [label] is not found.
-  int posOf(LT label);
+  int indexOfLabel(LT label);
 
   /// Returns true if [this] contains [label]
   bool containsLabel(LT label);

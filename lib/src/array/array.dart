@@ -1,8 +1,8 @@
 library grizzly.primitives.array;
 
-import 'package:grizzly_primitives/grizzly_primitives.dart';
 import 'package:grizzly_primitives/src/core/core.dart';
 import 'package:grizzly_primitives/src/array2d/array2d.dart';
+import 'package:grizzly_primitives/src/series/series.dart';
 import 'package:grizzly_range/grizzly_range.dart' show Extent;
 
 part 'numeric.dart';
@@ -13,9 +13,6 @@ part 'stats.dart';
 
 /// A mutable 1 dimensional array of element [E]
 abstract class Array<E> implements ArrayFix<E> {
-  @override
-  String name;
-
   void add(E a);
 
   void addAll(Iterable<E> a);
@@ -57,13 +54,11 @@ abstract class ArrayFix<E> implements ArrayView<E> {
 
 /// A read-only 1 dimensional array of element [E]
 abstract class ArrayView<E> implements Iterable<E> {
-  String get name;
+  ArrayView<E> makeView(Iterable<E> newData);
 
-  ArrayView<E> makeView(Iterable<E> newData, [String name]);
+  ArrayFix<E> makeFix(Iterable<E> newData);
 
-  ArrayFix<E> makeFix(Iterable<E> newData, [String name]);
-
-  Array<E> makeArray(Iterable<E> newData, [String name]);
+  Array<E> makeArray(Iterable<E> newData);
 
   Index1D get shape;
 
@@ -71,7 +66,7 @@ abstract class ArrayView<E> implements Iterable<E> {
 
   Array<E> slice(int start, [int end]);
 
-  Array<E> clone({String name});
+  Array<E> clone();
 
   int count(E v);
 
@@ -131,7 +126,7 @@ abstract class ArrayView<E> implements Iterable<E> {
   StringArray toStringArray();
 
   NumericSeries<E, int> valueCounts(
-      {bool sortByValue = false, bool descending = false, name});
+      {bool sortByValue = false, bool descending = false});
 
   int compareValue(E a, E b);
 
